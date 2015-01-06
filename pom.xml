@@ -22,9 +22,22 @@
 		      <version>3.8.1</version>
 		      <scope>test</scope>
 		    </dependency>
+		  <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>3.0-alpha-1</version>
+		    <scope>provided</scope>
+		</dependency>
+		    
 	  </dependencies>
   </dependencyManagement>
   <modules>
   	<module>model</module>
+  	<module>util</module>
+  	<module>entity</module>
+  	<module>dao</module>
+  	<module>service</module>
+  	<module>control</module>
+  	<module>web</module>
   </modules>
 </project>
