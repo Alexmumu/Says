@@ -1,0 +1,11 @@
+package org.entity;/******************************************************************************* * javaBeans * says_msgcenter --> SaysMsgcenter  * <table explanation> * @author 2015-01-07 19:01:41 *  */	public class SaysMsgcenter implements java.io.Serializable {	//field	/** 消息表id **/	private String mcid;	/** 所属用户id **/	private String userid;	/** 消息源的id  如好友申请表的id，点赞表，转发表的id，评论表的id，回复表的id **/	private String mcfromid;	/** 消息的类型
+            1.好友申请
+            2.说说被评论
+            3.说说被转发
+            4.说说被赞
+            5.日志被评论
+            6.日志被转发
+            7.日志被赞
+            8.相片被评论
+            9.相片被转发
+            10.相片被赞 **/	private int mctype;	/** 根据状态来判断 已读 和 未读 0代表已读  1.代表未读 **/	private int mcstatus;	/** 消息时间 **/	private Object msctime;	//method	public String getMcid() {		return mcid;	}	public void setMcid(String mcid) {		this.mcid = mcid;	}	public String getUserid() {		return userid;	}	public void setUserid(String userid) {		this.userid = userid;	}	public String getMcfromid() {		return mcfromid;	}	public void setMcfromid(String mcfromid) {		this.mcfromid = mcfromid;	}	public int getMctype() {		return mctype;	}	public void setMctype(int mctype) {		this.mctype = mctype;	}	public int getMcstatus() {		return mcstatus;	}	public void setMcstatus(int mcstatus) {		this.mcstatus = mcstatus;	}	public Object getMsctime() {		return msctime;	}	public void setMsctime(Object msctime) {		this.msctime = msctime;	}	//override toString Method 	public String toString() {		StringBuffer sb=new StringBuffer();		sb.append("{");		sb.append("'mcid':'"+this.getMcid()+"',");		sb.append("'userid':'"+this.getUserid()+"',");		sb.append("'mcfromid':'"+this.getMcfromid()+"',");		sb.append("'mctype':'"+this.getMctype()+"',");		sb.append("'mcstatus':'"+this.getMcstatus()+"',");		sb.append("'msctime':'"+this.getMsctime()+"',");		sb.append("}");		return sb.toString();	}	//return String[] filed; 	public String[] getField() {		return new String[]{"mcid","userid","mcfromid","mctype","mcstatus","msctime"};	}}
