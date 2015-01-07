@@ -16,7 +16,7 @@
   </properties>
  <dependencyManagement>
 	  <dependencies>
-		    <dependency>
+		  <dependency>
 		      <groupId>junit</groupId>
 		      <artifactId>junit</artifactId>
 		      <version>3.8.1</version>
@@ -32,7 +32,6 @@
 	  </dependencies>
   </dependencyManagement>
   <modules>
-  	<module>model</module>
   	<module>util</module>
   	<module>entity</module>
   	<module>dao</module>
