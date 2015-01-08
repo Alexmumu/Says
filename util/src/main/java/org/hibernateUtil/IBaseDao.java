@@ -19,6 +19,14 @@ public interface IBaseDao<T> {
 	// -------------------------------------------------------------------------
 
 	public Serializable save(T entity) throws DataAccessException;
+	
+	/**
+	 * 批量删除
+	 * @param entitys
+	 * @return
+	 * @throws DataAccessException
+	 */
+	public List<Serializable> save(T...entitys)throws DataAccessException;
 
 	void delete(T entity) throws DataAccessException;
 

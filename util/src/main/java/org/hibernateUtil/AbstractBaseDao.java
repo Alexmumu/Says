@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -237,6 +238,21 @@ public abstract class AbstractBaseDao<T> extends MyHibernateDaoSupport implement
 	public Serializable save(T entity) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return getHibernateTemplate().save(entity);
+	}
+	
+	
+	
+
+	@Override
+	public List<Serializable> save(T... entitys) throws DataAccessException {
+		List<Serializable> slist=new ArrayList<Serializable>();
+		for (int i = 0; i < entitys.length; i++) {
+			slist.add(getHibernateTemplate().save(entitys[i]));
+			if (i % 20 == 0) {
+				getHibernateTemplate().flush();
+			}
+		}
+		return slist;
 	}
 
 	/*
