@@ -314,21 +314,21 @@ public abstract class AbstractBaseDao<T> extends MyHibernateDaoSupport implement
 	}
 
 	@SuppressWarnings("all")
-	protected List findByHql(String hql) {
+	protected List findByHql(String hql)throws DataAccessException {
 		return this.findByHql(hql, -1, -1, null);
 	}
-	protected List findByHql(String hql,Object...values) {
+	protected List findByHql(String hql,Object...values)throws DataAccessException {
 		return this.findByHql(hql, -1, -1, values);
 	}
 
 	@SuppressWarnings("all")
-	protected List findByHql(String hql, int firstResult, int maxResults) {
+	protected List findByHql(String hql, int firstResult, int maxResults)throws DataAccessException {
 		return this.findByHql(hql, firstResult, maxResults, null);
 	}
 
 	@SuppressWarnings("unchecked")
 	protected List findByHql(final String hql, final int firstResult,
-			final int maxResults, final Object... values) {
+			final int maxResults, final Object... values)throws DataAccessException {
 		return getHibernateTemplate().executeFind(
 				new HibernateCallback<List>() {
 
@@ -352,11 +352,11 @@ public abstract class AbstractBaseDao<T> extends MyHibernateDaoSupport implement
 	}
 
 	@SuppressWarnings("all")
-	protected int countByHql(final String hql) {
+	protected int countByHql(final String hql)throws DataAccessException {
 		return this.countByHql(hql, null);
 	}
 
-	protected int countByHql(final String hql, final Object... values) {
+	protected int countByHql(final String hql, final Object... values)throws DataAccessException {
 		return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
 			public Integer doInHibernate(Session session)
 					throws HibernateException, SQLException {
