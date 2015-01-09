@@ -40,11 +40,8 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<!-- 以下用来列出Hibernate映射实体 -->
-				
-			</list>
+		<property name="packagesToScan" value="org.entity">
+			
 		</property>
 
 		<!-- 定义Hibernate的SessionFactory的属性 -->
