@@ -23,5 +23,29 @@ public interface ISaysAlbumDao extends IBaseDao<SaysAlbum>{
 	 * @throws DataAccessException
 	 */
 	 public int countByUserid(Serializable userid)throws DataAccessException;
+	 
+
+	 /**
+	  * 
+	  * @param al
+	  * @return
+	  * @throws DataAccessException
+	  */
+	 public Serializable addAlbum(SaysAlbum al) throws DataAccessException;
 	
+	/**
+	 *  根据相册ID删除相册，包括里面的照片
+	 * @param albumid 相册ID
+	 * @throws DataAccessException
+	 */
+	 public void delectAlbum(Serializable albumid)throws DataAccessException;
+	 
+	 
+	 /**
+	  * 修改相册信息
+	  * @param al 相册ID
+	  * @return
+	  * @throws DataAccessException
+	  */
+	 public void updateAlbum(SaysAlbum al) throws DataAccessException;
 }
