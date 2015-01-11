@@ -32,7 +32,7 @@
 		<!-- 指定连接数据库连接池的最小连接数 -->
 		<property name="minPoolSize" value="1" />
 		<!-- 指定连接数据库连接池的初始化连接数 -->
-		<property name="initialPoolSize" value="2" />
+		<property name="initialPoolSize" value="1" />
 		<!-- 指定连接数据库连接池的连接的最大空闲时间 -->
 		<property name="maxIdleTime" value="20" />
 	</bean>

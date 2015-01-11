@@ -1,0 +1,18 @@
+body{
+	background-color: #ededef;
+}
+.am-topbar{
+	background: url(../images/body_1.png);
+}
+.am-topbar-brand{
+	font-size: 28px;
+}
+.am-offcanvas-bar{
+	background: #FFFFFF;
+}
+.am-offcanvas-bar:after{
+	background: #FFFFFF;
+}
+.am-offcanvas-content a{
+	color: #000;
+}

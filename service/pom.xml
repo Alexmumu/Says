@@ -20,7 +20,7 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+				<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>dao</artifactId>
 			<version>${project.version}</version>

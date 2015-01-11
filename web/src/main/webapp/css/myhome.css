@@ -1,0 +1,14 @@
+#fmtop{
+
+}
+#caidan li{
+	border: 1px solid #e9ecf1;
+border-width: 0 1px;
+margin-left: -1px;
+}
+#caidan li:first-child{
+	border-left: none;
+}
+#caidan li:last-child{
+	border-right: none;
+}
