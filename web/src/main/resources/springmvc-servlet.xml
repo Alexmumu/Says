@@ -17,14 +17,20 @@
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">  
   	<!-- 载入注解驱动 -->
     <mvc:annotation-driven />  
-     
-    <bean name="test" class="org.control.MyCon">
-    </bean> 
+    <bean name="test" class="org.control.UserControl">
+    
+    </bean>
+    
     <!-- 扫描 MVC控制器-->
-    <!-- <context:component-scan base-package="org.control.*" />   -->
-  
+    
+   	
+   	<mvc:resources mapping="/images/**" location="/WEB-INF/images/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
+   	<mvc:resources mapping="/css/**" location="/WEB-INF/css/" />  	
+   	<mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/" />
+   	  
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-        <property name="prefix" value="/" />  
+        <property name="prefix" value="/WEB-INF/jsp/" />  
         <property name="suffix" value=".jsp" />  
     </bean>  
   
