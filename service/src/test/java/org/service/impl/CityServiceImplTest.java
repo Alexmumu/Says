@@ -44,11 +44,11 @@ public class CityServiceImplTest
      */
     public void testApp()
     {	
-//    	City c=new City();
-//    	c.setCid(888);
-//    	c.setCname("通山县22");
-//    	System.out.println(cs.findAllCity());
-//    	cs.saveCity(c);
+    	City c=new City();
+    	c.setCid(888);
+    	c.setCname("通山县22");
+    	System.out.println(cs.findAllCity());
+    	//cs.saveCity(c);
         assertTrue( true );
     }
 }
