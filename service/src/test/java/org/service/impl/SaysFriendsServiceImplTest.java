@@ -83,13 +83,13 @@ public class SaysFriendsServiceImplTest
 	    	
 	    }
     
-		  public void testdeletedFriends()
-		  {	
-		  	Boolean istest=false;
-		  	SaysFriends f=new SaysFriends();
-		  	f.setFriendid("2bf1d9004ade4bbc014ade4c7acb0001");
-		  	fs.deletedFriends(f.getFriendid());
-		  }
+//		  public void testdeletedFriends()
+//		  {	
+//		  	Boolean istest=false;
+//		  	SaysFriends f=new SaysFriends();
+//		  	f.setFriendid("2bf1d9004ade4bbc014ade4c7acb0001");
+//		  	fs.deletedFriends(f.getFriendid());
+//		  }
 	    
 		  public void testselectbufriendsbyidinfo()
 		  {	

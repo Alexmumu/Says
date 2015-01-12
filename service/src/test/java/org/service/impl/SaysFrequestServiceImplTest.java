@@ -69,13 +69,13 @@ public class SaysFrequestServiceImplTest
     }
     
     
-	    public void testdeletedSaysFrequestbyfrid()
-	    {	
-	    	SaysFrequest frequest=new SaysFrequest();
-	    	frequest.setFrid("2bf1d9004ade4bbc014ade4c34390000");
-	    	
-	    	fq.deletedSaysFrequestbyfrid(frequest.getFrid());
-	    }
+//	    public void testdeletedSaysFrequestbyfrid()
+//	    {	
+//	    	SaysFrequest frequest=new SaysFrequest();
+//	    	frequest.setFrid("2bf1d9004ade4bbc014ade4c34390000");
+//	    	
+//	    	fq.deletedSaysFrequestbyfrid(frequest.getFrid());
+//	    }
     
 		  public void testselectSaysFrequestall()
 		  {	
