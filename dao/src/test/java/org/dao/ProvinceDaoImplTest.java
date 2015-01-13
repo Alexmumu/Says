@@ -19,7 +19,7 @@ public class ProvinceDaoImplTest extends TestCase {
     public ProvinceDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         provincedao=(IProvinceDao) act.getBean("provinceDaoImpl");
     }
 

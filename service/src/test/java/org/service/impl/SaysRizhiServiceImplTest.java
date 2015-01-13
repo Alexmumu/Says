@@ -5,7 +5,6 @@ package org.service.impl;
 import org.entity.SaysRizhi;
 import org.entity.SaysRizhitype;
 import org.entity.SaysUser;
-
 import org.service.ISaysRizhiService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -28,7 +27,7 @@ public class SaysRizhiServiceImplTest extends TestCase{
     public SaysRizhiServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         srzs=(ISaysRizhiService) act.getBean("saysRizhiServiceImpl");
     }

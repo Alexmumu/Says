@@ -28,7 +28,7 @@ public class SaysRizhiImplDaoTest extends TestCase{
     public SaysRizhiImplDaoTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysRizhidao=(ISaysRizhiDao) act.getBean("saysRizhiDaoImpl");
     }
     /**

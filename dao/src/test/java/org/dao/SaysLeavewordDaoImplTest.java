@@ -24,7 +24,7 @@ public class SaysLeavewordDaoImplTest
     public SaysLeavewordDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysLeavewordDao=(ISaysLeavewordDao) act.getBean("saysLeavewordDaoImpl");
     }
 

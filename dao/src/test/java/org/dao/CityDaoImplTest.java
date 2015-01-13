@@ -23,8 +23,8 @@ public class CityDaoImplTest
     public CityDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
-    	 citydao=(ICityDao) act.getBean("cityDaoImpl");
+        act=DaoTestUtil.getAct();
+      citydao=(ICityDao) act.getBean("cityDaoImpl");
     }
 
     /**

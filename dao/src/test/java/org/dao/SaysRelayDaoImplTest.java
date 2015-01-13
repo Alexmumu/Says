@@ -27,7 +27,7 @@ public class SaysRelayDaoImplTest
     public SaysRelayDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysRelayDao=(ISaysRelayDao) act.getBean("saysRelayDaoImpl");
     }
 

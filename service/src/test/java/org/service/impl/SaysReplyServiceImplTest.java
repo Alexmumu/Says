@@ -24,7 +24,7 @@ public class SaysReplyServiceImplTest extends TestCase {
     public SaysReplyServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         replyService=(ISaysReplyService) act.getBean("saysReplyServiceImpl");
     }
 

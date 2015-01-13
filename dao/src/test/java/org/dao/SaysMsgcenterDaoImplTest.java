@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -23,7 +24,7 @@ public class SaysMsgcenterDaoImplTest extends TestCase {
     public SaysMsgcenterDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         msgcenterDao=(ISaysMsgcenterDao) act.getBean("saysMsgcenterDaoImpl");
     }
 

@@ -25,7 +25,7 @@ public class SaysMsgcenterServiceImplTest extends TestCase {
     public SaysMsgcenterServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         msgcenterService=(ISaysMsgcenterService) act.getBean("saysMsgcenterServiceImpl");
     }
 

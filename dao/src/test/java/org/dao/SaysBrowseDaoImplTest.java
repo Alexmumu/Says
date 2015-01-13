@@ -27,7 +27,7 @@ public class SaysBrowseDaoImplTest
     public SaysBrowseDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysBrowseDao=(ISaysBrowseDao) act.getBean("saysBrowseDaoImpl");
     }
 

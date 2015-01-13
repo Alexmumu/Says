@@ -27,7 +27,7 @@ public class SaysRizhitypeDaoImplTest extends TestCase{
     public SaysRizhitypeDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysRizhitypedao=(ISaysRizhitypeDao) act.getBean("saysRizhitypeDaoImpl");
     }
     /**

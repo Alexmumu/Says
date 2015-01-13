@@ -2,6 +2,8 @@ package org.dao;
 
 import java.io.Serializable;
 import java.util.List;
+ 
+
 
 import org.entity.SaysPhoto;
 import org.hibernateUtil.IBaseDao;
@@ -14,7 +16,7 @@ public interface ISaysPhotoDao extends IBaseDao<SaysPhoto>{
 	 * @return List<SaysPhoto>
 	 * @throws DataAccessException
 	 */
-	public List<SaysPhoto> findPhotoByAlbumId(Serializable albumid,int firstResult,int maxResults)throws DataAccessException;
+	public List<SaysPhoto> findPhotoByAlbumId(Serializable albumid,int firstResult,int maxResults,String photostatus)throws DataAccessException;
 
 	
 	/**
@@ -40,13 +42,31 @@ public interface ISaysPhotoDao extends IBaseDao<SaysPhoto>{
 	 */
 	public void deletPhoto(Serializable photoid)throws DataAccessException;
 	
+   
 	/**
-	 * 转移照片到指定的相册
-	 * @param photoid 照片的ID
-	 * @param albumid  相册的ID
+	 * 根据相册ID统计所有照片
+	 * @param albumid 相册的ID
+	 * @param photostatus 照片的状态
+	 * @return int
 	 * @throws DataAccessException
 	 */
+    public int countPhotoByAlbum(Serializable albumid,String photostatus)throws DataAccessException;
 	
-	
-	//public void updatePhotoIsAlbum(Serializable photoid,Serializable albumid) throws DataAccessException;
+	/**
+	 * 根据相册的ID查询相册里面的照片
+	 * @param albumid  相册ID
+	 * @return List<SaysPhoto>
+	 * @throws DataAccessException
+	 */
+    public List<SaysPhoto> getPhotoByAlbumId(Serializable albumid,String photostatus)throws DataAccessException;
+ 
+ 
+    
+    /**
+     * 查询要修改的照片的信息
+     * @param photoid
+     * @return
+     * @throws DataAccessException
+     */
+    public SaysPhoto getPhotoByphotoid(Serializable photoid)throws DataAccessException;
 }

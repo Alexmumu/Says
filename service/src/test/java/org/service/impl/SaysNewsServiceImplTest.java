@@ -24,7 +24,7 @@ public class SaysNewsServiceImplTest extends TestCase {
     public SaysNewsServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         newsService=(ISaysNewsService) act.getBean("saysNewsServiceImpl");
     }
 
