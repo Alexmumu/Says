@@ -106,11 +106,13 @@
 				<artifactId>spring-webmvc</artifactId>
 				<version>3.0.5.RELEASE</version>
 			</dependency>
+
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>1.9.4</version>
 			</dependency>
+
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>

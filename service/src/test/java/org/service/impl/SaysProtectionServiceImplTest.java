@@ -32,7 +32,7 @@ public class SaysProtectionServiceImplTest
     public SaysProtectionServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         ps=(ISaysProtectionService) act.getBean("saysProtectionServiceImpl");
     }

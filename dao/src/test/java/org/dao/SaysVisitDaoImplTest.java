@@ -21,7 +21,7 @@ public class SaysVisitDaoImplTest extends TestCase {
     public SaysVisitDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysVisitdao=(ISaysVisitDao) act.getBean("saysVisitDaoImpl");
     }
 

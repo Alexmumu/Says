@@ -24,7 +24,7 @@ public class SaysCommentsServiceImplTest extends TestCase {
     public SaysCommentsServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         commentsService=(ISaysCommentsService) act.getBean("saysCommentsServiceImpl");
     }
 

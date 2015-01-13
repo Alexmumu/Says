@@ -2,7 +2,6 @@ package org.service.impl;
 
 import org.entity.SaysRelay;
 import org.entity.SaysUser;
-
 import org.service.ISaysRelayService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -28,7 +27,7 @@ public class SaysRelayServiceImplTest
     public SaysRelayServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         cs=(ISaysRelayService) act.getBean("saysRelayServiceImpl");
     }

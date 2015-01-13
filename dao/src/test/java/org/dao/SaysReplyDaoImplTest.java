@@ -20,7 +20,7 @@ public class SaysReplyDaoImplTest extends TestCase {
     public SaysReplyDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         replyDao=(ISaysReplyDao) act.getBean("saysReplyDaoImpl");
     }
 

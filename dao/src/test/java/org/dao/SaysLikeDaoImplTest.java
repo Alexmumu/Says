@@ -29,7 +29,7 @@ public class SaysLikeDaoImplTest
     public SaysLikeDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysLikeDao=(ISaysLikeDao) act.getBean("saysLikeDaoImpl");
     }
 

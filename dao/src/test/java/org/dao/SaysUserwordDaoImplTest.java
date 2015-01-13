@@ -25,7 +25,7 @@ public class SaysUserwordDaoImplTest
     public SaysUserwordDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         saysUserwordDao=(ISaysUserwordDao) act.getBean("saysUserwordDaoImpl");
     }
 

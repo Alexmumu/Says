@@ -24,7 +24,7 @@ public class SaysRizhitypeServiceImplTest extends TestCase {
     public SaysRizhitypeServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         srzts=(ISaysRizhitypeService) act.getBean("saysRizhitypeServiceImpl");
     }

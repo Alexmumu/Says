@@ -2,7 +2,6 @@ package org.service.impl;
 
 
 import org.entity.Province;
-
 import org.service.IProvinceService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,7 +23,7 @@ public class ProvinceImplTest extends TestCase{
     public ProvinceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         ps=(IProvinceService) act.getBean("provinceServiceImpl");
     }

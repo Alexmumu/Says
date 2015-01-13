@@ -31,7 +31,7 @@ public class SaysLeavewordServiceImplTest
     public SaysLeavewordServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         ls=(ISaysLeavewordService) act.getBean("saysLeavewordServiceImpl");
     }

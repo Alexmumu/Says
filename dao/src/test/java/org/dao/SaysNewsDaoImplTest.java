@@ -17,7 +17,7 @@ public class SaysNewsDaoImplTest extends TestCase {
 	
 	public SaysNewsDaoImplTest(String testName) {
 		super(testName);
-		act = new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+		act=DaoTestUtil.getAct();
 		newsDao = (ISaysNewsDao)act.getBean("saysNewsDaoImpl");
 	}
 	

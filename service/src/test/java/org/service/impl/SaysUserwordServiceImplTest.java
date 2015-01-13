@@ -29,7 +29,7 @@ public class SaysUserwordServiceImplTest
     public SaysUserwordServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         cs=(ISaysUserwordService) act.getBean("saysUserwordServiceImpl");
     }

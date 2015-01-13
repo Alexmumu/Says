@@ -1,7 +1,6 @@
 package org.service.impl;
 
 import org.entity.Province;
-
 import org.entity.SaysUser;
 import org.entity.SaysVisit;
 import org.service.IProvinceService;
@@ -27,7 +26,7 @@ public class SaysVisvitServiceImplTest extends TestCase{
     public SaysVisvitServiceImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext ("applicationContext-service.xml","applicationContext-dao.xml");
+        act=ServiceTestUtil.getAct();
         System.out.println(act);
         svs=(ISaysVisitService) act.getBean("saysVisvitServiceImpl");
     }

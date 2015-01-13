@@ -7,16 +7,18 @@ import org.dao.ISaysShouShousDao;
 import org.entity.SaysShuoshuo;
 import org.hibernateUtil.AbstractBaseDao;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class SaysShouShouDaoImpl extends AbstractBaseDao<SaysShuoshuo> implements ISaysShouShousDao{
-   private static final String FIND_ALL_SHOUSHOU_HQL="from SaysShuoshuo ss where ss.userid.userid=?";
+   private static final String FIND_ALL_SHOUSHOU_HQL="from SaysShuoshuo ss where ss.userid.userid=? and shuostatus!=? order by shuodate desc";
 	
 	
 	@SuppressWarnings("unchecked")
 	public List<SaysShuoshuo> findAllShuoShuo(Serializable userid,
-			int firstResult, int maxResults) throws DataAccessException {
+			int firstResult, int maxResults,int shuostatus) throws DataAccessException {
 		  
-		return this.findByHql(FIND_ALL_SHOUSHOU_HQL, firstResult, maxResults,new Object[]{userid});
+		return this.findByHql(FIND_ALL_SHOUSHOU_HQL, firstResult, maxResults,new Object[]{userid,shuostatus});
 	}
 
 
@@ -35,6 +37,13 @@ public class SaysShouShouDaoImpl extends AbstractBaseDao<SaysShuoshuo> implement
 	public void updateShouShou(SaysShuoshuo ss) throws DataAccessException {
 		 this.update(ss);
 		
+	}
+
+
+	@Override
+	public int countShouShouByUserId(Serializable userid, int shuostatus)
+			throws DataAccessException {
+		    return this.countByHql(FIND_ALL_SHOUSHOU_HQL, new Object[]{userid,shuostatus});
 	}
 
 }

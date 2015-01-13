@@ -21,7 +21,7 @@ public class SaysCommentsDaoImplTest extends TestCase {
     public SaysCommentsDaoImplTest( String testName )
     {
         super( testName );
-        act=new ClassPathXmlApplicationContext("applicationContext-dao.xml");
+        act=DaoTestUtil.getAct();
         commentsDao=(ISaysCommentsDao) act.getBean("saysCommentsDaoImpl");
     }
 

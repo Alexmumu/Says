@@ -40,17 +40,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
           <div class="am-tabs-bd">
             <div data-tab-panel-0 class="am-tab-panel am-active">
-            <form action="user/login" class="am-form" data-am-validator>
+            <form action="user/login" class="am-form" method="post" data-am-validator>
               <fieldset>
                 <legend>用户登录</legend>
                 <div class="am-form-group">
                   <label for="doc-vld-name-2">帐号：</label>
-                  <input type="text" id="doc-vld-name-2" minlength="3" placeholder="帐号（至少 3 个字符）" required/>
+                  <input type="text" name="username" id="doc-vld-name-2" minlength="3" placeholder="帐号（至少 3 个字符）" required/>
                 </div>
 
                 <div class="am-form-group">
                   <label for="doc-vld-email-2">密码：</label>
-                  <input type="password"  placeholder="密码" required/>
+                  <input type="password" name="userpassword"  placeholder="密码" required/>
                 </div>
 
                 <div class="am-cf">

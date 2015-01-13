@@ -15,18 +15,18 @@ public interface ISaysAlbumDao extends IBaseDao<SaysAlbum>{
 	 * @return
 	 * @throws DataAccessException
 	 */
-	 public List<SaysAlbum> findByUserId(Serializable userid, int firstResult,int maxResults) throws DataAccessException;
+	 public List<SaysAlbum> findByUserId(Serializable userid, int firstResult,int maxResults,int albumstatus) throws DataAccessException;
 	/**
 	 * 根据用户ID统计相册数目
 	 * @param userid 用户ID
 	 * @return 相册数目
 	 * @throws DataAccessException
 	 */
-	 public int countByUserid(Serializable userid)throws DataAccessException;
+	 public int countByUserid(Serializable userid ,int albumstatus )throws DataAccessException;
 	 
 
 	 /**
-	  * 
+	  * 添加一个相册
 	  * @param al
 	  * @return
 	  * @throws DataAccessException
@@ -48,4 +48,12 @@ public interface ISaysAlbumDao extends IBaseDao<SaysAlbum>{
 	  * @throws DataAccessException
 	  */
 	 public void updateAlbum(SaysAlbum al) throws DataAccessException;
+	 
+	 /**
+	  * 根据相ID查询要修改的信息
+	  * @param albumid
+	  * @return SaysAlbum
+	  * @throws DataAccessException
+	  */
+	 public SaysAlbum findAlbumByalbumid(Serializable albumid)throws DataAccessException;
 }

@@ -15,7 +15,7 @@ public interface ISaysShouShousDao {
 	 * @return List<SaysShuoshuo>
 	 * @throws DataAccessException
 	 */
-	public List<SaysShuoshuo> findAllShuoShuo(Serializable userid, int firstResult,int maxResults) throws DataAccessException;
+	public List<SaysShuoshuo> findAllShuoShuo(Serializable userid, int firstResult,int maxResults,int shuostatus) throws DataAccessException;
 	
 	/**
 	 * 添加一条说说
@@ -34,9 +34,18 @@ public interface ISaysShouShousDao {
 	public void delectShouShou(Serializable shuoid) throws DataAccessException;
 	
 	/**
-	 * 修改日志
+	 * 修改说说
 	 * @param ss 说说的实体对象
 	 * @throws DataAccessException
 	 */
 	public void updateShouShou(SaysShuoshuo ss)throws DataAccessException;
+	
+	/**
+	 * 根据UserId和说说状态统计说说
+	 * @param userid
+	 * @param shuostatus
+	 * @return int
+	 * @throws DataAccessException
+	 */
+	public int countShouShouByUserId(Serializable userid,int shuostatus)throws DataAccessException;
 }
