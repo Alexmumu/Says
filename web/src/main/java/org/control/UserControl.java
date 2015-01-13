@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.entity.SaysUser;
+import org.service.ISaysUserService;
 import org.service.impl.SaysUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,24 +18,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserControl {
 	
 	@Autowired
-	private SaysUserServiceImpl suService ;
+	private ISaysUserService saysUserServiceImpl ;
 	
 	@RequestMapping("/toLogin")
 	public String toLogin(){
 		
 		return "login";
 	}
-	@ResponseBody
-	@RequestMapping("/login")
-	public String login(SaysUser user,HttpSession session,@RequestBody String requestbody){
+	
+	@RequestMapping(value="/login")
+	public @ResponseBody String login(
+			SaysUser user){
+		System.out.println(user.getUsername());
 		String msg="shibai";
-		System.out.println(requestbody);
-		List userlist=suService.loginuser(user.getUserarea(),user.getUserpassword());
-		if(userlist.size()==0){
-			session.setAttribute("myuser",userlist.get(0));
+		try{
+			List userlist=saysUserServiceImpl.loginuser(user.getUsername(),user.getUserpassword());
 			msg="chenggong";
+
+		}catch(RuntimeException e){
+			//e.printStackTrace();
+			msg="shibai";
 		}
+	
 		return msg;
+	}
+	@RequestMapping("test")
+	public @ResponseBody List test(){
+		return this.saysUserServiceImpl.selectbyname("黄英鹏");
+		
 	}
 	
 }
