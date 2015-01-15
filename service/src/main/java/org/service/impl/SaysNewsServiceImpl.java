@@ -107,9 +107,9 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				String id = news.getNewscontent();
 				con.setData(shouShousDao.loadByID(id));
 				con.setPinglunnum(commDao.CountComments(id,"1"));
-				//con.setZhuanfanum(relayDao.countByUseridSaysRelay(userid));
-				//con.setYuedunum(browseDao.countByUseridSaysBrowse(userid));
-				//con.setDianzannum(likeDao.countByUseridSaysLike(userid));
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
 				con.setDatadate(((SaysShuoshuo)con.getData()).getShuodate());
 				SaysShuoshuo shuoshuo=(SaysShuoshuo)con.getData();
 				shouShousDao.initialize(shuoshuo.getUserid());
@@ -120,6 +120,9 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				String id = news.getNewscontent();
 				con.setData(rizhiDao.loadByID(id));
 				con.setPinglunnum(commDao.CountComments(id, "1"));
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
 				con.setDatadate(((SaysRizhi)con.getData()).getRizhidate());
 				SaysRizhi sr=(SaysRizhi) con.getData();
 				rizhiDao.initialize(sr.getRizhitype());
@@ -132,6 +135,9 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				String id = news.getNewscontent();
 				con.setData(photoDao.loadByID(id));
 				con.setPinglunnum(commDao.CountComments(id, "1"));
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
 				con.setDatadate(((SaysPhoto)con.getData()).getPhotodate());
 				SaysPhoto sp=(SaysPhoto) con.getData();
 				photoDao.initialize(sp.getAlbumid());
