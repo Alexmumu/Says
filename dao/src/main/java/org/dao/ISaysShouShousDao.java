@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.entity.SaysShuoshuo;
+import org.hibernateUtil.IBaseDao;
 import org.springframework.dao.DataAccessException;
 
-public interface ISaysShouShousDao {
+public interface ISaysShouShousDao extends IBaseDao<SaysShuoshuo> {
 	/**
 	 * 根据用户ID查询所有的说说
 	 * @param userid 用户ID

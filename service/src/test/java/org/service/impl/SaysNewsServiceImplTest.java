@@ -5,6 +5,7 @@ import org.entity.SaysUser;
 import org.service.ISaysNewsService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.vo.ContentData;
 import org.vo.Page;
 
 import junit.framework.Test;
@@ -52,7 +53,7 @@ public class SaysNewsServiceImplTest extends TestCase {
     	SaysUser user = new SaysUser();
     	user.setUserid("U006");
     	news.setUserid(user);
-    	if(newsService.AddNews(news)!= null){
+    	if(newsService.addNews(news)!= null){
     		istest=true;
     	}
     	assertTrue(istest);
@@ -62,8 +63,12 @@ public class SaysNewsServiceImplTest extends TestCase {
     	Boolean istest=false;
     	Page<SaysNews> page = new Page<SaysNews>();
     	page.setPageNo(1);
-    	page.setPageSize(3);
-    	if(newsService.FindNewsByUser("U001",page) != null){
+    	page.setPageSize(999);
+    	if(newsService.findNewsByUser("U001",page) != null){
+    		Page<ContentData<Object>> page2= (newsService.findNewsByUser("U001",page));
+    		for(ContentData cd:page2.getResult()){
+    			System.out.println(cd.getData());
+    		}
     		istest=true;
     	}
     	assertTrue(istest);

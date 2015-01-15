@@ -57,7 +57,7 @@ public class SaysReplyServiceImplTest extends TestCase {
     	userare.setUserid("U003");
     	reply.setUserid(user);
     	reply.setUseridare(userare);
-    	if(replyService.AddReply(reply)!= null){
+    	if(replyService.addReply(reply)!= null){
     		istest=true;
     	}
     	assertTrue(istest);
@@ -69,7 +69,7 @@ public class SaysReplyServiceImplTest extends TestCase {
     	Page<SaysReply> page = new Page<SaysReply>();
     	page.setPageNo(1);
     	page.setPageSize(3);
-    	if(replyService.FindReplybyCommentid("C001",page,1) != null){
+    	if(replyService.findReplybyCommentid("C001",page,1) != null){
     		istest=true;
     	}
     	assertTrue(istest);
@@ -81,7 +81,7 @@ public class SaysReplyServiceImplTest extends TestCase {
     	Page<SaysReply> page = new Page<SaysReply>();
     	page.setPageNo(1);
     	page.setPageSize(3);
-    	if(replyService.FindReplybyReplyare("RY01",page,1) != null){
+    	if(replyService.findReplybyReplyare("RY01",page,1) != null){
     		istest=true;
     	}
     	assertTrue(istest);
@@ -89,7 +89,7 @@ public class SaysReplyServiceImplTest extends TestCase {
     
     public void testDeleteReply(){
     	Boolean istest=false;
-    	if(replyService.DeleteReply(replyService.GetReply("402881ec4ad46d7a014ad46d919a0000"))){
+    	if(replyService.deleteReply(replyService.getReply("402881ec4ad46d7a014ad46d919a0000"))){
     		istest=true;
     	}
     	assertTrue(istest);

@@ -16,7 +16,7 @@ public class SaysReplyServiceImpl implements ISaysReplyService {
 	@Autowired
 	private ISaysReplyDao replyDao;
 	
-	public Serializable AddReply(SaysReply reply) {
+	public Serializable addReply(SaysReply reply) {
 		Serializable i = null;
 		if(replyDao.HasReply(reply.getReplyid())){
 			i = replyDao.AddReply(reply);
@@ -24,7 +24,7 @@ public class SaysReplyServiceImpl implements ISaysReplyService {
 		return i;
 	}
 
-	public boolean DeleteReply(SaysReply reply) {
+	public boolean deleteReply(SaysReply reply) {
 		try {
 			reply.setReplystatus(0);
 			replyDao.update(reply);
@@ -35,7 +35,7 @@ public class SaysReplyServiceImpl implements ISaysReplyService {
 	}
 
 	@Override
-	public Page<SaysReply> FindReplybyCommentid(Serializable commentid,
+	public Page<SaysReply> findReplybyCommentid(Serializable commentid,
 			Page<SaysReply> page, int replystatus) {
 		page.setDataSum(replyDao.CountReplybyCommentid(commentid,replystatus));
 		List<SaysReply> list = replyDao.FindReplybyCommentid(commentid, page
@@ -46,7 +46,7 @@ public class SaysReplyServiceImpl implements ISaysReplyService {
 	}
 
 	@Override
-	public Page<SaysReply> FindReplybyReplyare(Serializable replyare,
+	public Page<SaysReply> findReplybyReplyare(Serializable replyare,
 			Page<SaysReply> page, int replystatus) {
 		page.setDataSum(replyDao.CountReplybyReplyare(replyare,replystatus));
 		List<SaysReply> list = replyDao.FindReplybyReplyare(replyare, page
@@ -57,7 +57,7 @@ public class SaysReplyServiceImpl implements ISaysReplyService {
 	}
 
 	@Override
-	public SaysReply GetReply(Serializable replyid) {
+	public SaysReply getReply(Serializable replyid) {
 
 		return replyDao.getById(replyid);
 		
