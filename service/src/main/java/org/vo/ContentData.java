@@ -1,8 +1,8 @@
 package org.vo;
 
-import java.util.List;
+import java.sql.Timestamp;
 
-import org.entity.SaysComments;
+
 
 /**
  * 展现动态的时候 可以直接用这个
@@ -23,6 +23,10 @@ public class ContentData<T> {
 	 */
 	private int yuedunum;
 	/**
+	 * 评论的数目
+	 */
+	private int pinglunnum;
+	/**
 	 * 转发数
 	 */
 	private int zhuanfanum;
@@ -34,6 +38,12 @@ public class ContentData<T> {
 	 * 表示这个对象的类型  如 1是说说 2日志 3相册
 	 */
 	private int datatype;
+	/**
+	 * 对象创建时间
+	 */
+	private Timestamp datadate;
+	
+	
 	public T getData() {
 		return data;
 	}
@@ -63,6 +73,18 @@ public class ContentData<T> {
 	}
 	public void setDatatype(int datatype) {
 		this.datatype = datatype;
+	}
+	public int getPinglunnum() {
+		return pinglunnum;
+	}
+	public void setPinglunnum(int pinglunnum) {
+		this.pinglunnum = pinglunnum;
+	}
+	public Timestamp getDatadate() {
+		return datadate;
+	}
+	public void setDatadate(Timestamp datadate) {
+		this.datadate = datadate;
 	}
 	
 	

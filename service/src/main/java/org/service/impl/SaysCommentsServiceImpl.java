@@ -16,7 +16,7 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 	@Autowired
 	private ISaysCommentsDao commentsDao;
 
-	public Serializable AddComments(SaysComments comm) {
+	public Serializable addComments(SaysComments comm) {
 		Serializable i = null;
 		if(commentsDao.HasComment(comm.getCommentid())){
 			i = commentsDao.AddComments(comm);
@@ -24,7 +24,7 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 		return i;
 	}
 
-	public boolean DeleteComments(SaysComments comm) {
+	public boolean deleteComments(SaysComments comm) {
 		try {
 			comm.setCommentstatus("0");
 			commentsDao.update(comm);
@@ -35,7 +35,7 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 	}
 
 	@Override
-	public Page<SaysComments> FindComments(Serializable commentsforid,
+	public Page<SaysComments> findComments(Serializable commentsforid,
 			Page<SaysComments> page,String commentstatus) {
 		page.setDataSum(commentsDao.CountComments(commentsforid,commentstatus));
 		List<SaysComments> list = commentsDao.FindComments(commentsforid, page
@@ -46,7 +46,7 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 	}
 
 	@Override
-	public SaysComments GetComment(Serializable commentid) {
+	public SaysComments getComment(Serializable commentid) {
 
 		return commentsDao.getById(commentid);
 		
