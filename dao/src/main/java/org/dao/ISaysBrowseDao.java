@@ -32,6 +32,8 @@ public interface ISaysBrowseDao extends IBaseDao<SaysBrowse>{
 	  * @throws DataAccessException
 	  */
 	 public int countByUseridSaysBrowse(Serializable userid)throws DataAccessException;
+	 public int countByBrowseforSaysBrowse(Serializable browsefor)throws DataAccessException;
+	 
 	 /**
 	 * 根据项目查看访问用户信息
 	 * @throws DataAccessException

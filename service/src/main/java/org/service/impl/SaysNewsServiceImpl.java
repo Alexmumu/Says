@@ -38,7 +38,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 			Page<SaysNews> page) {
 		page.setDataSum(newsDao.CountNews(userid));
 		List<SaysNews> list = newsDao.FindNewsByUser(userid, page
-				.getFirstResult(), page.getMaxResults());
+		.getFirstResult(), page.getMaxResults());
 		page.setResult(list);
 		System.out.println(page.getDataSum());
 		return page;
