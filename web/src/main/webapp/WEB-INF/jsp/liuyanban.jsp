@@ -27,9 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    skin: '#AF0000', //加载内置皮肤，也可以直接赋值16进制颜色值，如:#c00
 		    groups: 5, //连续显示分页数
 		    jump: function(e){
-		    	alert(e.curr);
+		    	var aa=e.curr;
+		    	$("#dijiye").text(aa);
+		    	//alert($("#dijiye").text()); 
 		    }
 		});
+  			$("p").click(function(){
+  				alter("1243");
+  			}
+  					
+  			)
   	});
   	</script>
 </head>
@@ -122,6 +129,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
 	<div id="page1"></div>
 						</div>
-					
+						<a style="display:none;" id="dijiye"></a>				
 </body>
 </html>
