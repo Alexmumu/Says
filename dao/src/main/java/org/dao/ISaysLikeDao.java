@@ -32,6 +32,8 @@ public interface ISaysLikeDao extends IBaseDao<SaysLike> {
 	  * @throws DataAccessException
 	  */
 	 public int countByUseridSaysLike(Serializable userid)throws DataAccessException;
+	 public int countByLikeforSaysLike(Serializable likefor)throws DataAccessException;
+		
 	 /**
 	  * 通过所属用户id查看点赞用户
 	  * @param userid

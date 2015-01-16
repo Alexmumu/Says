@@ -32,10 +32,11 @@ public class SaysReplyDaoImpl extends AbstractBaseDao<SaysReply> implements
 	@Override
 	public List<SaysReply> FindReplybyReplyare(Serializable replyare,
 			int firstResult, int maxResults,int replystatus) throws DataAccessException {
-
+		
 		return this.findByHql(FINF_REPLYBYREPLYARE, firstResult, maxResults, new Object[]{replyare,replystatus});
 		
 	}
+	
 
 	@Override
 	public Serializable AddReply(SaysReply reply) throws DataAccessException {

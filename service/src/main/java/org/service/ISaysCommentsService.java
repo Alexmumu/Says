@@ -7,13 +7,13 @@ import org.vo.Page;
 
 public interface ISaysCommentsService {
 
-	public SaysComments GetComment(Serializable commentid);
+	public SaysComments getComment(Serializable commentid);
 	
-	public Page<SaysComments> FindComments(Serializable commentsforid,Page<SaysComments> page,String commentstatus);
+	public Page<SaysComments> findComments(Serializable commentsforid,Page<SaysComments> page,String commentstatus);
 	
-	public Serializable AddComments(SaysComments comm);
+	public Serializable addComments(SaysComments comm);
 	
-	public boolean DeleteComments(SaysComments comm);
+	public boolean deleteComments(SaysComments comm);
 	
 	
 	

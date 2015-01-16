@@ -12,4 +12,5 @@ public interface ISaysLikeService {
 	List<SaysLike> findByUseridareSaysLike(Serializable useridare);
 	int findByUseridToUseridareForLikeforSaysLike(Serializable likefor,Serializable userid,Serializable useridare);
 	List<SaysLike> findByUseridSaysLike(Serializable userid);
+	int countByLikeforSaysLike(Serializable likefor);
 }

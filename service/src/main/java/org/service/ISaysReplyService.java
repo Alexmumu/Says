@@ -7,13 +7,13 @@ import org.vo.Page;
 
 public interface ISaysReplyService {
 
-	public Page<SaysReply> FindReplybyCommentid(Serializable commentid,Page<SaysReply> page,int replystatus);
+	public Page<SaysReply> findReplybyCommentid(Serializable commentid,Page<SaysReply> page,int replystatus);
 	
-	public Page<SaysReply> FindReplybyReplyare(Serializable replyare,Page<SaysReply> page,int replystatus); 
+	public Page<SaysReply> findReplybyReplyare(Serializable replyare,Page<SaysReply> page,int replystatus); 
 	
-	public  Serializable AddReply(SaysReply reply);
+	public  Serializable addReply(SaysReply reply);
 	
-	public boolean DeleteReply(SaysReply reply);
+	public boolean deleteReply(SaysReply reply);
 	
-	public SaysReply GetReply(Serializable replyid);
+	public SaysReply getReply(Serializable replyid);
 }
