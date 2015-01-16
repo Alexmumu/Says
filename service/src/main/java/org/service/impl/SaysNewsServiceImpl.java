@@ -13,10 +13,13 @@ import org.dao.ISaysPhotoDao;
 import org.dao.ISaysRelayDao;
 import org.dao.ISaysRizhiDao;
 import org.dao.ISaysShouShousDao;
+import org.dao.ISaysUserDao;
+import org.entity.SaysAlbum;
 import org.entity.SaysFriends;
 import org.entity.SaysNews;
 import org.entity.SaysPhoto;
 import org.entity.SaysRizhi;
+import org.entity.SaysRizhitype;
 import org.entity.SaysShuoshuo;
 import org.entity.SaysUser;
 import org.service.ISaysNewsService;
@@ -46,7 +49,8 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 	private ISaysBrowseDao browseDao;
 	@Autowired
 	private ISaysLikeDao likeDao;
-	
+	@Autowired
+	private ISaysUserDao userDao;
 
 	@Override
 	public int countFriends(Serializable userid) {
@@ -105,44 +109,65 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 			{
 				ContentData<Object> con = new ContentData<Object>();
 				String id = news.getNewscontent();
-				con.setData(shouShousDao.loadByID(id));
+				
 				con.setPinglunnum(commDao.CountComments(id,"1"));
 				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
 				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
 				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				SaysShuoshuo shuoshuo=  shouShousDao.getById(id);
+				System.out.println(shuoshuo);
+				SaysUser user=new SaysUser();
+				user.setUserid(shuoshuo.getUserid().getUserid());
+				user.setUsername(shuoshuo.getUserid().getUsername());
+				user.setUserimg(shuoshuo.getUserid().getUserimg());
+				shuoshuo.setUserid(user);
+				con.setData(shuoshuo);
 				con.setDatadate(((SaysShuoshuo)con.getData()).getShuodate());
-				SaysShuoshuo shuoshuo=(SaysShuoshuo)con.getData();
-				shouShousDao.initialize(shuoshuo.getUserid());
 				content.add(con);
 			}
 			if(news.getNewsstatus() == 3 || news.getNewsstatus() == 4){
 				ContentData<Object> con = new ContentData<Object>();
 				String id = news.getNewscontent();
-				con.setData(rizhiDao.loadByID(id));
+				System.out.println("日志ID"+id);
 				con.setPinglunnum(commDao.CountComments(id, "1"));
 				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
 				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
 				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				SaysRizhi rizhi=rizhiDao.getById(id);
+				SaysRizhitype rizhitype = new SaysRizhitype();
+				rizhitype.setTypeid(rizhi.getRizhitype().getTypeid());
+				rizhitype.setTypename(rizhi.getRizhitype().getTypename());
+				rizhitype.setUserid(null);
+				rizhi.setRizhitype(rizhitype);
+				SaysUser user = new SaysUser();
+				user.setUserid(rizhi.getRizhiuserid().getUserid());
+				user.setUsername(rizhi.getRizhiuserid().getUsername());
+				user.setUserimg(rizhi.getRizhiuserid().getUserimg());
+				rizhi.setRizhiuserid(user);
+				con.setData(rizhi);
 				con.setDatadate(((SaysRizhi)con.getData()).getRizhidate());
-				SaysRizhi sr=(SaysRizhi) con.getData();
-				rizhiDao.initialize(sr.getRizhitype());
-				sr.getRizhitype().setUserid(null);
-				rizhiDao.initialize(sr.getRizhiuserid());
 				content.add(con);
 			}
 			if(news.getNewsstatus() == 5 || news.getNewsstatus() == 6){
 				ContentData<Object> con = new ContentData<Object>();
 				String id = news.getNewscontent();
-				con.setData(photoDao.loadByID(id));
 				con.setPinglunnum(commDao.CountComments(id, "1"));
 				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
 				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
 				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
 				con.setDatadate(((SaysPhoto)con.getData()).getPhotodate());
-				SaysPhoto sp=(SaysPhoto) con.getData();
-				photoDao.initialize(sp.getAlbumid());
-				sp.getAlbumid().setUserid(null);
-				photoDao.initialize(sp.getUserid());
+				SaysPhoto photo = photoDao.getById(id);
+				SaysAlbum album = new SaysAlbum();
+				album.setAlbumid(photo.getAlbumid().getAlbumid());
+				album.setAlbumtitle(photo.getAlbumid().getAlbumtitle());
+				album.setUserid(null);
+				photo.setAlbumid(album);
+				SaysUser user = new SaysUser();
+				user.setUserid(photo.getUserid().getUserid());
+				user.setUsername(photo.getUserid().getUsername());
+				user.setUserimg(photo.getUserid().getUserimg());
+				photo.setUserid(user);
+				con.setData(photo);
 				content.add(con);
 			}
 		}

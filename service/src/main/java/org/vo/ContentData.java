@@ -1,5 +1,6 @@
 package org.vo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 
@@ -13,7 +14,11 @@ import java.sql.Timestamp;
  *
  * @param <T> 说说 日志 相片 这种数据对象
  */
-public class ContentData<T> {
+public class ContentData<T> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 核心数据  如 说说 相片 日志
 	 */

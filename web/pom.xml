@@ -51,6 +51,7 @@
 			<artifactId>standard</artifactId>
 			<type>jar</type>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>web</finalName>
