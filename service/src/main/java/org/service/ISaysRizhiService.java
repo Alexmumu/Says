@@ -38,7 +38,7 @@ public interface ISaysRizhiService {
       * @throws DataAccessException
       */
      
-     public Page<SaysRizhi> fandSaysRizhi(SaysRizhi srz,Page<SaysRizhi> page) throws DataAccessException;
+     public Page<SaysRizhi> findSaysRizhi(SaysRizhi srz,Page<SaysRizhi> page) throws DataAccessException;
      
      /**
       * 根据用户ID查询所有日志的个数

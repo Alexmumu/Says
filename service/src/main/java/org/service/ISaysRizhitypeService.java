@@ -3,6 +3,7 @@ package org.service;
 import java.io.Serializable;
 import java.util.List;
 
+import org.entity.SaysRizhi;
 import org.entity.SaysRizhitype;
 import org.springframework.dao.DataAccessException;
 
@@ -46,5 +47,11 @@ public interface ISaysRizhitypeService {
 	 * @throws DataAccessException
 	 */
     public int countByUserid(Serializable userid,Serializable typestatus) throws DataAccessException;
-
+	 /**
+     * 根据日志类型ID,查询日志类型的详细信息
+     * @param saysrizhi 日志类型表的对象
+     * @throws DataAccessException
+     */
+	 public SaysRizhitype SaysRizhiById(Serializable typeid) throws DataAccessException;
+   
 }

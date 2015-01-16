@@ -123,7 +123,7 @@
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
 				<version>1.1.2</version>
-				<scope>provided</scope>
+
 			</dependency>
 
 
@@ -131,7 +131,7 @@
 				<groupId>taglibs</groupId>
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
-				<scope>provided</scope>
+			
 			</dependency>
 
 

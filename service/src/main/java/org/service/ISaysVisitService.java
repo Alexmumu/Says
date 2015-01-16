@@ -29,7 +29,7 @@ public interface ISaysVisitService {
 	 * @throws DataAccessException
 	 */
 
-	Page<SaysVisit> fandMySaysVisit(SaysVisit data, Page<SaysVisit> page) throws DataAccessException;
+	Page<SaysVisit> findMySaysVisit(SaysVisit data, Page<SaysVisit> page) throws DataAccessException;
 
 	
 	/**
@@ -54,16 +54,7 @@ public interface ISaysVisitService {
 	  * @throws DataAccessException
 	  */
 	 public Serializable addSaysVisit(SaysVisit saysVisit) throws DataAccessException;
-	 
-
-	 /**
-	  * 根据访问的用户第二访问时，实行时间的更新
-	  * @param fromuserid 访问人的用户ID
-	  * @return
-	  * @throws DataAccessException
-	  */
-	 public void updateVisitIdTime(SaysVisit saysVisit) throws DataAccessException;
-     /**
+    /**
       * 根据访问客标的ID删除访问记录  真的删除
       * @param fromuserid
       * @return
