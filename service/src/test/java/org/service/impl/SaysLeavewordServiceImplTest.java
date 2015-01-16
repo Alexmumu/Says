@@ -60,7 +60,7 @@ public class SaysLeavewordServiceImplTest
     	page.setPageSize(2);
     	
     	Page<SaysLeaveword> ss=ls.findAllSaysLeaveword(page, alw);
- //   	System.out.println(ss.getResult().get(0));
+    	System.out.println(ss.getResult().get(0));
 //  	SaysLeaveword alw=new SaysLeaveword();
 //    	alw.setLeavewordcontent("qwertyuio");
 //    	ls.saveSaysLeaveword(alw);

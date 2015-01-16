@@ -36,6 +36,16 @@ public class SaysRelayServiceImpl implements ISaysRelayService{
 		return this.saysRelayDao.findByUseridSaysRelay(userid);
 	}
 
+	@Override
+	public int countByRelayfromSaysRelay(Serializable relayfrom) {
+		return this.saysRelayDao.countByRelayfromSaysRelay(relayfrom);
+	}
+
+	@Override
+	public int countByRelayafterSaysRelay(Serializable relayafter) {
+		return this.saysRelayDao.countByRelayfromSaysRelay(relayafter);
+	}
+
 	
 
 }
