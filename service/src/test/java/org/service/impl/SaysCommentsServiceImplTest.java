@@ -56,7 +56,7 @@ public class SaysCommentsServiceImplTest extends TestCase {
     	userare.setUserid("U001");
     	comm.setUserid(user);
     	comm.setUseridare("U001");
-    	if(commentsService.AddComments(comm)!= null){
+    	if(commentsService.addComments(comm)!= null){
     		istest=true;
     	}
     	assertTrue(istest);
@@ -67,7 +67,7 @@ public class SaysCommentsServiceImplTest extends TestCase {
     	Page<SaysComments> page = new Page<SaysComments>();
     	page.setPageNo(1);
     	page.setPageSize(3);
-    	if(commentsService.FindComments("A001",page,"1") != null){
+    	if(commentsService.findComments("A001",page,"1") != null){
     		istest=true;
     	}
     	assertTrue(istest);
@@ -75,7 +75,7 @@ public class SaysCommentsServiceImplTest extends TestCase {
     
     public void testDeleteComments(){
     	Boolean istest=false;
-    	if(commentsService.DeleteComments(commentsService.GetComment("402881ec4ad36d91014ad36da6af0000"))){
+    	if(commentsService.deleteComments(commentsService.getComment("402881ec4ad36d91014ad36da6af0000"))){
     		istest=true;
     	}
     	assertTrue(istest);   	

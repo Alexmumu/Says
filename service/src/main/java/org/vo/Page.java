@@ -18,6 +18,8 @@ public class Page<T> implements Serializable {
 	public Page() {
 		super();
 		pageSize = Constant.DEFAULT_PAGE;
+		firstResult = 0;
+		
 	}
 
 	/**

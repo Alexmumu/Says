@@ -45,8 +45,6 @@ public class SaysProtectionServiceImpl  implements ISaysProtectionService{
 	@Override
 	public boolean updateSaysProtections(SaysProtection saysprotection)
 			throws DataAccessException {
-		// TODO Auto-generated method stub
-		
 		try {
 			boolean s = this.protectionDao.updateSaysProtection(saysprotection);
 			return s;

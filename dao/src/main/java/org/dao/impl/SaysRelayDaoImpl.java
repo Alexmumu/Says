@@ -20,6 +20,8 @@ import org.springframework.stereotype.Repository;
 class SaysRelayDaoImpl extends AbstractBaseDao<SaysRelay> implements
 ISaysRelayDao {
 	private static final String FINDBYUSERID_HQL="select sr from SaysRelay sr where sr.useridare.userid=? order by sr.relaytime desc";
+	private static final String FINDBYRelayfrom_HQL="select sr from SaysRelay sr where sr.relayfrom=? order by sr.relaytime desc";
+	private static final String FINDBYRelayafter_HQL="select sr from SaysRelay sr where sr.relayafter=? order by sr.relaytime desc";
 	
 	@Override
 	public void saveSaysRelay(SaysRelay ar) throws DataAccessException {
@@ -41,5 +43,18 @@ ISaysRelayDao {
 		@SuppressWarnings("unchecked")
 		List<SaysRelay> list=this.findByHql(FINDBYUSERID_HQL,new Object[]{userid});
 		return list;
+	}
+	@Override
+	public int countByRelayfromSaysRelay(Serializable relayfrom)
+			throws DataAccessException {
+		return this.countByHql(FINDBYRelayfrom_HQL, new Object[]{relayfrom});
+		
+	}
+	@Override
+	public int countByRelayafterSaysRelay(Serializable relayafter)
+			throws DataAccessException {
+		
+		return this.countByHql(FINDBYRelayafter_HQL, new Object[]{relayafter});
+		
 	}
 }

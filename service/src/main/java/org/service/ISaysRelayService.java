@@ -10,5 +10,6 @@ public interface ISaysRelayService {
 	void deleteSaysRelay(Serializable relayid);
 	int countByUseridSaysRelay(Serializable userid);
 	List<SaysRelay> findByUseridSaysRelay(Serializable userid);
-	
+	int countByRelayfromSaysRelay(Serializable relayfrom);
+	int countByRelayafterSaysRelay(Serializable relayafter);
 }

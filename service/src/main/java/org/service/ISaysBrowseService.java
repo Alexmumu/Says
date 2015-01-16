@@ -14,5 +14,5 @@ public interface ISaysBrowseService {
 	List<SaysBrowse> findSaysBrowseByitem(Serializable browsefor,Serializable useridare);
 	void updateSaysBrowse(SaysBrowse sb);
 	List<SaysBrowse> findSaysBrowse(int firstResult,int maxResults, Serializable browsefor,Serializable useridare);
-	
+	int countByBrowseforSaysBrowse(Serializable browsefor);
 }

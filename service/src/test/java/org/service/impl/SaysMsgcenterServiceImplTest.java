@@ -54,7 +54,7 @@ public class SaysMsgcenterServiceImplTest extends TestCase {
  	   SaysUser user = new SaysUser();
  	   user.setUserid("U001");
  	   msg.setUserid(user);
- 		if(msgcenterService.AddMsg(msg)!=null){
+ 		if(msgcenterService.addMsg(msg)!=null){
  		   		istest=true;
  		   	}
  		assertTrue(istest);
@@ -63,7 +63,7 @@ public class SaysMsgcenterServiceImplTest extends TestCase {
     
     public void testFindNewMsg(){
     	Boolean istest=false;
-    	int a = msgcenterService.FindNewMsg("U001");
+    	int a = msgcenterService.findNewMsg("U001");
     	System.out.println("------------a-----------");
     	System.out.println("a="+a);
     	if(a>0){
@@ -77,8 +77,8 @@ public class SaysMsgcenterServiceImplTest extends TestCase {
     	Boolean istest=false;
     	Page<SaysMsgcenter> page = new Page<SaysMsgcenter>();
     	page.setPageNo(1);
-    	page.setPageSize(2);
-    	if(msgcenterService.FindMsgByUser("U001",page) != null){
+    	page.setPageSize(9999);
+    	if(msgcenterService.findMsgByUser("U001",page) != null){
     		istest=true;
     	}
     	assertTrue(istest);

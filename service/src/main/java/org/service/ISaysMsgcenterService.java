@@ -3,15 +3,17 @@ package org.service;
 import java.io.Serializable;
 
 import org.entity.SaysMsgcenter;
+import org.vo.ContentData;
+import org.vo.MsgDataVo;
 import org.vo.Page;
 
 public interface ISaysMsgcenterService {
 
-	public Page<SaysMsgcenter> FindMsgByUser(Serializable userid,Page<SaysMsgcenter> page);
+	public Page<MsgDataVo> findMsgByUser(Serializable userid,Page<SaysMsgcenter> page);
 	
-	public Serializable AddMsg(SaysMsgcenter msg);
+	public Serializable addMsg(SaysMsgcenter msg);
 	
-	public int FindNewMsg(Serializable userid);
+	public int findNewMsg(Serializable userid);
 	
-	public boolean DeleteMsg(Serializable mcid);
+	public boolean deleteMsg(Serializable mcid);
 }

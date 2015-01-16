@@ -57,5 +57,10 @@ public class SaysLikeServiceImpl implements ISaysLikeService {
 	public List<SaysLike> findByUseridSaysLike(Serializable userid) {
 		return this.saysLikeDao.findByUseridSaysLike(userid);
 	}
+
+	@Override
+	public int countByLikeforSaysLike(Serializable likefor) {
+		return this.saysLikeDao.countByLikeforSaysLike(likefor);
+	}
 	
 }

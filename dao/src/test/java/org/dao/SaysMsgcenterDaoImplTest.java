@@ -78,6 +78,11 @@ public class SaysMsgcenterDaoImplTest extends TestCase {
 		assertTrue(istest);
    }
    
+   public void testCountMsg(){
+	   System.out.println(msgcenterDao.CountMsg("U001"));
+		assertTrue(true);
+   }
+   
    
    public void testhasMsg(){
    	Boolean istest=false;

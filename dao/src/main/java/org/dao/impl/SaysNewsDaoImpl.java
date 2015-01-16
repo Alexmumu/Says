@@ -15,7 +15,7 @@ public class SaysNewsDaoImpl extends AbstractBaseDao<SaysNews> implements
 
 	private static final String FIND_NEWSBYUSER = "from SaysNews as news where news.userid.userid = ? order by news.newtime";
 	private static final String FIND_NRWS = "select count(*) from SaysNews as news where news.newsid = ?";
-	private static final String COUNT_NEWS = "select count(*) from SaysNews as news where news.userid.userid = ?";
+	private static final String COUNT_NEWS = "select count(*) from SaysNews as news where news.userid.userid = ? ";
 	
 	@SuppressWarnings("unchecked")
 	@Override
