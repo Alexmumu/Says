@@ -2,6 +2,8 @@ package org.service.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.dao.ISaysBrowseDao;
@@ -99,6 +101,12 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 			}
 		}
 		
+		Collections.sort(list);
+		System.out.println("list之前");
+		for(SaysNews sn:list){
+			System.out.println(sn.getNewtime());
+		}
+		
 		List<ContentData<Object>> content= new ArrayList<ContentData<Object>>();
 		for(SaysNews news:list){
 			if(news.getNewsstatus() == 1 || news.getNewsstatus() == 2)
@@ -107,9 +115,9 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				String id = news.getNewscontent();
 				con.setData(shouShousDao.loadByID(id));
 				con.setPinglunnum(commDao.CountComments(id,"1"));
-				//con.setZhuanfanum(relayDao.countByUseridSaysRelay(userid));
-				//con.setYuedunum(browseDao.countByUseridSaysBrowse(userid));
-				//con.setDianzannum(likeDao.countByUseridSaysLike(userid));
+//				con.setZhuanfanum(relayDao.countByUseridSaysRelay(userid));
+//				con.setYuedunum(browseDao.countByUseridSaysBrowse(userid));
+//				con.setDianzannum(likeDao.countByUseridSaysLike(userid));
 				con.setDatadate(((SaysShuoshuo)con.getData()).getShuodate());
 				SaysShuoshuo shuoshuo=(SaysShuoshuo)con.getData();
 				shouShousDao.initialize(shuoshuo.getUserid());
@@ -140,10 +148,12 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				content.add(con);
 			}
 		}
+
 		conrtentpage.setDataSum(this.countFriends(userid));
 		conrtentpage.setResult(content);
 		System.out.println(content.size());
 		System.out.println(conrtentpage.getDataSum());
+		
 		return conrtentpage;
 	}
 
