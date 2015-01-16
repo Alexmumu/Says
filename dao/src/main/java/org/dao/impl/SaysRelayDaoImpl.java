@@ -22,6 +22,7 @@ ISaysRelayDao {
 	private static final String FINDBYUSERID_HQL="select sr from SaysRelay sr where sr.useridare.userid=? order by sr.relaytime desc";
 	private static final String FINDBYRelayfrom_HQL="select sr from SaysRelay sr where sr.relayfrom=? order by sr.relaytime desc";
 	private static final String FINDBYRelayafter_HQL="select sr from SaysRelay sr where sr.relayafter=? order by sr.relaytime desc";
+	private static final String FINDBYUSERIDAndRelayafter_HQL="select sr from SaysRelay sr where sr.useridare.userid=? and sr.relayafter=? order by sr.relaytime desc";
 	
 	@Override
 	public void saveSaysRelay(SaysRelay ar) throws DataAccessException {
@@ -56,5 +57,13 @@ ISaysRelayDao {
 		
 		return this.countByHql(FINDBYRelayafter_HQL, new Object[]{relayafter});
 		
+	}
+	@Override
+	public List<SaysRelay> findByUseridAndRelayafterSaysRelay(
+			Serializable userid, Serializable relayafter)
+			throws DataAccessException {
+		@SuppressWarnings("unchecked")
+		List<SaysRelay> list= this.findByHql(FINDBYUSERIDAndRelayafter_HQL,userid,relayafter);
+		return list;
 	}
 }
