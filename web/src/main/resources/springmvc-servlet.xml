@@ -26,9 +26,20 @@
    	<mvc:resources mapping="/css/**" location="/WEB-INF/css/" />  	
    	<mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/" />
    	  
+   
+   	  
+   	  
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="prefix" value="/WEB-INF/jsp/" />  
         <property name="suffix" value=".jsp" />  
-    </bean>  
+    </bean>
+    
+    	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="1000000" />
+	</bean>  
+    
   
 </beans>  

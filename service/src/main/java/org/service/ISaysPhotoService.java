@@ -7,8 +7,9 @@ import org.entity.SaysPhoto;
 import org.vo.Page;
 
 public interface ISaysPhotoService {
-    Page<SaysPhoto> findPhotoByAlbumId(SaysPhoto ph,Page<SaysPhoto> page,String photostatus);
+    Page<SaysPhoto> findPhotoByAlbumId(String albumid,Page<SaysPhoto> page);
 	Serializable addPhotoIntoAlbum(SaysPhoto ph);
 	void updatePhoto(SaysPhoto ph);
 	int countPhotoByAlbum(Serializable albumid,String photostatus);
+	 
 }

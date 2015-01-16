@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SaysAlbumDaoImpl extends AbstractBaseDao<SaysAlbum> implements
 		ISaysAlbumDao {
-	private static final String FINDBYUSERID_HQL="select al from SaysAlbum al where al.userid.userid=? and albumstatus!=?  order by albumdate desc";
+	private static final String FINDBYUSERID_HQL="select al from SaysAlbum al where al.userid.userid=? and al.albumstatus!=?  order by albumdate desc";
 	@SuppressWarnings("unchecked")
 	
  

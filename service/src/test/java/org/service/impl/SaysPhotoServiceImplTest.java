@@ -95,7 +95,7 @@ public class SaysPhotoServiceImplTest extends TestCase{
     	page.setPageSize(2);
         SaysPhoto ph1=new SaysPhoto();
         ph1.setAlbumid(al1);
-        ph1.setPhotostatus("1");
+        ph1.setPhotostatus("0");
     	if(ph.findPhotoByAlbumId(ph1, page, ph1.getPhotostatus())!=null){
     		istest=true;
     	}

@@ -15,4 +15,6 @@ public interface ISaysCommentsService {
 	
 	public boolean DeleteComments(SaysComments comm);
 	
+	
+	
 }

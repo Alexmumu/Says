@@ -1,0 +1,26 @@
+#img
+{
+	width: 200px;
+	height: 240px;
+}
+.am-gallery-item
+{
+	width: 210px;
+	
+}
+#page1
+{
+	width:400px;
+	margin-left: auto;
+	margin-right: auto;
+	 
+}
+#xiugai
+{
+	border:0px;
+	border-collapse:#fff;
+	width: 40px;
+	height:30px;
+	 
+	color:#fff; 
+}

@@ -53,14 +53,13 @@ public class SaysAlbumServiceImplTest extends TestCase{
 //    {
 //    	Boolean istest=false;
 //    	SaysAlbum al1=new SaysAlbum();
-//    	al1.setAlbumstatus(1);
+//    	al1.setAlbumstatus(0);
 //    	SaysUser user=new SaysUser();
 //    	Page<SaysAlbum> page=new Page<SaysAlbum>();
 //    	page.setPageNo(1);
-//    	page.setPageSize(2);
-//         user.setUserid("U001");
+//    	user.setUserid("U001");
 //    	al1.setUserid(user);
-//    	if(al.findByUserId(al1, page,1)!=null){
+//    	if(al.findByUserId(al1, page,0)!=null){
 //    		istest=true;
 //    	}
 //    	assertTrue(istest);
