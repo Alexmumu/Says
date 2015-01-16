@@ -71,36 +71,6 @@ public class SaysRizhitypeDaoImplTest extends TestCase{
        	}
     	assertTrue(istest);
     }
-    public void testaddsaysRizhitype(){
-    	System.out.println("添加日志类型");
-    	SaysRizhitype rzt = new SaysRizhitype();
-    	
-    	rzt.setTypeid("T003");
-    	rzt.setTypename("生活类zz");
-    	SaysUser user = new SaysUser();
-    	user.setUserid("U001");
-    	rzt.setUserid(user);
-    	rzt.setTypestatus(1);
-    	saysRizhitypedao.addRizhitype(rzt);
-    	
-		assertTrue(true);
-    	}
-    public void testupdatesaysRizhitype(){
-    	System.out.println("修改日志类型");
-    	SaysRizhitype rzt = new SaysRizhitype();
-    	
-    	rzt.setTypeid("2bf1d8b04acefec7014acefed3e40000");
-    	rzt.setTypename("战争类aa");
-    	SaysUser user = new SaysUser();
-    	user.setUserid("U001");
-    	rzt.setUserid(user);
-    	rzt.setTypestatus(1);
-    	saysRizhitypedao.updataRizhitype(rzt);
-    	
-		assertTrue(true);
-    	}
-    
-    
     
 
 }
