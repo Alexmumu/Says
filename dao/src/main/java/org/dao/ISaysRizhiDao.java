@@ -8,27 +8,13 @@ import org.hibernateUtil.IBaseDao;
 import org.springframework.dao.DataAccessException;
 
 public interface ISaysRizhiDao extends IBaseDao<SaysRizhi> {
-	
-	/**
-	 * 根据Saysrizhi的对象添加一条日志数据
-	 * @param saysrizhi 日志表的对象
-	 * @throws DataAccessException
-	 */
-	 public Serializable addSaysRizhi(SaysRizhi saysrizhi) throws DataAccessException;
-    
+
 	 /**
       * 根据日志ID,查询日志的详细信息
       * @param saysrizhi 日志表的对象
       * @throws DataAccessException
       */
 	 public SaysRizhi SaysRizhiById(Serializable rizhiid) throws DataAccessException;
-    
-	 /**
-      * 根据日志的ID的对象修改对应的日志数据
-      * @param saysrizhi 日志表的对象
-      * @throws DataAccessException
-      */
-     public void updateSaysRizhi(SaysRizhi saysrizhi) throws DataAccessException;
     
      /**
       * 根据用户的Id查询所有的日志
@@ -39,7 +25,7 @@ public interface ISaysRizhiDao extends IBaseDao<SaysRizhi> {
       * @throws DataAccessException
       */
      
-     public List<SaysRizhi> fandSaysRizhi(Serializable userid,int rizhistatus,int firstResult,int maxResults) throws DataAccessException;
+     public List<SaysRizhi> findSaysRizhi(Serializable userid,int rizhistatus,int firstResult,int maxResults) throws DataAccessException;
      
      /**
       * 根据用户ID查询所有日志的个数
@@ -66,14 +52,6 @@ public interface ISaysRizhiDao extends IBaseDao<SaysRizhi> {
       */
      public List<SaysRizhi> findRizhitypes(Serializable userid,Serializable rizhitype,int rizhistatus) throws DataAccessException;
      
-     /**
-      *如果日志类型被删除，就把所有的删除的日志类型里面的所有日志转移到默认日志中，就是修改日志的状态 
-      * @param userid 用户Id
-      * @param rizhitype 日志状态
-      * @return
-      * @throws DataAccessException
-      */
-     public void updateRizhitype(Serializable userid,Serializable rizhitype,Serializable rizhistatus) throws DataAccessException;
-     
+
      
 }
