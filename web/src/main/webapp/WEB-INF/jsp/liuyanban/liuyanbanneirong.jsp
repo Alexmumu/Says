@@ -1,69 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-	<title>Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Insert title here</title>
 	<base href="<%=basePath%>">
-	
 	<link rel="stylesheet" type="text/css" href="css/amazeui.css">
-		<link rel="stylesheet" type="text/css" href="css/laypage/skin/laypage.css">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.js"></script>
-  	  	<script src="css/laypage/laypage.js"></script>
-  	  	
 	<script type="text/javascript">
-  	$(function(){
-  		
-  			laypage({
-		    cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象,
-		    pages: 10,//总页数
-		    skin: '#AF0000', //加载内置皮肤，也可以直接赋值16进制颜色值，如:#c00
-		    groups: 5, //连续显示分页数
-		    jump: function(e){
-		    	var aa=e.curr;
-		    	$("#dijiye").text(aa);
-		    	//alert($("#dijiye").text()); 
-		    }
-		});
-  			$("p").click(function(){
-  				alter("1243");
-  			}
-  					
-  			)
-  	});
-  	</script>
+	$(function(){
+		$("#quedingliuyan").click(function(){
+			var aa=$("#liuyantext").val();
+			$("#leavewordcontent1").val(aa);
+			alert($("#leavewordcontent1").val());
+			$("#fabiaoliuyan").submit();
+		})
+		
+		
+	})
+	</script>
+
 </head>
 <body>
-<div class="am-panel am-panel-default">
-  <div class="am-panel-hd" >留言寄语</div>
-  <div class="am-panel-bd" style=" text-align:center; ">
-    大家好 欢迎来留言！！
-  </div>
-</div>
-	
-	
-<div class="am-panel am-panel-default">
-  <div class="am-panel-hd">留言板</div>
+	<div class="am-panel am-panel-default">
+  <div class="am-panel-hd">输入框</div>
 	<div class="am-g" style="background: #fafafa; border:1px dashed #ededef;height:100px;">
 
 		<!--评论框-->
 							<div class="am-g">
+							 <form id="fabiaoliuyan" action="Leavword/addUserWord"  method="post">
 							     <div class="am-u-lg-12" style="height:100px;">
-							     	<textarea style="width:100%; height:100%; border:1px solid #A6A6A6;"></textarea>
+							     	<textarea  name="leavewordcontent" id="liuyantext" style="width:100%; height:100%; border:1px solid #A6A6A6;"></textarea>
 							     </div>
-							     </div>
-
-							     <div class="am-g">
+							   
+							    	<input type="hidden" value="U001" name="userid.userid"/>
+							   		<input type="hidden" value="U002" name="fromuserid.userid"/>
+							   
 							     	 <div class="am-u-lg-12 ">
-							     	 <a class="am-btn am-btn-default am-fr" href="" style="margin-top:-45px; margin-right:5px;">确定</a>
+							     	 <button type="submit" class="am-btn am-btn-default am-fr"  style="margin-top:-45px; margin-right:5px;" onclick="javascript:window.parent.location.reload();">确定</button>
 							     	</div>
+							     	 </form>
 							     </div>
 
 <!--评论列表
@@ -117,18 +101,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							     	</div>
 							     </div>-->
 							</div>
-<div class="am-panel-bd">
+</div>				
 
- 
+<div class="am-panel-bd">
   <ul class="am-list">
   <c:forEach items="${page1.result}" var="pro">
-  <li style="height:80px; line-height:78px;"><span style="display:block;width:80px; float:left;"><img src="images/touxiang1.jpg" alt="" class="am-comment-avatar" width="48" height="48"></span><span>${pro.leavewordcontent}</span><span style="float:right;"> <a href="javascript:void(0);" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>评论(0)</a></span></li>
+  <li style="height:80px; line-height:78px;"><span style="display:block;width:80px; float:left;"><img  src="images/${pro.fromuserid.userimg}" alt="" class="am-comment-avatar" width="48" height="48"></span><span>${pro.leavewordcontent}</span><span style="float:right;"> <a href="javascript:void(0);" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>评论(0)</a></span></li>
+  <li ><span style="font-size: 12px;">${pro.fromuserid.usernickname} 在</span><span style="color: blue;">${pro.leaveworddate}</span><span style="font-size: 12px;">发表了留言</span></li>
+  <a id="sanchu" onclick="javascript:window.parent.location.reload();" style="background-color:A2A2A2; font-size:14px; color:blue; margin-top: -118px ; float:right;" class="am-close am-close-alt am-close-spin" href="Leavword/deleteUserWord?leavewordid=${pro.leavewordid}">
+  x
+</a>
   </c:forEach>
   </ul>
-  </div>
+ </div>
  
-	<div id="page1"></div>
-						</div>
-						<a style="display:none;" id="dijiye"></a>				
 </body>
 </html>

@@ -22,6 +22,7 @@ public class SaysLikeServiceImpl implements ISaysLikeService {
 				{
 					SaysLike slk=saysLikeDao.findByUseridToUseridareForLikeforSaysLike1(sl.getLikefor(), sl.getUserid().getUserid(), sl.getUseridare().getUserid());
 					saysLikeDao.deleteById(slk.getLikeid());
+				
 					return false;
 				}
 				else
@@ -40,7 +41,6 @@ public class SaysLikeServiceImpl implements ISaysLikeService {
 	public int countByUseridSaysLike(Serializable userid) {
 		return this.saysLikeDao.countByUseridSaysLike(userid);
 	}
-
 	@Override
 	public List<SaysLike> findByUseridareSaysLike(Serializable useridare) {
 		
@@ -49,7 +49,7 @@ public class SaysLikeServiceImpl implements ISaysLikeService {
 
 	@Override
 	public int findByUseridToUseridareForLikeforSaysLike(Serializable likefor,
-			Serializable userid, Serializable useridare) {
+		Serializable userid, Serializable useridare) {
 		return this.saysLikeDao.findByUseridToUseridareForLikeforSaysLike(likefor, userid, useridare);	
 	}
 
@@ -61,6 +61,20 @@ public class SaysLikeServiceImpl implements ISaysLikeService {
 	@Override
 	public int countByLikeforSaysLike(Serializable likefor) {
 		return this.saysLikeDao.countByLikeforSaysLike(likefor);
+	}
+
+	@Override
+	public int countByLikeforAndUseridSaysLike(Serializable likefor,
+			Serializable userid) {
+		return this.saysLikeDao.countByLikeforAndUseridSaysLike(likefor, userid);
+		
+	}
+
+	@Override
+	public List<SaysLike> findByLikeforAndUseridSaysLike(Serializable likefor,
+			Serializable userid) {
+		return this.saysLikeDao.findByLikeforAndUseridSaysLike(likefor, userid);
+		
 	}
 	
 }

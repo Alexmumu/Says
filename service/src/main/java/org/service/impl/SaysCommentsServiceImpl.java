@@ -47,9 +47,13 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 
 	@Override
 	public SaysComments getComment(Serializable commentid) {
-
-		return commentsDao.getById(commentid);
-		
+		return commentsDao.getById(commentid);	
 	}
 
+	@Override
+	public List<SaysComments> FindCommentsNopage(Serializable commentsforid,
+			Serializable userid, Serializable useridare) {
+		return this.commentsDao.FindCommentsNopage(commentsforid, userid, useridare);
+		
+	}
 }
