@@ -21,10 +21,11 @@
 <script src="js/amazeui.js"></script>
 <script src="js/tanchuang.js"></script>
 <script type="text/javascript">
-
+//为了让父窗口弹出模态窗 里面方的是ifream
 function tanchuang(url){
-	alert(url);
+	//1.获取父窗口的元素 这个元素我方在了top。jsp里面 然后改属性 就是改url地址
 	$('#myframe',window.parent.document).attr('src',url);
+	//2.使用模态窗口的方法 激活弹出
 	$('#my-popup',window.parent.document).modal('open');
 }
 </script>
