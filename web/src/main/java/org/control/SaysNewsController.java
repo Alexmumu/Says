@@ -25,11 +25,14 @@ public class SaysNewsController {
 	private ISaysNewsService newsService;
 	
 	@RequestMapping("/listNews")
-	public @ResponseBody Map<String,Object> listNews(Page<SaysNews> page,HttpSession session){
-		SaysUser myuser=(SaysUser) session.getAttribute("myuser");
-		Page<ContentData<Object>> pages=newsService.findNewsByUser((Serializable)myuser.getUserid(),page );
+	public @ResponseBody Map<String,Object> listNews(String id,Page<SaysNews> page){
+		System.out.println(page.getPageNo());
+		System.out.println("-----------------");
+		System.out.println(page.getPageSize());
+		Page<ContentData<Object>> pages=newsService.findNewsByUser((Serializable)id,page );
+
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("pageSum",page.getPageSum());
+		map.put("pageSum",pages.getPageSum());
 		map.put("dataSum",pages.getDataSum());
 //		System.out.println(pages.getResult().get(0).getData().getClass());
 		map.put("newslist",pages.getResult());
