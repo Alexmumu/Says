@@ -6,7 +6,7 @@ $(function(){
 			data:$('#dengluform').serialize(),
 			success:function(data){
 				if(data.msg==='chenggong'){
-					window.location.href="user/toTop"; 
+					window.location.href="News/tolistNews"; 
 				}else{
 					$('#my-alert').modal();
 				}

@@ -191,4 +191,10 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 	}
 
 
+	@Override
+	public int countByMy(Serializable userid) {
+		return this.newsDao.CountNews(userid);
+	}
+
+
 }

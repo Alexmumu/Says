@@ -1,10 +1,14 @@
 package org.service.impl;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
+import org.dao.ISaysUserDao;
 import org.dao.ISaysVisitDao;
 import org.entity.SaysVisit;
+import org.service.ISaysUserService;
 import org.service.ISaysVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -16,8 +20,8 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 
 	@Autowired
 	private ISaysVisitDao saysVisitDao;
-	
-
+	@Autowired
+	private ISaysUserDao userdao;
 
 	@Override
 	public int countByUserid(Serializable userid) throws DataAccessException {
@@ -51,18 +55,29 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 	 */
 	@Override
 	public Serializable addSaysVisit(SaysVisit saysVisit) throws DataAccessException {
-		// TODO Auto-generated method stub
-
-		 return saysVisitDao.addSaysVisit(saysVisit);
+		List list=saysVisitDao.findByVisitId(saysVisit.getUserid().getUserid(),saysVisit.getFromuserid().getUserid());
+		 //获取系统最新时间
+		saysVisit.setVisittime(new Timestamp(new Date().getTime()));
+		 if(list==null||list.size()==0){
+			 System.out.println("进入添加 访客表");
+			 return saysVisitDao.addSaysVisit(saysVisit);
+		 }else{
+			 System.out.println("已有记录 更新中。。。访客表");
+			 saysVisit =(SaysVisit) list.get(0);
+			 this.updateVisitIdTime(saysVisit);
+			 return saysVisit.getVisitid();
+		 }
+		
 
 	}
 
 	@Override
-	public Page<SaysVisit> fandMySaysVisit(SaysVisit data,
+	public Page<SaysVisit> findMySaysVisit(SaysVisit data,
 			Page<SaysVisit> page) throws DataAccessException {
 		// TODO Auto-generated method stub
 		page.setDataSum(saysVisitDao.countMyByUserid(data.getFromuserid().getUserid()));
-		List<SaysVisit> list = saysVisitDao.fandSaysVisit(data.getFromuserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		List<SaysVisit> list = saysVisitDao.fandMySaysVisit(data.getFromuserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		page.setResult(list);
 		return page;
 
 	}
@@ -74,6 +89,7 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 		// TODO Auto-generated method stub
 		page.setDataSum(saysVisitDao.countByUserid(data.getUserid().getUserid()));
 		List<SaysVisit> list = saysVisitDao.fandSaysVisit(data.getUserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		page.setResult(list);
 		return page; 
 	}
 
