@@ -1,7 +1,11 @@
 package org.service.impl;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.dao.ISaysBrowseDao;
@@ -88,23 +92,38 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 	public Page<ContentData<Object>> findNewsByUser(Serializable userid,
 			Page<SaysNews> page) {
 		Page<ContentData<Object>> conrtentpage = new Page<ContentData<Object>>();
-		page.setDataSum(newsDao.CountNews(userid));
-		
+		conrtentpage.setDataSum(this.countFriends(userid));
 		List<SaysFriends> listFriend = friendsDao.findbyuseridallSaysFriends(userid, 0,Integer.MAX_VALUE);
-		List<SaysNews> list = newsDao.FindNewsByUser(userid, page.getFirstResult(), page.getMaxResults());
-		page.setResult(list);
+		List<SaysNews> list = newsDao.FindNewsByUser(userid,0, Integer.MAX_VALUE);
 		System.out.println(page.getDataSum());
 		for(SaysFriends fd:listFriend){
 			
 			String id = fd.getUserfriendid().getUserid();
-			List<SaysNews> listF2 = newsDao.FindNewsByUser(id, page.getFirstResult(), page.getMaxResults());
+			List<SaysNews> listF2 = newsDao.FindNewsByUser(id, 0, Integer.MAX_VALUE);
 			for(SaysNews news:listF2){
 				list.add(news);
 			}
 		}
 		
+		//排序
+		Collections.sort(list);
+		
+		//手工分页
+		List<SaysNews>  listnews=new ArrayList<SaysNews>();
+		int start=page.getFirstResult();
+		int end=page.getMaxResults();
+		if(end>conrtentpage.getDataSum()){
+			end=conrtentpage.getDataSum();
+		}
+		System.out.println(start  +"\\\\" +end);
+		for(int i=start;i<=end-1;i++){
+			listnews.add(list.get(i));
+		}
+		
+		/////////////////////////////////////////////////////////////////////////////////////////
+		
 		List<ContentData<Object>> content= new ArrayList<ContentData<Object>>();
-		for(SaysNews news:list){
+		for(SaysNews news:listnews){
 			if(news.getNewsstatus() == 1 || news.getNewsstatus() == 2)
 			{
 				ContentData<Object> con = new ContentData<Object>();
@@ -114,6 +133,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
 				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
 				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
 				SaysShuoshuo shuoshuo=  shouShousDao.getById(id);
 				System.out.println(shuoshuo);
 				SaysUser user=new SaysUser();
@@ -122,7 +142,9 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(shuoshuo.getUserid().getUserimg());
 				shuoshuo.setUserid(user);
 				con.setData(shuoshuo);
-				con.setDatadate(((SaysShuoshuo)con.getData()).getShuodate());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysShuoshuo)con.getData()).getShuodate();
+				con.setDatadate(sdf.format(date));
 				content.add(con);
 			}
 			if(news.getNewsstatus() == 3 || news.getNewsstatus() == 4){
@@ -133,6 +155,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
 				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
 				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
 				SaysRizhi rizhi=rizhiDao.getById(id);
 				SaysRizhitype rizhitype = new SaysRizhitype();
 				rizhitype.setTypeid(rizhi.getRizhitype().getTypeid());
@@ -145,7 +168,9 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(rizhi.getRizhiuserid().getUserimg());
 				rizhi.setRizhiuserid(user);
 				con.setData(rizhi);
-				con.setDatadate(((SaysRizhi)con.getData()).getRizhidate());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysRizhi)con.getData()).getRizhidate();
+				con.setDatadate(sdf.format(date));
 				content.add(con);
 			}
 			if(news.getNewsstatus() == 5 || news.getNewsstatus() == 6){
@@ -155,7 +180,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
 				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
 				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
-				con.setDatadate(((SaysPhoto)con.getData()).getPhotodate());
+				con.setDatatype(news.getNewsstatus());
 				SaysPhoto photo = photoDao.getById(id);
 				SaysAlbum album = new SaysAlbum();
 				album.setAlbumid(photo.getAlbumid().getAlbumid());
@@ -168,10 +193,13 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(photo.getUserid().getUserimg());
 				photo.setUserid(user);
 				con.setData(photo);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysPhoto)con.getData()).getPhotodate();
+				con.setDatadate(sdf.format(date));
 				content.add(con);
 			}
 		}
-		conrtentpage.setDataSum(this.countFriends(userid));
+	
 		conrtentpage.setResult(content);
 		System.out.println(content.size());
 		System.out.println(conrtentpage.getDataSum());

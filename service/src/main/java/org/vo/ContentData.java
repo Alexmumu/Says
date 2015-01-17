@@ -46,7 +46,7 @@ public class ContentData<T> implements Serializable {
 	/**
 	 * 对象创建时间
 	 */
-	private Timestamp datadate;
+	private String datadate;
 	
 	
 	public T getData() {
@@ -85,12 +85,13 @@ public class ContentData<T> implements Serializable {
 	public void setPinglunnum(int pinglunnum) {
 		this.pinglunnum = pinglunnum;
 	}
-	public Timestamp getDatadate() {
+	public String getDatadate() {
 		return datadate;
 	}
-	public void setDatadate(Timestamp datadate) {
+	public void setDatadate(String datadate) {
 		this.datadate = datadate;
 	}
+
 	
 	
 }
