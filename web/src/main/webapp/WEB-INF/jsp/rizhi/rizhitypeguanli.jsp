@@ -35,7 +35,7 @@ $(function() {
 		
 		<form class="am-form am-form-horizontal" action="rizhi/addrizhitype" method="post">
   <div class="am-form-group">
-    <label for="doc-ipt-3"  class="am-u-sm-2 am-form-label">类型名称</label>
+    <label for="doc-ipt-3"  class="am-u-sm-2 am-form-label">添加类型:</label>
     <div class="am-u-sm-10">
       <input type="text" name="typename"  class="am-form-field am-radius" placeholder="输入日志类型名称">
       <input type="hidden" name="userid.userid" value="U001">
@@ -65,13 +65,13 @@ $(function() {
             <td>${t.timedate}</td>
             <td>
             <c:if test="${t.typestatus==1}">
-            <a href="rizhi/deleterizhitype?userid.userid=${t.userid.userid}&typeid=${t.typeid}" class="am-btn am-btn-default">删除</a>  
-            <button class="am-btn am-btn-default" data-am-modal="{target: '#my-popup2${t.typeid}'}">编辑</button>
+            <button class="am-btn am-btn-default am-round am-btn-lg" data-am-modal="{target: '#my-popup2${t.typeid}'}">编辑</button>
+            <a href="rizhi/deleterizhitype?userid.userid=${t.userid.userid}&typeid=${t.typeid}"><i class="am-icon-trash am-icon-btn am-icon-twitter"></i></a>  
               <div class="am-popup" id="my-popup2${t.typeid}">
                 <div class="am-popup-inner">
                     <div class="am-popup-hd">
                        <h4 class="am-popup-title" id="bianji" >编辑类型</h4>
-                       <span data-am-modal-close class="am-close">&times;</span>
+                       <span data-am-modal-close class="am-close am-close-alt am-close-spin am-icon-times"></span>
                     </div>
                 <div class="am-popup-bd">
                 <iframe src="rizhi/getRizhitypeid?typeid=${t.typeid}"  width="600px" height="300px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>

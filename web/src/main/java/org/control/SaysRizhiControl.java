@@ -3,26 +3,21 @@ package org.control;
 import java.io.Serializable;
 import java.util.List;
 
-
-
-
-
-
-
 import javax.xml.ws.Service.Mode;
 
 import org.dao.impl.SyasPhotoDaoImpl;
+import org.entity.SaysRelay;
 import org.entity.SaysRizhi;
 import org.entity.SaysRizhitype;
 import org.entity.SaysUser;
+import org.service.ISaysRelayService;
 import org.service.ISaysRizhiService;
 import org.service.ISaysRizhitypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.vo.ContentData;
 import org.vo.Page;
 
 @Controller
@@ -33,6 +28,9 @@ public class SaysRizhiControl {
 	private ISaysRizhiService saysRizhiService;
 	@Autowired
 	private ISaysRizhitypeService saysRizhitypeService;
+	@Autowired
+	private ISaysRelayService saysRelayService; 
+	
 	
 	@RequestMapping("/toRizhi")
 	private String toRizhi(Model model,Page<SaysRizhi> page,SaysUser user){
@@ -46,38 +44,40 @@ public class SaysRizhiControl {
         	page.setPageNo(1);
         }
 		System.out.println(page.getPageSize());
+	
+		List<SaysRizhitype> listtype = saysRizhitypeService.find(user.getUserid(),0);
 		page = saysRizhiService.findSaysRizhi(srz,page);
 		model.addAttribute("page",page);
-		List<SaysRizhitype> listtype = saysRizhitypeService.find("U001",0);
 		model.addAttribute("type",listtype);
-//		SaysUser user1 = new SaysUser();
-//		user1.setUserid("U001");
-//		model.addAttribute("uid",user1);
+		model.addAttribute("uid",user.getUserid());
+		model.addAttribute("rz","to");
 		return "rizhi/rizhilist" ;
 	}
 	
 	
 	
 	
-	@RequestMapping("/findrizhitype")
-	private String findrizhitype(Model model,Page<SaysRizhi> page,SaysUser user){
+	@RequestMapping("/typeRizhi")
+	private String typeRizhi(Model model,Page<SaysRizhi> page,SaysUser user,SaysRizhi rz){
 		System.out.println(user.getUserid()+"userid");
-		SaysRizhi srz = new SaysRizhi();
-		System.out.println(page.getPageNo());
+		System.out.println(rz.getRizhitype().getTypeid());
+		String typeid = rz.getRizhitype().getTypeid();
+		model.addAttribute("typeid", typeid);
+		
 		user.setUserid(user.getUserid());
-		srz.setRizhiuserid(user);
-		srz.setRizhistatus(0);
+		rz.setRizhiuserid(user);
+		rz.setRizhistatus(0);
         if(page.getPageNo()==null){
         	page.setPageNo(1);
         }
 		System.out.println(page.getPageSize());
-		page = saysRizhiService.findRizhitype(srz, page);
-		model.addAttribute("page",page);
+		page = saysRizhiService.findRizhitype(rz, page);
 		List<SaysRizhitype> listtype = saysRizhitypeService.find(user.getUserid(),0);
+		System.out.println(page.getResult().size());
+		model.addAttribute("page",page);
 		model.addAttribute("type",listtype);
-//		SaysUser user1 = new SaysUser();
-//		user1.setUserid("U001");
-//		model.addAttribute("uid",user1);
+		model.addAttribute("uid",user.getUserid());
+		model.addAttribute("rz","type");
 		return "rizhi/rizhilist" ;
 	}
 	
@@ -88,20 +88,6 @@ public class SaysRizhiControl {
 		
 		return "redirect:/rizhi/toRizhi?userid="+rz.getRizhiuserid().getUserid();
 	}
-//	@RequestMapping("/rizhilist")
-//	private @ResponseBody Page<SaysRizhi> Rizhilist(Model model) {
-//		SaysRizhi srz = new SaysRizhi();
-//		SaysUser user = new SaysUser();
-//		user.setUserid("U001");
-//		srz.setRizhiuserid(user);
-//		srz.setRizhistatus(0);
-//		System.out.println(page.getPageNo());
-//		System.out.println(page.getPageSize());
-//		page = saysRizhiService.findSaysRizhi(srz,page);
-//		model.addAttribute("page",page);
-//		System.out.println(page.getResult().size());
-//		return page;
-//	}
 	
 	@RequestMapping("/addrizhitype")
 	private String addrizhitype(Model model,SaysRizhitype srzt){
@@ -133,9 +119,17 @@ public class SaysRizhiControl {
 	
 	@RequestMapping("/getRizhiid")
 	private String getRizhiid(Model model,	SaysRizhi rz){
-		SaysRizhi srz = saysRizhiService.SaysRizhiById(rz.getRizhiid());
+		ContentData<SaysRizhi>  data= saysRizhiService.SaysRizhiById(rz.getRizhiid());
 		//System.out.println(srz.getRizhitype().getTypename());
-		model.addAttribute("srz",srz);
+		SaysRizhi srz = data.getData();
+		if(srz.getRizhinature()==1){
+			System.out.println(srz.getRizhiid());
+			System.out.println(srz.getRizhiuserid().getUserid());
+			SaysRelay rzr=this.saysRelayService.findByUseridAndRelayafterSaysRelay(srz.getRizhiuserid().getUserid(),srz.getRizhiid());
+			System.out.println(rzr.getUseridare().getUsername());
+			model.addAttribute("rzr",rzr);
+		}
+		model.addAttribute("srz",data);
 		return "rizhi/rizhibyid";
 		
 	}
@@ -156,14 +150,9 @@ public class SaysRizhiControl {
 	}
 	@RequestMapping("/addrizhi")
 	private String addrizhi(Model model,SaysRizhi rz){
-		System.out.println(rz.getRizhititle());
-		System.out.println(rz.getRizhicontent());
-		System.out.println(rz.getRizhitype().getTypeid());
-		System.out.println(rz.getRizhiuserid().getUserid());
 		rz.setRizhistatus(1);
 		saysRizhiService.addSaysRizhi(rz);
-		
-		return "rizhi/addrizhi";
+		return "redirect:/rizhi/toRizhi?userid="+rz.getRizhiuserid().getUserid();
 	}
 	@RequestMapping("/deleterizhitype")
 	private String deleterizhitype(Model model,SaysRizhitype rzt){
@@ -183,10 +172,10 @@ public class SaysRizhiControl {
 	@RequestMapping("/toupdatarizhi")
 	private String toupdatarizhi(Model model,SaysRizhi rz){
 		System.out.println(rz.getRizhiuserid().getUserid());
-		SaysRizhi rz1 =this.saysRizhiService.SaysRizhiById(rz.getRizhiid());
+		ContentData<SaysRizhi>  data= saysRizhiService.SaysRizhiById(rz.getRizhiid());
 		List<SaysRizhitype> listtype = saysRizhitypeService.find(rz.getRizhiuserid().getUserid(),0);
 		model.addAttribute("type",listtype);
-		model.addAttribute("rz1",rz1);
+		model.addAttribute("rz1",data.getData());
 		return "rizhi/updaterizhi";
 	}
 	

@@ -12,4 +12,6 @@ public interface ISaysRelayService {
 	List<SaysRelay> findByUseridSaysRelay(Serializable userid);
 	int countByRelayfromSaysRelay(Serializable relayfrom);
 	int countByRelayafterSaysRelay(Serializable relayafter);
+	public SaysRelay findByUseridAndRelayafterSaysRelay(
+			Serializable userid, Serializable relayafter);
 }

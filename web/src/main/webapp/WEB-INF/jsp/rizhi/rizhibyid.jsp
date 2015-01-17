@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<!DOCTYPE html>
 	<%
 	String path = request.getContextPath();
@@ -20,26 +21,35 @@
 </head>
 <body>
 <article class="am-article">
-  <div class="am-article-hd">
-    <h1 class="am-article-title"><p>${srz.rizhititle}</p></h1>
-    <p class="am-article-meta">${srz.rizhitype.typename}</p>
+<div><a  href="javascript:history.go(-1)" class="am-btn am-btn-default am-round">返回</a></div>
+  <div class="am-article-hd" align="center">
+    <h1 class="am-article-title"><span><p>
+     <c:if test="${srz.data.rizhinature==1}">
+     <strong>[转]</strong>
+    </c:if> 
+    ${srz.data.rizhititle} 
+     <c:if test="${srz.data.rizhinature==1}">
+     <small class="am-article-meta" style="font-size: 14px;" >   转载自  </small>
+     <small style="color: #236; font-size: 14px;" > ${rzr.useridare.usernickname}</small>
+    </c:if></p></span>
+    </h1>
+    <p class="am-article-meta" style="font-size: 16px">${srz.data.rizhitype.typename}</p>
   </div>
 
   <div class="am-article-bd">
-    <p class="am-article-lead">
-     ${srz.rizhicontent}
+    <div class="am-article-lead">
+     ${srz.data.rizhicontent}
+    </div>
+    <p style="float: right; text-align: center; width: 280px;">
+     发表时间：${srz.datadate}
     </p>
-    <p>
-
-     ${srz.rizhidate}
-  </p>
   </div>
 </article>
 
 <div class="am-g am-text-sm">
               <div class="am-fr">
                 <span>
-                  <button href="" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>评论(20)</button>
+                  <button href="" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>评论(${srz.pinglunnum})</button>
 
 <!--评论弹出框-->
   <div class="am-popup" id="my-popup" style="display: none;">
@@ -59,13 +69,15 @@
           </span>
           <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>
+            <c:if test="${srz.data.rizhiuserid.userid!='U002'}">
             <button href="" class="am-link-muted" alt="转发">
-        <i class="am-icon-share" alt="转发"></i>
-        转发(10)</button>
+             <i class="am-icon-share" alt="转发"></i>
+                                    转发(${srz.zhuanfanum})</button>
+        </c:if>
                 </span>
                   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span>
-                  <button href="" class="am-link-muted"><i class="am-icon-thumbs-up"></i>赞(150)</button>
+                  <button href="" class="am-link-muted"><i class="am-icon-thumbs-up"></i>赞(${srz.dianzannum})</button>
                 </span>
               
             

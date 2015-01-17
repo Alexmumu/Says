@@ -69,7 +69,9 @@
 
     </div>
     
-    <p><button type="submit" id='btnHtml' class="am-btn am-btn-default">提交</button></p>
+    <p><span><button type="submit" id='btnHtml' class="am-btn am-btn-secondary">修改</button></span>
+        <span><a  href="javascript:history.go(-1)" class="am-btn  am-btn-default">取消</a></span>
+    </p>
     </fieldset>
     </div>
     </article>

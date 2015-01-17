@@ -35,6 +35,8 @@ public interface ISaysRizhiDao extends IBaseDao<SaysRizhi> {
       */
      public int countByUserid(Serializable userid,int rizhistatus) throws DataAccessException;
 
+    
+ 	 public int countByUseridtype(Serializable userid,Serializable rizhitype,int rizhistatus) throws DataAccessException;
      /**
       * 根据用户ID和日志类型的ID查询相关类型的所有日志信息
       * @param userid 用户ID

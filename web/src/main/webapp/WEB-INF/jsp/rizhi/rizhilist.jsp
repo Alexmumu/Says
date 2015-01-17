@@ -37,10 +37,17 @@
 	<div class="am-g">
 		<div class="am-u-lg-8">
 			<div class="am-panel am-panel-default">
-				<div class="am-panel-hd">日志列表</div>
-				<div><a class="am-btn am-btn-default am-round" href="rizhi/toaddrizhi">写日志</a></div>
+				<div class="am-panel-hd">日志列表<span style="float: right;">日志数量：${page.dataSum}</span></div>
+			<c:if test="${uid=='U001'}">
+				<div style="margin-left: 30px; margin-top: 12px"><a class="am-btn am-btn-default  am-radius" href="rizhi/toaddrizhi">T写日志</a></div>
+			<hr>
+			</c:if>
+			
 				<table class="am-table">
+				<c:if test="${page.dataSum==0}" ><tr><td>您在这个分类下还没有保存日志，<a href="rizhi/toaddrizhi">立刻添加一篇，与朋友分享您的生活吧。</a></td></tr></c:if>
+				<c:if test="${page.dataSum>0}">
 				<c:forEach items="${page.result}" var="rz">
+				
 				<tr>
 				  <td style="width: 80px;">
 				  <c:if test="${rz.rizhinature==1}">
@@ -64,14 +71,15 @@
 				  <td>
 				    <c:if test="${rz.rizhiuserid.userid=='U001'}">
 						        <span >
-						        <a class="am-btn am-btn-default" href="rizhi/toupdatarizhi?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}">编辑</a>
+						        <a class="am-btn am-btn-default am-round am-btn-lg" href="rizhi/toupdatarizhi?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}">编辑</a>
 						        
-						        <a class="am-btn am-btn-default" href="rizhi/deleterizhibyid?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}">删除</a>
+						        <a  href="rizhi/deleterizhibyid?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}"><i class="am-icon-trash am-icon-btn am-icon-twitter"></i></a>
 						        </span>
 		           </c:if>
 				  </td>
 				</tr>
 				</c:forEach>
+				</c:if>
 				</table>
 			</div>
 
@@ -79,41 +87,42 @@
 				<ul class="am-pagination am-pagination-centered ">
 					<c:if test="${page.pageNo<=1}">
 						<li class="am-pagination am-disabled"><a
-							href="rizhi/getRizhiid?userid=U001&pageNo=${page.pageNo-1}&zt=1">&laquo;
+							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo-1}&rizhitype.typeid=${typeid}">&laquo;
 								上一页</a>
 					</c:if>
 					<c:if test="${page.pageNo>1}">
 						<li class="am-pagination"><a
-							href="rizhi/toRizhi?userid=U001&pageNo=${page.pageNo-1}&zt=1">&laquo;
+							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo-1}&rizhitype.typeid=${typeid}">&laquo;
 								上一页</a>
 					</c:if>
 					<c:if test="${page.pageNo==page.pageSum}">
 						<li class="am-pagination am-disabled"><a
-							href="rizhi/toRizhi?userid=U001&pageNo=${page.pageNo+1}&zt=1">下一页
+							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo+1}&rizhitype.typeid=${typeid}">下一页
 								&raquo;</a>
 					</c:if>
 					<c:if test="${page.pageNo!=page.pageSum}">
 						<li class="am-pagination"><a
-							href="rizhi/toRizhi?userid=U001&pageNo=${page.pageNo+1}&zt=1">下一页
+							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo+1}&rizhitype.typeid=${typeid}">下一页
 								&raquo;</a>
 					</c:if>
 				</ul>
 			</div>
 		</div>
-		<div class="am-u-lg-4">
+		<div class="am-u-lg-4" >
 			<div class="am-panel am-panel-default">
 				<div class="am-panel-hd">
 					日志类型
-					
+					<!--判断是否是用户本人-->
+					<c:if test="${uid=='U001'}">
 					<button data-am-modal="{target: '#my-popup'}" 
 					class=" am-icon-wrench am-fr">管理</button>
-                   
+                   </c:if>
 					<!--日志管理弹窗-->
 					<div class="am-popup" id="my-popup" style="display: none;">
 						<div class="am-popup-inner">
 							<div class="am-popup-hd">
 								<h4 class="am-popup-title">日志类型管理</h4>
-								<span data-am-modal-close="" class="am-close">×</span>
+								<span data-am-modal-close="" class="am-close am-close-alt am-close-spin am-icon-times"></span>
 							</div>
 							<div class="am-popup-bd">
 
@@ -126,8 +135,9 @@
 					</div>
 				</div>
 				<ul class="am-list am-list-static am-list-border am-list-striped">
+				        <li><a class="a1" href="rizhi/toRizhi?userid=U001">全部日志</a></li>
 					<c:forEach items="${type}" var="t">
-						<li><a class="a1" href="rizhi/findrizhitype?userid=${t.userid.userid}&rizhitype.typeid=${t.typeid}">${t.typename}</a></li>
+						<li><a class="a1" href="rizhi/typeRizhi?userid=${t.userid.userid}&rizhitype.typeid=${t.typeid}">${t.typename}</a></li>
 					</c:forEach>
 				</ul>
 			</div>

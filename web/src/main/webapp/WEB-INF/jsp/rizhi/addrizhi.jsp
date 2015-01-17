@@ -35,8 +35,15 @@
 <form class="am-form" action="rizhi/addrizhi" method="post">
 <article class="am-article">
   <div class="am-article-hd">
-    <p>标题：<input type="text" name="rizhititle" class="am-form-field am-round" placeholder="请输入标题"/></p>
+  <fieldset>
+    <div class="am-form-group">
+      <label for="doc-vld-name">标题：</label>
+      <input type="text" name="rizhititle" id="doc-vld-name" minlength="3" placeholder="输入用户名" class="am-form-field am-round" required/>
+    </div>
+  </fieldset>
+   
       <div class="am-form-group">
+       
       <label for="doc-select-1">日志类型:</label>
       <select id="doc-select-1" name="rizhitype.typeid">
       <c:forEach items="${type}" var="t">
@@ -69,8 +76,9 @@
       </div>  
 
     </div>
-    
-    <p><button type="submit" id='btnHtml' class="am-btn am-btn-default">提交</button></p>
+    <input type="hidden" name="rizhinature" value="0">
+    <p><span><button type="submit" id='btnHtml' class="am-btn am-btn-secondary">提交</button></span>
+    <span><a  href="javascript:history.go(-1)" class="am-btn  am-btn-default">返回</a></span></p>
     </fieldset>
     </div>
     </article>
@@ -91,7 +99,7 @@
                 $btnHide = $('#btnHide');
             $textarea.hide();
             $btnHtml.click(function(){
-                $textarea.show();
+                
                 $textarea.val( $editor.html() );
             });
             $btnText.click(function(){

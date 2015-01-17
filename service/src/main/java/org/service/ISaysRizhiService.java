@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.entity.SaysRizhi;
 import org.springframework.dao.DataAccessException;
+import org.vo.ContentData;
 import org.vo.Page;
 
 public interface ISaysRizhiService {
@@ -20,7 +21,7 @@ public interface ISaysRizhiService {
       * @param saysrizhi 日志表的对象
       * @throws DataAccessException
       */
-	 public SaysRizhi SaysRizhiById(Serializable rizhiid) throws DataAccessException;
+	 public ContentData<SaysRizhi> SaysRizhiById(Serializable rizhiid) throws DataAccessException;
     
 	 /**
       * 根据日志的ID的对象修改对应的日志数据

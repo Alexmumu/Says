@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 public  class SaysRizhiDaoImpl extends AbstractBaseDao<SaysRizhi> implements ISaysRizhiDao{
 
 	
-	private static final String FINDBYUSERID_HQL="select rz from SaysRizhi rz where rz.rizhiuserid.userid=? and rz.rizhistatus!=? order by rz.rizhicontent desc";
-	private static final String FINDBRIZHITYPE_HQL="select rz from SaysRizhi rz where rz.rizhiuserid.userid=? and rz.rizhitype.typeid=? and rz.rizhistatus!=? order by rz.rizhicontent desc";
+	private static final String FINDBYUSERID_HQL="select rz from SaysRizhi rz where rz.rizhiuserid.userid=? and rz.rizhistatus!=? order by rz.rizhidate desc";
+	private static final String FINDBRIZHITYPE_HQL="select rz from SaysRizhi rz where rz.rizhiuserid.userid=? and rz.rizhitype.typeid=? and rz.rizhistatus!=? order by rz.rizhidate desc";
 	
 
 
@@ -43,7 +43,11 @@ public  class SaysRizhiDaoImpl extends AbstractBaseDao<SaysRizhi> implements ISa
 		return this.countByHql(FINDBYUSERID_HQL, new Object[]{userid,rizhistatus});
 	}
 
-
+	@Override
+	public int countByUseridtype(Serializable userid,Serializable rizhitype,int rizhistatus) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return this.countByHql(FINDBRIZHITYPE_HQL, new Object[]{userid,rizhitype,rizhistatus});
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
