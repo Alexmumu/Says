@@ -27,5 +27,11 @@ public interface ISaysNewsService {
 	 * @return
 	 */
 	public int countFriends(Serializable userid);
+	/**
+	 * 记录传入的用户的总动态数
+	 * @param userid
+	 * @return
+	 */
+	public int countByMy(Serializable userid);
 	
 }

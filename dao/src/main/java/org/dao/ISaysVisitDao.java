@@ -56,4 +56,5 @@ public interface ISaysVisitDao extends IBaseDao<SaysVisit> {
 	 public List<SaysVisit> findByVisitId(Serializable userid,Serializable fromuserid) throws DataAccessException;
 	 
 
+
 }

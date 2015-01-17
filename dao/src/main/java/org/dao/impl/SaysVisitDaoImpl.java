@@ -18,7 +18,6 @@ public class SaysVisitDaoImpl extends AbstractBaseDao<SaysVisit> implements
 	private static final String FINDBYUSERID_HQL="select sv from SaysVisit sv where sv.userid.userid=? order by sv.visittime desc";
 	private static final String FINDMYBYUSERID_HQL="select sv from SaysVisit sv where sv.fromuserid.userid=? order by sv.visittime desc";
 	private static final String FINDBYUSERID_FROMUSERID_HQL="select sv from SaysVisit sv where sv.userid.userid=? and sv.fromuserid.userid=? order by sv.visittime desc";
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SaysVisit> findSaysVisit(Serializable userid, int firstResult,
