@@ -15,9 +15,11 @@
    <link rel="stylesheet" type="text/css" href="css/amazeui.css">
         <link rel="stylesheet" type="text/css" href="css/wangEditor-1.1.0-min.css">
     <link rel="stylesheet" type="text/css" href="css/fontawesome-4.2.0/css/font-awesome.min.css">
-    
     <link rel="stylesheet" type="text/css"
 	href="js/laypage/skin/laypage.css">
+	<link rel="stylesheet" type="text/css" href="css/appdefault.css">
+
+	
     <script src="js/jquery.min.js"></script>
     <script src="js/amazeui.js"></script>
     <script src="js/laypage/laypage.js"></script>
@@ -28,10 +30,15 @@
         body{
             padding: 0px 10px 0px 10px;
             color:#333333;
+            background-color: rgb(237, 237, 239);
         }
     </style>
 </head>
 <body>
+<div class="am-g ">
+ <div class="am-container">
+		<div class="am-u-sm-12 am-animation-slide-left block">
+
 <form class="am-form" action="rizhi/updaterizhi" method="post">
 <article class="am-article">
   <div class="am-article-hd">
@@ -76,6 +83,9 @@
     </div>
     </article>
     </form>
+    </div>
+    </div>
+    </div>
 </body>
 <script type="text/javascript" src='js/wangEditor-1.1.0-min.js'></script>
     <script type="text/javascript">
@@ -92,7 +102,7 @@
                 $btnHide = $('#btnHide');
             $textarea.hide();
             $btnHtml.click(function(){
-                $textarea.show();
+                //$textarea.show();
                 $textarea.val( $editor.html() );
             });
             $btnText.click(function(){

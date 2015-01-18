@@ -36,7 +36,6 @@ public class SaysRizhiControl {
 	private String toRizhi(Model model,Page<SaysRizhi> page,SaysUser user){
 		System.out.println(user.getUserid()+"userid");
 		SaysRizhi srz = new SaysRizhi();
-		System.out.println(page.getPageNo());
 		user.setUserid(user.getUserid());
 		srz.setRizhiuserid(user);
 		srz.setRizhistatus(0);
@@ -44,9 +43,11 @@ public class SaysRizhiControl {
         	page.setPageNo(1);
         }
 		System.out.println(page.getPageSize());
-	
+	System.out.println(user.getUserid()+"用户id");
 		List<SaysRizhitype> listtype = saysRizhitypeService.find(user.getUserid(),0);
+		
 		page = saysRizhiService.findSaysRizhi(srz,page);
+		System.out.println(page.getResult().size()+"查出来的数量");
 		model.addAttribute("page",page);
 		model.addAttribute("type",listtype);
 		model.addAttribute("uid",user.getUserid());
@@ -129,6 +130,7 @@ public class SaysRizhiControl {
 			System.out.println(rzr.getUseridare().getUsername());
 			model.addAttribute("rzr",rzr);
 		}
+		model.addAttribute("uid",data.getData().getRizhiuserid().getUserid());
 		model.addAttribute("srz",data);
 		return "rizhi/rizhibyid";
 		
@@ -143,7 +145,7 @@ public class SaysRizhiControl {
 	}
 	@RequestMapping("/toaddrizhi")
 	private String toaddrizhi(Model model,SaysUser user){
-		List<SaysRizhitype> listtype = saysRizhitypeService.find("U001",0);
+		List<SaysRizhitype> listtype = saysRizhitypeService.find(user.getUserid(),0);
 		model.addAttribute("type",listtype);
 		return "rizhi/addrizhi";
 		
@@ -165,8 +167,11 @@ public class SaysRizhiControl {
 	@RequestMapping("/updatarizhitype")
 	private String updatarizhitype(Model model,SaysRizhitype rzt){
 		System.out.println(rzt.getUserid().getUserid());
-		saysRizhitypeService.updataRizhitype(rzt);
-		
+		try {
+			saysRizhitypeService.updataRizhitype(rzt);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return "redirect:/rizhi/toRizhitypegl?userid.userid="+rzt.getUserid().getUserid();
 	}
 	@RequestMapping("/toupdatarizhi")

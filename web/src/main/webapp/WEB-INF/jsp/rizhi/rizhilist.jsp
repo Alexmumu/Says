@@ -16,6 +16,8 @@
 <link rel="stylesheet" type="text/css" href="css/amazeui.css">
 <link rel="stylesheet" type="text/css"
 	href="js/laypage/skin/laypage.css">
+<link rel="stylesheet" type="text/css" href="css/appdefault.css">
+
 
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.js"></script>
@@ -32,19 +34,35 @@
 
 </script>
 
+<script type="text/javascript">
+//为了让父窗口弹出模态窗 里面方的是ifream
+function tanchuang(url){
+	//1.获取父窗口的元素 这个元素我方在了top。jsp里面 然后改属性 就是改url地址
+	$('#myframe',window.parent.document).attr('src',url);
+	//2.使用模态窗口的方法 激活弹出
+	$('#my-popup',window.parent.document).modal('open');
+}
+</script>
+
 </head>
-<body>
-	<div class="am-g">
-		<div class="am-u-lg-8">
-			<div class="am-panel am-panel-default">
-				<div class="am-panel-hd">日志列表<span style="float: right;">日志数量：${page.dataSum}</span></div>
-			<c:if test="${uid=='U001'}">
-				<div style="margin-left: 30px; margin-top: 12px"><a class="am-btn am-btn-default  am-radius" href="rizhi/toaddrizhi">T写日志</a></div>
+<body style="background-color: rgb(237, 237, 239);">
+	<div class="am-g ">
+		<div class="am-container">
+		<div class="am-u-sm-8 am-animation-slide-left block">
+			<!-- <div class="am-panel am-panel-default">
+				<div class="am-panel-hd">日志列表<span style="float: right;">日志数量：${page.dataSum}</span></div> -->
+			<c:if test="${uid==myuser.userid}">
+				<div style="margin-left: 30px; margin-top: 12px"><a class="am-btn am-btn-default  am-radius" href="rizhi/toaddrizhi?userid=${myuser.userid}">T写日志</a></div>
 			<hr>
 			</c:if>
 			
 				<table class="am-table">
-				<c:if test="${page.dataSum==0}" ><tr><td>您在这个分类下还没有保存日志，<a href="rizhi/toaddrizhi">立刻添加一篇，与朋友分享您的生活吧。</a></td></tr></c:if>
+				<c:if test="${page.dataSum==0}" ><tr><td>
+				<c:if test="${uid!=myuser.userid}">您的好友在这个分类下还没有保存日志！</c:if>
+				<c:if test="${uid==myuser.userid}">您在这个分类下还没有保存日志
+				，<a href="rizhi/toaddrizhi">立刻添加一篇，与朋友分享您的生活吧。</a></c:if>
+				</td>
+				</tr></c:if>
 				<c:if test="${page.dataSum>0}">
 				<c:forEach items="${page.result}" var="rz">
 				
@@ -63,17 +81,17 @@
 					   </span>
 				  </td>
 				  <td>
-			              类型: <span> ${rz.rizhitype.typename} </span> 
+			               <span> ${rz.rizhitype.typename} </span> 
 				  </td>
 				  <td>
-			              发表时间: <span> ${rz.rizhidate} </span> 
+			              <span> ${rz.rizhidate} </span> 
 				  </td>
 				  <td>
-				    <c:if test="${rz.rizhiuserid.userid=='U001'}">
+				    <c:if test="${rz.rizhiuserid.userid==myuser.userid}">
 						        <span >
-						        <a class="am-btn am-btn-default am-round am-btn-lg" href="rizhi/toupdatarizhi?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}">编辑</a>
+						        <a class="am-btn am-btn-default am-icon-sm am-round" href="rizhi/toupdatarizhi?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}">编辑</a>
 						        
-						        <a  href="rizhi/deleterizhibyid?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}"><i class="am-icon-trash am-icon-btn am-icon-twitter"></i></a>
+						        <a  href="rizhi/deleterizhibyid?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}"><i class="am-icon-trash am-icon-sm"></i></a>
 						        </span>
 		           </c:if>
 				  </td>
@@ -81,7 +99,7 @@
 				</c:forEach>
 				</c:if>
 				</table>
-			</div>
+			<!-- </div> -->
 
 			<div id="page1">
 				<ul class="am-pagination am-pagination-centered ">
@@ -108,16 +126,23 @@
 				</ul>
 			</div>
 		</div>
-		<div class="am-u-lg-4" >
-			<div class="am-panel am-panel-default">
-				<div class="am-panel-hd">
+		<div class="am-u-sm-4 am-animation-slide-right " >
+			<!--  <div class="am-panel am-panel-default">
+				<div class="am-panel-hd">   -->
+				<div class="am-g">
+					<div class="am-u-sm-1">
+					
+					</div>
+					<div class="am-u-sm-11 block">
 					日志类型
-					<!--判断是否是用户本人-->
-					<c:if test="${uid=='U001'}">
-					<button data-am-modal="{target: '#my-popup'}" 
+					<!--判断是否是用户本人 session中访客的ID与myuser.userid比较-->
+					<c:if test="${uid==myuser.userid}">
+					<button onclick="tanchuang('rizhi/toRizhitypegl?userid.userid=${myuser.userid}')"  
 					class=" am-icon-wrench am-fr">管理</button>
+					<hr>
                    </c:if>
 					<!--日志管理弹窗-->
+					<!-- 
 					<div class="am-popup" id="my-popup" style="display: none;">
 						<div class="am-popup-inner">
 							<div class="am-popup-hd">
@@ -133,15 +158,22 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<ul class="am-list am-list-static am-list-border am-list-striped">
-				        <li><a class="a1" href="rizhi/toRizhi?userid=U001">全部日志</a></li>
+					-->
+					<ul class="am-list am-list-static">
+				        <li><a class="a1" href="rizhi/toRizhi?userid=${uid}">全部日志</a></li>
 					<c:forEach items="${type}" var="t">
-						<li><a class="a1" href="rizhi/typeRizhi?userid=${t.userid.userid}&rizhitype.typeid=${t.typeid}">${t.typename}</a></li>
+						<li><a class="a1" href="rizhi/typeRizhi?userid=${uid}&rizhitype.typeid=${t.typeid}">${t.typename}</a></li>
 					</c:forEach>
-				</ul>
+					</ul>
+					</div>
+				</div>
+					
+				</div>
+				
 			</div>
 		</div>
+		<!-- 
 	</div>
+</div> -->
 </body>
 </html>

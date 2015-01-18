@@ -30,6 +30,7 @@
       <input type="hidden" name="typeid" value="${rzt.typeid}">
       <input type="hidden" name="userid.userid" value="${rzt.userid.userid}">
     </div>
+      <p>${cz}</p>
   </div>
     <div class="am-form-group">
     <div class="am-u-sm-10 am-u-sm-offset-2">

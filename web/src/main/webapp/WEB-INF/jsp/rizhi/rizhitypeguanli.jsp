@@ -38,7 +38,7 @@ $(function() {
     <label for="doc-ipt-3"  class="am-u-sm-2 am-form-label">添加类型:</label>
     <div class="am-u-sm-10">
       <input type="text" name="typename"  class="am-form-field am-radius" placeholder="输入日志类型名称">
-      <input type="hidden" name="userid.userid" value="U001">
+      <input type="hidden" name="userid.userid" value="${myuser.userid}">
       <p>${cz}</p>
     </div>
   </div>

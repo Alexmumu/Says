@@ -13,8 +13,10 @@
     <title>添加日志</title>
     <base href="<%=basePath%>">
    <link rel="stylesheet" type="text/css" href="css/amazeui.css">
-        <link rel="stylesheet" type="text/css" href="css/wangEditor-1.1.0-min.css">
-    <link rel="stylesheet" type="text/css" href="css/fontawesome-4.2.0/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="css/wangEditor-1.1.0-min.css">
+   <link rel="stylesheet" type="text/css" href="css/fontawesome-4.2.0/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="css/appdefault.css">
+
     
     <link rel="stylesheet" type="text/css"
 	href="js/laypage/skin/laypage.css">
@@ -28,17 +30,22 @@
         body{
             padding: 0px 10px 0px 10px;
             color:#333333;
+            background-color: rgb(237, 237, 239);
         }
     </style>
 </head>
 <body>
+<div class="am-g ">
+<div class="am-container">
+		<div class="am-u-sm-12 am-animation-slide-left block">
 <form class="am-form" action="rizhi/addrizhi" method="post">
 <article class="am-article">
   <div class="am-article-hd">
   <fieldset>
     <div class="am-form-group">
+    <p>添加日志</p>
       <label for="doc-vld-name">标题：</label>
-      <input type="text" name="rizhititle" id="doc-vld-name" minlength="3" placeholder="输入用户名" class="am-form-field am-round" required/>
+      <input type="text" name="rizhititle" id="doc-vld-name" minlength="3" placeholder="请输入标题名" class="am-form-field am-round" required/>
     </div>
   </fieldset>
    
@@ -49,7 +56,7 @@
       <c:forEach items="${type}" var="t">
       <c:if test="${t.typestatus==2}">
         <option  selected="selected" value="${t.typeid}">${t.typename}</option>
-         <input type="hidden" name="rizhiuserid.userid" value="${t.userid.userid}">
+         <input type="hidden" name="rizhiuserid.userid" value="${myuser.userid}">
       </c:if>
        <c:if test="${t.typestatus==1}">
        <option value="${t.typeid}">${t.typename}</option>
@@ -83,6 +90,9 @@
     </div>
     </article>
     </form>
+    </div>
+    </div>
+    </div>
 </body>
 <script type="text/javascript" src='js/wangEditor-1.1.0-min.js'></script>
     <script type="text/javascript">
