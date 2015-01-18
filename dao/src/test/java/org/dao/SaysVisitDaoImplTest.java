@@ -102,7 +102,7 @@ public class SaysVisitDaoImplTest extends TestCase {
 	    	
 	    	System.out.println("访问的用户ID查询是否有了访问记录");
 		    Boolean istest=false;
-		    if(saysVisitdao.fandByVisitId("U002","U001")!=null){
+		    if(saysVisitdao.findByVisitId("U002","U001")!=null){
 			   istest=true;
 		    }
 		    assertTrue(istest);

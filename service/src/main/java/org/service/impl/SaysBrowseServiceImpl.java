@@ -43,5 +43,9 @@ public class SaysBrowseServiceImpl implements ISaysBrowseService{
 			Serializable browsefor, Serializable useridare) {
 		return this.saysBrowseDao.findSaysBrowse(firstResult, maxResults, browsefor, useridare);
 	}
+	@Override
+	public int countByBrowseforSaysBrowse(Serializable browsefor) {
+		return this.saysBrowseDao.countByBrowseforSaysBrowse(browsefor);
+	}
 
 }

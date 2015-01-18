@@ -1,8 +1,10 @@
 package org.vo;
 
-import java.util.List;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Comparator;
 
-import org.entity.SaysComments;
+
 
 /**
  * 展现动态的时候 可以直接用这个
@@ -13,7 +15,11 @@ import org.entity.SaysComments;
  *
  * @param <T> 说说 日志 相片 这种数据对象
  */
-public class ContentData<T> {
+public class ContentData<T> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 核心数据  如 说说 相片 日志
 	 */
@@ -22,6 +28,10 @@ public class ContentData<T> {
 	 * 浏览的数目
 	 */
 	private int yuedunum;
+	/**
+	 * 评论的数目
+	 */
+	private int pinglunnum;
 	/**
 	 * 转发数
 	 */
@@ -34,6 +44,12 @@ public class ContentData<T> {
 	 * 表示这个对象的类型  如 1是说说 2日志 3相册
 	 */
 	private int datatype;
+	/**
+	 * 对象创建时间
+	 */
+	private String datadate;
+	
+	
 	public T getData() {
 		return data;
 	}
@@ -64,6 +80,17 @@ public class ContentData<T> {
 	public void setDatatype(int datatype) {
 		this.datatype = datatype;
 	}
-	
-	
+	public int getPinglunnum() {
+		return pinglunnum;
+	}
+	public void setPinglunnum(int pinglunnum) {
+		this.pinglunnum = pinglunnum;
+	}
+	public String getDatadate() {
+		return datadate;
+	}
+	public void setDatadate(String datadate) {
+		this.datadate = datadate;
+	}
+
 }

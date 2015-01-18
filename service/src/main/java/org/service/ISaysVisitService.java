@@ -29,7 +29,7 @@ public interface ISaysVisitService {
 	 * @throws DataAccessException
 	 */
 
-	Page<SaysVisit> fandMySaysVisit(SaysVisit data, Page<SaysVisit> page) throws DataAccessException;
+	Page<SaysVisit> findMySaysVisit(SaysVisit data, Page<SaysVisit> page) throws DataAccessException;
 
 	
 	/**

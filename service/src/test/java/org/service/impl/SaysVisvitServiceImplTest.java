@@ -76,7 +76,7 @@ public class SaysVisvitServiceImplTest extends TestCase{
      	System.out.println(sv+"userid");
     	System.out.println(p.getPageNo()+"pageno");
     	System.out.println(p.getPageSize()+"pageSize");
-    	System.out.println(svs.fandMySaysVisit(sv,p));
+    	System.out.println(svs.findMySaysVisit(sv,p));
     	//ps.saveProvince(p);;
         assertTrue( true );
     }

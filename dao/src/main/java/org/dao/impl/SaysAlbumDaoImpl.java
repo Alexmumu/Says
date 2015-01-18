@@ -14,7 +14,6 @@ public class SaysAlbumDaoImpl extends AbstractBaseDao<SaysAlbum> implements
 	private static final String FINDBYUSERID_HQL="select al from SaysAlbum al where al.userid.userid=? and albumstatus!=?  order by albumdate desc";
 	@SuppressWarnings("unchecked")
 	
- 
 	public List<SaysAlbum> findByUserId(Serializable userid, int firstResult,
 			int maxResults,int albumstatus) throws DataAccessException {
 		return this.findByHql(FINDBYUSERID_HQL, firstResult, maxResults, new Object[]{userid,albumstatus});

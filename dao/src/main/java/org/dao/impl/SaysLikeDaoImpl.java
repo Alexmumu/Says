@@ -20,7 +20,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SaysLikeDaoImpl extends AbstractBaseDao<SaysLike> implements
 ISaysLikeDao {
+	private static final String FINDBYLikefor_HQL="select sl from SaysLike sl where sl.likefor=?  order by sl.liketime desc";
 	private static final String FINDBYUseridare_HQL="select sl from SaysLike sl where sl.useridare.userid=?  order by sl.liketime desc";
+	
 	private static final String FINDBYUSERID_HQL="select sl from SaysLike sl where sl.userid.userid=?  order by sl.liketime desc";
 	private static final String FINDBYUSERIDToUseridareForLikeforSaysLike_HQL="select sl from SaysLike sl where sl.likefor=? and sl.userid.userid=? and sl.useridare.userid=? ";
 	@Override
@@ -63,6 +65,12 @@ ISaysLikeDao {
 			Serializable likefor, Serializable userid, Serializable useridare)
 			throws DataAccessException {
 			return (SaysLike) this.findByHql(FINDBYUSERIDToUseridareForLikeforSaysLike_HQL,new Object[]{likefor,userid,useridare}).get(0);
+	}
+	@Override
+	public int countByLikeforSaysLike(Serializable likefor)
+			throws DataAccessException {
+		return this.countByHql(FINDBYLikefor_HQL,new Object[]{likefor});
+	
 	}
 	
 	

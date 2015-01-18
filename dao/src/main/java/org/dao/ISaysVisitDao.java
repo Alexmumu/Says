@@ -60,7 +60,7 @@ public interface ISaysVisitDao extends IBaseDao<SaysVisit> {
 	  * @return 一条数据
 	  * @throws DataAccessException
 	  */
-	 public List<SaysVisit> fandByVisitId(Serializable userid,Serializable fromuserid) throws DataAccessException;
+	 public List<SaysVisit> findByVisitId(Serializable userid,Serializable fromuserid) throws DataAccessException;
 	 
 	 /**
 	  * 根据访问的用户第二访问时，实行时间的更新
@@ -76,5 +76,6 @@ public interface ISaysVisitDao extends IBaseDao<SaysVisit> {
       * @throws DataAccessException
       */
 	 public void deleteVisitId(Serializable visitid) throws DataAccessException;
+
 
 }

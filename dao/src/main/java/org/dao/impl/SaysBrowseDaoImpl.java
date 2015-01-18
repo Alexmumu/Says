@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 public class SaysBrowseDaoImpl extends AbstractBaseDao<SaysBrowse> implements
 ISaysBrowseDao {
 	private static final String FINDBYUSERID_HQL="select sb from SaysBrowse sb where sb.useridare.userid=?";
+	private static final String FINDBYBrowsefor_HQL="select sb from SaysBrowse sb where sb.browsefor=?";
 	private static final String FINDBYUSERIDByUser_HQL="select sb from SaysBrowse sb where sb.browsefor=? and sb.useridare.userid=? order by sb.browsetime desc";
 	private static final String FINDBYUSERIDByUser_HQLA="select  sb from SaysBrowse sb where sb.browsefor=? and sb.useridare.userid=? order by sb.browsetime desc";
 	@Override
@@ -62,6 +63,12 @@ ISaysBrowseDao {
 		@SuppressWarnings("unchecked")
 		List<SaysBrowse> list=this.findByHql(FINDBYUSERIDByUser_HQLA, firstResult, maxResults, new Object[]{browsefor,useridare});
 		return list;
+	}
+
+	@Override
+	public int countByBrowseforSaysBrowse(Serializable browsefor)
+			throws DataAccessException {
+		return this.countByHql(FINDBYBrowsefor_HQL,new Object[]{browsefor});
 	}
 
 	

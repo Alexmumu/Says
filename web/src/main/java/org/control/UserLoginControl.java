@@ -37,30 +37,6 @@ public class UserLoginControl {
 	private ISaysProtectionService saysprotectionImpl;
 	
 	
-	@RequestMapping("/toLogin")
-	public String toLogin(){
-		
-		return "login";
-	}
-	
-	
-	//登陆
-	@RequestMapping(value="/login")
-	public String login(SaysUser user,Model model){
-		System.out.println(user.getUsername());
-		try{
-			List userlist=saysUserServiceImpl.loginuser(user.getUsername(),user.getUserpassword());
-			model.addAttribute("userlist", userlist);
-			System.out.println("登陆"+userlist.toString());
-			return "myfriends";
-
-		}catch(RuntimeException e){
-			//e.printStackTrace();
-			return "login";
-		}
-	}
-
-	
 	//注册    注册成功后添加一个默认不可删除的相册和日志类型
 	@RequestMapping(value="/useradd")
 	public String useradd(SaysUser user,Model model)
