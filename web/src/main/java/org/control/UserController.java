@@ -109,7 +109,9 @@ public class UserController {
 	@RequestMapping("myhome")
 	public String toUserMyHome(Model model ,SaysUser user){
 		Map<String,Object> map=this.commonServiceImpl.findMyCountByUserid(user.getUserid());
+		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid(user.getUserid()).get(0);
 		model.addAttribute("usercount", map);
+		model.addAttribute("zyuser",user);
 		return "wodelingtu";
 	}
 	@RequestMapping("zhuyedongtai")

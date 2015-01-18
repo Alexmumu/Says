@@ -18,7 +18,7 @@ public interface ISaysVisitDao extends IBaseDao<SaysVisit> {
 	 * @return list集合
 	 * @throws DataAccessException
 	 */
-	public List<SaysVisit> fandSaysVisit(Serializable userid, int firstResult,int maxResults) throws DataAccessException;
+	public List<SaysVisit> findSaysVisit(Serializable userid, int firstResult,int maxResults) throws DataAccessException;
 
 	/**
 	 * 根据用户ID，查询我看过的好友记录
@@ -28,7 +28,7 @@ public interface ISaysVisitDao extends IBaseDao<SaysVisit> {
 	 * @return list集合
 	 * @throws DataAccessException
 	 */
-	public List<SaysVisit> fandMySaysVisit(Serializable fromuserid, int firstResult,int maxResults) throws DataAccessException;
+	public List<SaysVisit> findMySaysVisit(Serializable fromuserid, int firstResult,int maxResults) throws DataAccessException;
 
 	
 	/**
@@ -46,14 +46,7 @@ public interface ISaysVisitDao extends IBaseDao<SaysVisit> {
 	 * @throws DataAccessException
 	 */
 	 public int countMyByUserid(Serializable fromuserid) throws DataAccessException;
-		 
-	 /**
-	  * 添加一条访客记录
-	  * @param saysVisit 访客表的对象
-	  * @throws DataAccessException
-	  */
-	 public Serializable addSaysVisit(SaysVisit saysVisit) throws DataAccessException;
-	 
+
 	 /**
 	  * 根据访问的用户ID查询是否有过访问记录，如果有就修改用户的用的当前时间updateVisitIdTime()
 	  * @param fromuserid 访问的用户ID
@@ -62,20 +55,6 @@ public interface ISaysVisitDao extends IBaseDao<SaysVisit> {
 	  */
 	 public List<SaysVisit> findByVisitId(Serializable userid,Serializable fromuserid) throws DataAccessException;
 	 
-	 /**
-	  * 根据访问的用户第二访问时，实行时间的更新
-	  * @param fromuserid 访问人的用户ID
-	  * @return
-	  * @throws DataAccessException
-	  */
-	 public void updateVisitIdTime(SaysVisit saysVisit) throws DataAccessException;
-     /**
-      * 根据访问客标的ID删除访问记录  真的删除
-      * @param fromuserid
-      * @return
-      * @throws DataAccessException
-      */
-	 public void deleteVisitId(Serializable visitid) throws DataAccessException;
 
 
 }
