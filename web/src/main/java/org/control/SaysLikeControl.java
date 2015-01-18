@@ -48,6 +48,7 @@ public class SaysLikeControl {
 		System.out.println("点赞信息"+lklist.size());
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("dianzanNum",aa);
+		map.put("dianzanlist", lklist);
 		return map;
 	}
 	

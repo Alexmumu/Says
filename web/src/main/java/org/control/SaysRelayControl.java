@@ -98,7 +98,5 @@ public class SaysRelayControl {
 		ssr1.setRelayfor(sr.getRelayfor());
 		saysRelayServiceImpl.saveSaysRelay(ssr1);
 		return "zhuanzai/aaa";
-	}
-	
-	
+	}	
 }

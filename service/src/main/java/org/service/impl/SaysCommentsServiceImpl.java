@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.dao.ISaysCommentsDao;
 import org.entity.SaysComments;
+import org.entity.SaysRelay;
+import org.entity.SaysReply;
 import org.service.ISaysCommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,12 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 		List<SaysComments> list = commentsDao.FindComments(commentsforid, page
 				.getFirstResult(), page.getMaxResults(),commentstatus);
 		page.setResult(list);
+		for(SaysComments sc:list){
+			for(SaysReply sr:sc.getSaysreply()){
+				sr.setCommentid(null);
+			}
+			System.out.println(sc);
+		}
 		System.out.println(page.getDataSum());
 		return page;
 	}

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
     <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -14,24 +16,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="css/amazeui.css">
 	<script src="js/jquery.min.js"></script>
   	<script src="js/amazeui.js"></script>
+  	<script type="text/javascript">
+  	$(function(){
+  		$("#pllist").click(function(){
+  			$.post(
+  	  				"Comments/toAddComments",
+  	  				{
+  	  	  				'userid.userid':'U001',
+  	  	  				'useridare.userid':'U002',
+  	  	  				'commentsforid':'S001',
+  	  	  				'commentcontent':$("#commentcontent").val(),
+  	  	  				},
+  	  				function(data){
+  	  	  			  var content = "<table border='1' width='100%'>";
+						content += "<tbody>";
+  	  	  				$.each(data.pinlunlist,function(i,c){
+							content += "<tr>";
+							content += "<td style='font-size: 14px;'>"+c.userid.userimg + "</td>";	
+							content += "<td style='font-size: 14px;'>"+c.commentcontent + "</td>";		
+							content += "<td style='font-size: 14px;'>评论于"+c.commentdate + "</td>";		
+							content +="<td><a  style='  background-color:A2A2A2; font-size:14px; color:blue;  float:right;' class='am-close am-close-alt am-close-spin'>x</a></td>";
+							content += "</tr>";											
+						});
+  	  	  			content += "</tbody></table>";
+						$("#pinlunlist").html(content);
+  	  				}	
+  	  			);	
+  		})		
+  	})
+  	</script>
 </head>
 <body>
 <div class="am-g" style="background: #fafafa; border:1px dashed #ededef;">
 
 		<!--评论框-->
-		<form action="Comments/toAddComments?userid.userid=U001&useridare.userid=U002&commentsforid=S001" method="post">
 							<div class="am-g">
 							     <div class="am-u-lg-12">
-							     	<textarea style="width:100%" name="commentcontent"></textarea>
+							     	<textarea style="width:100%" name="commentcontent" id="commentcontent"></textarea>
 							     </div>
 							     </div>
 
 							     <div class="am-g">
 							     	 <div class="am-u-lg-12 ">
-							     	 <button type="submit" class="am-btn am-btn-default am-fr" >确定</button>
+							     	 <button type="button" id="pllist" class="am-btn am-btn-default am-fr" >确定</button>
 							     	</div>
 							     </div>
-								 </form>
+								 
 
 <!--评论列表-->
 							     <div class="am-g">
@@ -84,6 +114,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							     </div>
 							</div>
 
+<div id="pinlunlist">
+	<table style=" border: solid 1px black; width:100%">
+				<tbody>
+					<c:forEach items="${list}" var="l" >
+						<tr>
+							<td >	
+							${l.userid.userimg}
+							</td>
+							<td >
+							${l.commentcontent}	
+							</td>
+							<td >
+							${l.commentdate}	
+							</td>
+							 <td><a href="Comments/deleteComment?commentid=${l.commentid}" name="l.commentid"  style="background-color:A2A2A2; font-size:14px; color:blue;  float:right;" class="am-close am-close-alt am-close-spin" >
+  x
+</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+					</table>
+</div>
 
 </body>
 </html>

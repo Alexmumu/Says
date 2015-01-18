@@ -26,7 +26,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	  				'likefor':'S001'
   	  				},
   	  				function(data){
-  	  					$("#dianzannum").html(data.dianzanNum);
+  	  				 	var content = "<table border='1' width='100%'>";
+						content += "<tbody>";
+  	  				$.each(data.dianzanlist,function(i,c){
+						content += "<span style='display:block;'>";
+						content += "<img  src='images/"+c.userid.userimg+"' class='am-comment-avatar' width='48' height='48'>";	
+						content += "</span>";											
+					});
+  	  				content += "</tbody></table>";
+					$("#lookplb").html(content);
+					$("#dianzannum").html(data.dianzanNum);
   	  				}	
   	  			);	
   		})		
@@ -119,5 +128,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </span>   
               </div>
             </div>
+            <div style="width: 280px; border: 1px solid #A6A6A6; float: right; height: 48px; " id="lookplb"></div>
 </body>
 </html>
