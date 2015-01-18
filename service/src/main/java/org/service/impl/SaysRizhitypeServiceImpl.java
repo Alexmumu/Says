@@ -45,7 +45,7 @@ public class SaysRizhitypeServiceImpl implements ISaysRizhitypeService {
 	@Override
 	public void deleteRizhitype(SaysRizhitype rizhitype)
 			throws DataAccessException {
-		// TODO Auto-generated method stub
+		
 		int i = 0;
 		List<SaysRizhi> list = this.saysRizhiDao.findRizhitypes(rizhitype.getUserid().getUserid(), rizhitype.getTypeid(),0);
 		

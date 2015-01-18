@@ -33,7 +33,7 @@ public interface ISaysFriendsDao extends IBaseDao<SaysFriends> {
 	 * @param userid 好友表id
 	 * @throws DataAccessException
 	 */
-	public boolean deletedFriendsbyid(String friendid)throws DataAccessException;
+	public void deletedFriendsbyid(String friendid)throws DataAccessException;
 	
 	/**
 	 * 4.根据好友id，查询出好友的详细信息

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 <!doctype html>
 <%
 String path = request.getContextPath();
@@ -14,6 +15,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/jquery.min.js"></script>
   <script src="js/amazeui.js"></script>
   <title>登录页面</title>
+  
+<script type="text/javascript">
+	 function message()
+	 {
+		 var uname = document.d1.username.value;
+		 var upwd = document.d1.userpassword.value;
+			if(uname.length==0){
+				alert("输入账号不能为空");
+				return false;
+			}
+			if(upwd.length==0){
+				alert("输入密码不能为空");
+				return false;
+			} 
+	 }
+	 
+	 function message2()
+	 {
+		 var uname = document.d2.username.value;
+		 var upwd = document.d2.userpassword.value;
+			if(uname.length==0){
+				alert("输入账号不能为空");
+				return false;
+			}
+			if(upwd.length==0){
+				alert("输入密码不能为空");
+				return false;
+			} 
+	 }
+</script>
+  
 </head>
 <body style="height:100%; background-color:#f1f5f8;" >
   <div class="header" style="text-align:center;background: url(images/body_1.png);color:#FFF;min-height:220px;box-shadow: 0 2px 3px rgba(0,0,0,0.3);">
@@ -25,6 +57,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   </div>
   <hr>
+  
+  <!--忘记密码弹出框开始-->
+  <div class="am-popup" id="my-popup" style="display: none;">
+    <div class="am-popup-inner">
+      	<div class="am-popup-hd">
+      	  <h4 class="am-popup-title">输入窗口</h4>
+        <span data-am-modal-close="关闭" class="am-close">关闭</span>
+      	</div>
+      	<div class="am-popup-bd">
+         	<iframe src="userzh/touserzhanghao" name="rightF" width="100%" height="620px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
+  		</div>
+  	</div>
+  </div>
+<!--忘记密码弹出框结束-->
+  
   <div class="am-g">
     <div class="am-container">
       <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
@@ -40,37 +87,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
           <div class="am-tabs-bd">
             <div data-tab-panel-0 class="am-tab-panel am-active">
-            <form action="user/login" class="am-form" method="post" data-am-validator>
+            <form action="user/login" class="am-form" method="post" onsubmit="return message()" data-am-validator name="d1">
               <fieldset>
-                <legend>用户登录</legend>
+                <legend>用户登录</legend> ${msg}
                 <div class="am-form-group">
                   <label for="doc-vld-name-2">帐号：</label>
-                  <input type="text" name="username" id="doc-vld-name-2" minlength="3" placeholder="帐号（至少 3 个字符）" required/>
+                  <input type="text" name="username" id="doc-vld-name-2"  placeholder="请输入帐号" required/>
                 </div>
 
                 <div class="am-form-group">
                   <label for="doc-vld-email-2">密码：</label>
-                  <input type="password" name="userpassword"  placeholder="密码" required/>
+                  <input type="password" name="userpassword"  placeholder="请输入密码" required/>
                 </div>
 
                 <div class="am-cf">
                 <button class="am-btn am-btn-default" type="submit">登录</button>
-                 <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr"></div>
+                 <input type="button" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr" data-am-modal="{target: '#my-popup'}">
+
               </fieldset>
             </form>
             </div>
             <div data-tab-panel-1 class="am-tab-panel">
-              <form action="" class="am-form" data-am-validator>
+              <form action="user/useradd" method="post" onsubmit="return message2()" class="am-form" data-am-validator name="d2">
                 <fieldset>
                   <legend>用户注册</legend>
+                  
                   <div class="am-form-group">
                     <label for="doc-vld-name-2">帐号：</label>
-                    <input type="text" id="doc-vld-name-2" minlength="3" placeholder="输入注册帐号（至少 3 个字符）" required/>
+                    <input type="text" id="doc-vld-name-2" name="username" placeholder="输入注册帐号"/>
                   </div>
 
                   <div class="am-form-group">
                     <label for="doc-vld-email-2">密码：</label>
-                    <input type="password"  placeholder="输入注册密码" required/>
+                    <input type="password"  placeholder="输入注册密码" name="userpassword" />
                   </div>
                   <button class="am-btn am-btn-default" type="submit">注册</button>
                 </fieldset>
