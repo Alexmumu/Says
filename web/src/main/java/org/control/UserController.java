@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("myuser")
 @RequestMapping("/user")
-public class UserControl {
+public class UserController {
 
 	@Autowired
 	private ISaysUserService saysUserServiceImpl;

@@ -42,44 +42,44 @@ public class SaysVisvitServiceImplTest extends TestCase{
     /**
      * Rigourous Test :-)
      */
-    public void findSaysVisitsUseridByAndPage()
-    {	
-    	System.out.println("查询访问我的记录并分页");
+//    public void findSaysVisitsUseridByAndPage()
+//    {	
+//    	System.out.println("查询访问我的记录并分页");
+//    
+//    	SaysUser u = new SaysUser();
+//    	u.setUserid("U001");
+//    	SaysVisit sv=new SaysVisit();
+//    	sv.setUserid(u);
+//    	Page<SaysVisit> p = new Page<SaysVisit>();
+//    	p.setPageNo(1);
+//    	p.setPageSize(3);
+//     	System.out.println(sv+"userid");
+//    	System.out.println(p.getPageNo()+"pageno");
+//    	System.out.println(p.getPageSize()+"pageSize");
+//    	System.out.println(svs.findSaysVisitsUseridByAndPage(sv, p));
+//    	//ps.saveProvince(p);;
+//        assertTrue( true );
+//    }
     
-    	SaysUser u = new SaysUser();
-    	u.setUserid("U001");
-    	SaysVisit sv=new SaysVisit();
-    	sv.setUserid(u);
-    	Page<SaysVisit> p = new Page<SaysVisit>();
-    	p.setPageNo(1);
-    	p.setPageSize(3);
-     	System.out.println(sv+"userid");
-    	System.out.println(p.getPageNo()+"pageno");
-    	System.out.println(p.getPageSize()+"pageSize");
-    	System.out.println(svs.findSaysVisitsUseridByAndPage(sv, p));
-    	//ps.saveProvince(p);;
-        assertTrue( true );
-    }
-    
-    
-    public void testApp2()
-    {	
-    	System.out.println("查询我看谁的访问记记录并分页");
-    
-    	SaysUser u = new SaysUser();
-    	u.setUserid("U001");
-    	SaysVisit sv=new SaysVisit();
-    	sv.setFromuserid(u);
-    	Page<SaysVisit> p = new Page<SaysVisit>();
-    	p.setPageNo(0);
-    	p.setPageSize(3);
-     	System.out.println(sv+"userid");
-    	System.out.println(p.getPageNo()+"pageno");
-    	System.out.println(p.getPageSize()+"pageSize");
-    	System.out.println(svs.findMySaysVisit(sv,p));
-    	//ps.saveProvince(p);;
-        assertTrue( true );
-    }
+//    
+//    public void testApp2()
+//    {	
+//    	System.out.println("查询我看谁的访问记记录并分页");
+//    
+//    	SaysUser u = new SaysUser();
+//    	u.setUserid("U001");
+//    	SaysVisit sv=new SaysVisit();
+//    	sv.setFromuserid(u);
+//    	Page<SaysVisit> p = new Page<SaysVisit>();
+//    	p.setPageNo(0);
+//    	p.setPageSize(3);
+//     	System.out.println(sv+"userid");
+//    	System.out.println(p.getPageNo()+"pageno");
+//    	System.out.println(p.getPageSize()+"pageSize");
+//    	System.out.println(svs.findMySaysVisit(sv,p));
+//    	//ps.saveProvince(p);;
+//        assertTrue( true );
+//    }
 
     public void testadd()
     {	

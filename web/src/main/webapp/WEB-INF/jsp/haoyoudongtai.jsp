@@ -27,13 +27,12 @@
 			<li>
     			<div style="padding:5px;">
     				<a href="javascrip:;">
-    					<img  class="am-circle" content="{{d.result[i].fromuserid.username}} 于  {{d.result[i].visittime}}"  src="images/touxiang1.jpg"  width="64" height="64"></a>
+    					<img  class="am-circle" content="{{d.result[i].fromuserid.username}} 于  {{d.result[i].fangketime}}"  src="images/touxiang1.jpg"  width="64" height="64"></a>
 				</div>
     		</li>
     		{{# } }}
     	<ul class="am-avg-sm-3" >
 </script>
-
 <!-- 访客记录模块 结束 -->
 </head>
 <body>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.entity.SaysVisit;
 import org.springframework.dao.DataAccessException;
+import org.vo.FankeVo;
 import org.vo.Page;
 
 public interface ISaysVisitService {
@@ -17,7 +18,7 @@ public interface ISaysVisitService {
 	 * @return list集合
 	 * @throws DataAccessException
 	 */
-	public Page<SaysVisit> findSaysVisitsUseridByAndPage(SaysVisit data,Page<SaysVisit> page) throws DataAccessException;
+	public Page<FankeVo> findSaysVisitsUseridByAndPage(SaysVisit data,Page<FankeVo> page) throws DataAccessException;
 	//public List<SaysVisit> fandSaysVisit(Serializable userid, int firstResult,int maxResults) throws DataAccessException;
 
 	/**
@@ -29,7 +30,7 @@ public interface ISaysVisitService {
 	 * @throws DataAccessException
 	 */
 
-	Page<SaysVisit> findMySaysVisit(SaysVisit data, Page<SaysVisit> page) throws DataAccessException;
+	Page<FankeVo> findMySaysVisit(SaysVisit data, Page<FankeVo> page) throws DataAccessException;
 
 	
 	/**

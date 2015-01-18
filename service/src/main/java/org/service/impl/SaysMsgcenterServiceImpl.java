@@ -99,8 +99,10 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 				System.out.println("-------------项目ID:-------------");
 				System.out.println(msg.getMcfromid());
 				SaysFrequest frequest = frequestDao.getById(msg.getMcfromid());
-				frequest.setFruser(null);
+				System.out.println(frequest);
 				String fromid = frequest.getFruser().getUserid();
+				frequest.setFruser(null);
+				
 				msgda.setData(frequest);
 				msgda.setUserid((String)userid);
 				msgda.setFromid(fromid);
