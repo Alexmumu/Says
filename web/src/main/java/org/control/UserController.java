@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("myuser")
 @RequestMapping("/user")
-public class UserControl {
+public class UserController {
 
 	@Autowired
 	private ISaysUserService saysUserServiceImpl;
@@ -109,8 +109,8 @@ public class UserControl {
 	@RequestMapping("myhome")
 	public String toUserMyHome(Model model ,SaysUser user){
 		Map<String,Object> map=this.commonServiceImpl.findMyCountByUserid(user.getUserid());
+		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid(user.getUserid()).get(0);
 		model.addAttribute("usercount", map);
-		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid((String)user.getUserid()).get(0);
 		model.addAttribute("zyuser",user);
 		return "wodelingtu";
 	}

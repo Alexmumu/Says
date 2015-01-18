@@ -13,11 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.vo.FankeVo;
 import org.vo.Page;
 
 @Controller
 @RequestMapping("/visit")
-public class SaysVisitControl {
+public class SaysVisitController {
 	@Autowired
 	private ISaysVisitService  svservice;
 	
@@ -27,7 +28,7 @@ public class SaysVisitControl {
 	 * @return	
 	 */
 	@RequestMapping("/findByMy")
-	public @ResponseBody Page<SaysVisit> findByMyAndPage(Page<SaysVisit> page,HttpSession session){
+	public @ResponseBody Page<FankeVo> findByMyAndPage(Page<FankeVo> page,HttpSession session){
 		SaysUser user=(SaysUser) session.getAttribute("myuser");
 		SaysVisit sv=new SaysVisit();
 		sv.setFromuserid(user);
@@ -42,7 +43,7 @@ public class SaysVisitControl {
 	 * @return
 	 */
 	@RequestMapping("/findBy")
-	public @ResponseBody Page<SaysVisit> findByPage(Page<SaysVisit> page,HttpSession session){
+	public @ResponseBody Page<FankeVo> findByPage(Page<FankeVo> page,HttpSession session){
 		SaysUser user=(SaysUser) session.getAttribute("myuser");
 		SaysVisit sv=new SaysVisit();
 		sv.setUserid(user);

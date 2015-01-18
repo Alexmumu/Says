@@ -2,17 +2,20 @@ package org.service.impl;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.dao.ISaysUserDao;
 import org.dao.ISaysVisitDao;
+import org.dateutil.DateUtil;
 import org.entity.SaysVisit;
 import org.service.ISaysUserService;
 import org.service.ISaysVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.vo.FankeVo;
 import org.vo.Page;
 
 @Service
@@ -66,16 +69,20 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 	}
 
 	@Override
-	public Page<SaysVisit> findMySaysVisit(SaysVisit data, Page<SaysVisit> page)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
-		page.setDataSum(saysVisitDao.countMyByUserid(data.getFromuserid()
-				.getUserid()));
 
-		List<SaysVisit> list = saysVisitDao.findMySaysVisit(data
-				.getFromuserid().getUserid(), page.getFirstResult(), page
-				.getMaxResults());
-		page.setResult(list);
+	public Page<FankeVo> findMySaysVisit(SaysVisit data,
+			Page<FankeVo> page) throws DataAccessException {
+		page.setDataSum(saysVisitDao.countMyByUserid(data.getFromuserid().getUserid()));
+		List<SaysVisit> list = saysVisitDao.findSaysVisit(data.getFromuserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		List<FankeVo> fklist=new ArrayList<FankeVo>();
+		for(SaysVisit sv:list){
+			FankeVo fv=new FankeVo();
+			fv.setUser(sv.getUserid());
+			fv.setFromuserid(sv.getFromuserid());
+			fv.setFangketime(DateUtil.getDateStr(sv.getVisittime()));
+			fklist.add(fv);
+		}
+		page.setResult(fklist);
 
 		return page;
 
@@ -83,17 +90,23 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Page<SaysVisit> findSaysVisitsUseridByAndPage(SaysVisit data,
-			Page<SaysVisit> page) throws DataAccessException {
+	public Page<FankeVo> findSaysVisitsUseridByAndPage(SaysVisit data,
+			Page<FankeVo> page) throws DataAccessException {
 		// TODO Auto-generated method stub
-		page.setDataSum(saysVisitDao
-				.countByUserid(data.getUserid().getUserid()));
 
-		List<SaysVisit> list = saysVisitDao.findSaysVisit(data.getUserid()
-				.getUserid(), page.getFirstResult(), page.getMaxResults());
-		page.setResult(list);
+		page.setDataSum(saysVisitDao.countByUserid(data.getUserid().getUserid()));
+		List<SaysVisit> list = saysVisitDao.findSaysVisit(data.getUserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		List<FankeVo> fklist=new ArrayList<FankeVo>();
+		for(SaysVisit sv:list){
+			FankeVo fv=new FankeVo();
+			fv.setUser(sv.getUserid());
+			fv.setFromuserid(sv.getFromuserid());
+			fv.setFangketime(DateUtil.getDateStr(sv.getVisittime()));
+			fklist.add(fv);
+		}
+		page.setResult(fklist);
+		return page; 
 
-		return page;
 	}
 
 }
