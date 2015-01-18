@@ -70,6 +70,15 @@ public class SaysNewsDaoImplTest extends TestCase {
     	assertTrue(istest);
     }
 	
+    
+    public void testgetNews(){
+    	Boolean istest=false;
+    	if(newsDao.getNewsIDBynewscontent("2bf1e3824afbca50014afbccd6530000")!=null){
+    		System.out.println(newsDao.getNewsIDBynewscontent("2bf1e3824afbca50014afbccd6530000").getNewscontent());
+    		istest=true;
+    	}
+    	assertTrue(istest);
+    }
 
 	
 }
