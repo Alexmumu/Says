@@ -60,7 +60,7 @@
 	</div>
 </div>
 <!--主页展示top部分结束-->
-<iframe src=""  id="mainframe" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;" width="100%">
+<iframe src="user/zhuyedongtai"  id="mainframe" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;" width="100%">
 		
 </iframe>
 <script type="text/javascript">
