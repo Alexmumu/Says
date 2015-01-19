@@ -22,19 +22,21 @@ public class SaysLikeControl {
 	@Autowired
 	private ISaysLikeDao saysLikeDaoImpl;
 	
+	//页面要给的参数被点赞用户Id 项目id 
+//	@RequestMapping("/pageDianZanNum")
+//	public String pageDianZanNum(SaysLike slk,Model model){
+//		System.out.println("qqq");
+//		SaysUser sus=new SaysUser();
+//		sus.setUserid("U001");
+//		slk.setLikefor("S001");
+//		slk.setUseridare(sus);
+//		int aa=saysLikeServiceImpl.countByLikeforAndUseridSaysLike(slk.getLikefor(), slk.getUseridare().getUserid());
+//		System.out.println(aa);
+//		model.addAttribute("Likecount", aa);
+//		return "rizhi/rizhineirong";
+//	}
 	
-	@RequestMapping("/pageDianZanNum")
-	public String pageDianZanNum(SaysLike slk,Model model){
-		System.out.println("qqq");
-		SaysUser sus=new SaysUser();
-		sus.setUserid("U001");
-		slk.setLikefor("S001");
-		slk.setUseridare(sus);
-		int aa=saysLikeServiceImpl.countByLikeforAndUseridSaysLike(slk.getLikefor(), slk.getUseridare().getUserid());
-		System.out.println(aa);
-		model.addAttribute("Likecount", aa);
-		return "rizhi/rizhineirong";
-	}
+	//点击的时候获取点赞好友
 	@RequestMapping("/clickReturnDianZanNum")
 	public @ResponseBody Map<String,Object> clickReturnDianZanNum(SaysLike sl,Model model){
 		System.out.println(sl.getUserid().getUserid());

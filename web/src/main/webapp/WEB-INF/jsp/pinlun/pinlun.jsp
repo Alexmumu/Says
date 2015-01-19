@@ -56,6 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							     	<input type="hidden" name="useridare.userid" value="${Userid}">
 							     	<input type="hidden" name="commentsforid" value="${Commentsforid}" >
 							  		<input type="hidden" name="userid.userid" value="${myuser.userid}">
+							  		<input type="hidden" name="type" value="${type}">
+							    	
 							     </div>
 							   
 							    	
@@ -76,8 +78,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<form id="myform">
 								<input type="hidden" id="pageNotb" name="pageNo" > 
 								<input type="hidden"  name="commentsforid" value="${Commentsforid}">
+								<input type="hidden" name="useridare.userid" value="${Userid}">
 							</form>
 							<input type="hidden" id="pageSum" value="${pageSum}">
+							
 							<div id="page1"></div>
 </body>
 </html>

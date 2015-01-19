@@ -45,4 +45,6 @@ public interface ISaysCommentsDao extends IBaseDao<SaysComments> {
 	public boolean HasComment(Serializable commentid)throws DataAccessException;
 	
 	public List<SaysComments> FindCommentsNopage(Serializable commentsforid,Serializable userid,Serializable useridare)throws DataAccessException;
+	
+	
 }

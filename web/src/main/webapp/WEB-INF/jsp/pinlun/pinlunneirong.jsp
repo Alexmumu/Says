@@ -82,11 +82,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="am-panel-bd" style="padding-left:20px;padding-right:20px;">
   <ul class="am-list">
 <c:forEach items="${page1.result}" var="pro">
-  <li style="height:80px; line-height:78px;"><span style="display:block;width:80px; float:left;"><img  src="images/${pro.userid.userimg}" alt="" class="am-comment-avatar" width="48" height="48"></span><span>${pro.commentcontent}</span><span style="float:right;"> <a href="javascript:void(0);" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>回复(0)</a></span></li>
+  <li style="height:80px; line-height:78px;"><span style="display:block;width:80px; float:left;"><img  src="images/${pro.useridare.userimg}" alt="" class="am-comment-avatar" width="48" height="48"></span><span>${pro.commentcontent}</span><span style="float:right;"> <a href="javascript:void(0);" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>回复(0) </a></span></li>
   <li ><span style="font-size: 12px;">${pro.userid.usernickname} 在</span><span style="color: blue;">${pro.commentdate}</span><span style="font-size: 12px;">发表了评论</span></li>
-  <a  id="sanchu" onclick="javascript:window.parent.location.reload();" style="background-color:A2A2A2; font-size:14px; color:blue; margin-top: -118px ; float:right;" class="am-close am-close-alt am-close-spin" href="Comments/deleteComment?commentid=${pro.commentid}">
+ <c:if test="${aaa==myuser.userid}"> <a  id="sanchu" onclick="javascript:window.parent.location.reload();" style="background-color:A2A2A2; font-size:14px; color:blue; margin-top: -118px ; float:right;" class="am-close am-close-alt am-close-spin" href="Comments/deleteComment?commentid=${pro.commentid}">
   x
-</a>
+</a></c:if>
 </c:forEach>
   </ul>
  </div>
