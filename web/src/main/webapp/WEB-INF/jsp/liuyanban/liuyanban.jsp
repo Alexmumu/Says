@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link rel="stylesheet" type="text/css" href="css/amazeui.css">
 		<link rel="stylesheet" type="text/css" href="css/laypage/skin/laypage.css">
+		<link rel="stylesheet" type="text/css" href="css/appdefault.css">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.js"></script>
   	 <script src="css/laypage/laypage.js"></script>
@@ -53,17 +54,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	});
   	</script>
 </head>
-<body>
+<body style="background-color: rgb(237, 237, 239);" >
+	<div class="am-g ">
+		<div class="am-container am-animation-slide-left">
+<div class="am-u-lg-12 block"> 
 <div class="am-panel am-panel-default">
-  <div class="am-panel-hd" >留言寄语</div>
+  <div class="am-panel-hd" >留言寄语y</div>
   <div class="am-panel-bd" style=" text-align:center; " >
+  <c:if test="${fangwenUserid==myuser.userid}">
   	<span id="lyjy">${userword.userwordcontent}</span>
+  	</c:if>
+  	 <c:if test="${fangwenUserid!=myuser.userid}">
+  		<span >${userword.userwordcontent}</span>
+  	</c:if>
   	<form action="Leavword/updateUserWord" method="post">
   	<input  type="text" value="${userword.userwordid}" name="userwordid" style="display: none;" />	
   	<input  type="text" value="${userword.userid.userid}" name="userid.userid" style="display: none;" />
   	<input size="100%;" height="40px;" type="text" id="lyjyinout" name="userwordcontent" value="" style="display: none;"/>
   	<input style="display: none; width:50px; height:27px; line-height:10px; font-size:12px; margin-left: -55px;"  type="submit" id="updateuserword" class="am-btn am-btn-primary" value="编辑"/>
  	</form>
+ 	
+ 	
   </div>
 </div>
 
@@ -77,13 +88,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </div>
 	<form id="myform">
-		<input type="hidden" name="userid.userid" value="${userword.userid.userid}">
+		<input type="hidden" name="userid.userid" value="${fangwenUserid}">
 		<input type="hidden" name="levewodidstatus" value="1">
 		<input id="pageNoHidden" type="hidden" name="pageNo" >	
+		
 	</form>
 	<input type="hidden" id="pageSum" value="${pageSum}">
 
 <div id="page1"></div>
-		<a style="display:none;  " id="dijiye"></a>				
+		<a style="display:none;  " id="dijiye"></a>	
+		</div>		
+	</div>
+</div>	
 </body>
 </html>

@@ -24,23 +24,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<div class="am-panel am-panel-default">
-  <div class="am-panel-hd">输入框</div>
-	<div  class="am-g" style="padding-left:20px;padding-right:20px; background: #fafafa; border:1px dashed #ededef;height:100px;">
-
+  
 		<!--评论框-->
-							<div class="am-g">
-							 <form id="fabiaoliuyan" action="Comments/addComments?userid.userid=U001&useridare.userid=U002&commentsforid=S001"  method="post">
-							     <div class="am-u-lg-12" style="height:100px;">
-							     	<textarea  name="commentcontent" id="liuyantext" style="width:100%; height:100%; border:1px solid #A6A6A6;"></textarea>
-							     </div>
-							   
-							    	
-							     	 <div class="am-u-lg-12 ">
-							     	 <button type="submit" class="am-btn am-btn-default am-fr"  style="margin-top:-45px; margin-right:5px;" onclick="javascript:window.parent.location.reload();">确定</button>
-							     	</div>
-							     	 </form>
-							     </div>
-
+							
 <!--评论列表
 							     <div class="am-g">
 				     	<div class="am-u-lg-12">
@@ -91,8 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </ul>
 							     	</div>
 							     </div>-->
-							</div>
-</div>				
+		
 
 <div class="am-panel-bd" style="padding-left:20px;padding-right:20px;">
   <ul class="am-list">

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.dao.ISaysCommentsDao;
 import org.entity.SaysComments;
 import org.entity.SaysUser;
@@ -28,7 +30,7 @@ public class SaysCommentsControl {
 		
 			System.out.println(page.getPageNo());
 			page.setPageSize(4);
-			Page page1=saysCommentsServiceImpl.findComments("S001", page, "1");
+			Page page1=saysCommentsServiceImpl.findComments(cs.getCommentsforid(), page, "1");
 			model.addAttribute("page1", page1);
 		
 		return "pinlun/pinlunneirong";
@@ -36,13 +38,15 @@ public class SaysCommentsControl {
 
 	@RequestMapping("/toCommentsaa")
 	public String toCommentsaa(SaysComments cs,Model model,Page<SaysComments> page){
-		cs.setCommentsforid("S001");
+		
 		int i=saysCommentsDaoImpl.CountComments(cs.getCommentsforid(),"1");
 		System.out.println("iiiiii"+i);
 		page.setPageSize(4);
 		page.setDataSum(i);
 		System.out.println("aassdfff"+page.getPageSum());
 		model.addAttribute("pageSum", page.getPageSum());
+		model.addAttribute("Commentsforid",cs.getCommentsforid());
+		model.addAttribute("Userid",cs.getUserid().getUserid());
 		return "pinlun/pinlun";
 	}
 	
@@ -65,7 +69,7 @@ public class SaysCommentsControl {
 		cs.setCommentstatus("1");
 		
 		saysCommentsDaoImpl.save(cs);
-		return "redirect:/Comments/toCommentsaa";
+		return "redirect:/Comments/toCommentsaa?commentsforid="+cs.getCommentsforid()+"&userid.userid="+cs.getUseridare().getUserid();
 	}
 	
 }

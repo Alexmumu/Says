@@ -46,18 +46,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="am-g" style="background: #fafafa; border:1px dashed #ededef;">
 
 		<!--评论框-->
+		<div class="am-panel-hd">输入框</div>
+	<div  class="am-g" style="padding-left:20px;padding-right:20px; background: #fafafa; border:1px dashed #ededef;height:100px;">
+		
+			<div class="am-g">
+							 <form id="fabiaoliuyan" action="Comments/addComments"  method="post">
+							     <div class="am-u-lg-12" style="height:100px;">
+							     	<textarea  name="commentcontent" id="liuyantext" style="width:100%; height:100%; border:1px solid #A6A6A6;"></textarea>
+							     	<input type="hidden" name="useridare.userid" value="${Userid}">
+							     	<input type="hidden" name="commentsforid" value="${Commentsforid}" >
+							  		<input type="hidden" name="userid.userid" value="${myuser.userid}">
+							     </div>
+							   
+							    	
+							     	 <div class="am-u-lg-12 ">
+							     	 <button type="submit" class="am-btn am-btn-default am-fr"  style="margin-top:-45px; margin-right:5px;" onclick="javascript:window.parent.location.reload();">确定</button>
+							     	</div>
+							     	 </form>
+							     </div>
 						
-
+</div>
 <!--评论列表-->
 							     <div class="am-g">
 				 <iframe scrolling="no"  id="pinlunframe" src="" name="rightF" width="100%" height="560px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
 				
 							     </div>
 							</div>
+							<!-- 评论分页所用放form -->
 							<form id="myform">
-							<input type="hidden" id="pageNotb" name="pageNo" value="2"> 
-							
-							
+								<input type="hidden" id="pageNotb" name="pageNo" > 
+								<input type="hidden"  name="commentsforid" value="${Commentsforid}">
 							</form>
 							<input type="hidden" id="pageSum" value="${pageSum}">
 							<div id="page1"></div>

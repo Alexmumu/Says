@@ -1,7 +1,7 @@
 $(function(){
 	getCountxxnum();
 	findXiaoxi();
-	window.setInterval(getCountxxnum,'3000');//定时循环执行
+	//window.setInterval(getCountxxnum,'3000');//定时循环执行
 });
 //加载出用户的未读消息数
 function getCountxxnum(){
