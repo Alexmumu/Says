@@ -73,7 +73,7 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 	public Page<FankeVo> findMySaysVisit(SaysVisit data,
 			Page<FankeVo> page) throws DataAccessException {
 		page.setDataSum(saysVisitDao.countMyByUserid(data.getFromuserid().getUserid()));
-		List<SaysVisit> list = saysVisitDao.findSaysVisit(data.getFromuserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		List<SaysVisit> list = saysVisitDao.findMySaysVisit(data.getFromuserid().getUserid(),page.getFirstResult(), page.getMaxResults());
 		List<FankeVo> fklist=new ArrayList<FankeVo>();
 		for(SaysVisit sv:list){
 			FankeVo fv=new FankeVo();
