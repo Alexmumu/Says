@@ -1,21 +1,16 @@
 package org.service.impl;
 
 import java.io.Serializable;
+
 import java.util.List;
-
-
-
-
-
-
-
-
-
-
-
+import org.dao.ISaysAlbumDao;
+import org.dao.ISaysRizhitypeDao;
 import org.dao.ISaysUserDao;
+import org.entity.SaysAlbum;
 import org.entity.SaysFriends;
+import org.entity.SaysRizhitype;
 import org.entity.SaysUser;
+import org.service.ISaysAlbumService;
 import org.service.ISaysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -28,6 +23,13 @@ public class SaysUserServiceImpl implements ISaysUserService{
 
 	@Autowired
 	private ISaysUserDao userdao;
+	@Autowired
+	private ISaysAlbumDao albumdao;
+	@Autowired
+	private ISaysRizhitypeDao rizhidao;
+	
+
+
 	
 	@Override
 	public List loginuser(String username, String userpassword)
@@ -44,23 +46,44 @@ public class SaysUserServiceImpl implements ISaysUserService{
 
 	@Override
 	public Serializable addnewSaysuser(SaysUser saysuser) throws DataAccessException {
-		// TODO Auto-generated method stub
+		
 		
 		List  u=userdao.selectbyusername(saysuser.getUsername());
 		if(u.size()!=0)
 		{
 			System.out.println("账号已存在！");
-			return false;	
+			return null;
+				
 		}else 
 		{
-			Serializable s = this.userdao.addSaysuser(saysuser);
-			if(s!=null)
-			{
-				System.out.println("注册成功！");
-				return true;	
-			}
+			Serializable s = userdao.save(saysuser);
+			
+				System.out.println("注册成功！"+s);
+
+				SaysAlbum sal= new SaysAlbum();
+		     	sal.setAlbumremark("本人靓照");
+		     	sal.setAlbumstatus(2);
+		     	sal.setAlbumtitle("我的相册");
+		     	sal.setAlbumtopimg("fm.jpg");
+		     	SaysUser user = new SaysUser();
+		     	user.setUserid((String)s);
+		     	sal.setUserid(user);
+		     	System.out.println(sal.getUserid().getUserid()+"su");
+		     	Serializable xc=albumdao.addAlbum(sal);
+		     	System.out.println(xc.toString()+"默认相册");
+		     	
+		     	
+		    	SaysRizhitype rzt = new SaysRizhitype();
+		    	rzt.setTypename("秘密日志");
+		    	SaysUser ur = new SaysUser();
+		    	ur.setUserid((String)s);
+		    	rzt.setUserid(ur);
+		    	rzt.setTypestatus(2);
+		    	Serializable rz=rizhidao.save(rzt);
+		     	System.out.println(rz.toString()+"默认日志类型");
+		     	
+		     	return s;
 		}
-		return saysuser; 
 	}
 
 	@Override
@@ -89,7 +112,7 @@ public class SaysUserServiceImpl implements ISaysUserService{
 		if(u2.size()==0){
 			System.out.println("对不起,没有相关资料！");
 		}
-		
+		System.out.println(u2.size());
 		page.setResult(u2);
 		System.out.println(page.getDataSum()+"haha");
 		return page;

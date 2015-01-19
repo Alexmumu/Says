@@ -31,7 +31,7 @@ public class CommonServiceImpl implements ICommonService {
 		int albumcount=this.sadao.countByUserid(userid, 0);
 		int rizhicount=this.srzdao.countByUserid(userid, 0);
 		int shuoshuocount=this.ssdao.countShouShouByUserId(userid, 0);
-		int liuyancount=this.sldao.countAllSaysLeaveword(userid, 0);
+		int liuyancount=this.sldao.countAllSaysLeaveword(userid, 1);
 		int newscount=this.sndao.CountNews(userid);
 		map.put("albumcount", albumcount);
 		map.put("rizhicount",rizhicount);

@@ -55,7 +55,7 @@ public class SaysCommentsServiceImplTest extends TestCase {
     	SaysUser userare = new SaysUser();
     	userare.setUserid("U001");
     	comm.setUserid(user);
-    	comm.setUseridare("U001");
+    	//comm.setUseridare("U001");
     	if(commentsService.addComments(comm)!= null){
     		istest=true;
     	}

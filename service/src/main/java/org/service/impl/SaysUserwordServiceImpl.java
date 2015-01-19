@@ -30,8 +30,9 @@ public class SaysUserwordServiceImpl implements ISaysUserwordService {
 
 	@Override
 	public SaysUserword findSaysUserwordByUserId(Serializable userid) {
-		
-		return this.saysUserwordDao.findSaysUserwordByUserId(userid);
+		SaysUserword su=this.saysUserwordDao.findSaysUserwordByUserId(userid);
+		saysUserwordDao.initialize(su.getUserid());
+		return su;
 	}
 
 }

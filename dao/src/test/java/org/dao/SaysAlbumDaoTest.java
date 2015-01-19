@@ -47,13 +47,14 @@ public class SaysAlbumDaoTest extends TestCase{
     {	
         assertTrue( true );
     }
-//    public void testfindByUserId(){
-//    	Boolean istest=false;
-//    	if(albumDao.findByUserId("U001", 1, 2,1)!=null){
-//    		istest=true;
-//    	}
-//    	assertTrue(istest);
-//    }    
+    public void testfindByUserId(){
+    	Boolean istest=false;
+    	if(albumDao.findByUserId("U001", 1, 10,0)!=null){
+    		System.out.println(albumDao.findByUserId("U001", 0, 10,0).size());
+    		istest=true;
+    	}
+    	assertTrue(istest);
+    }    
 //    
 //    public void testcountByUserid(){
 //    	Boolean istest=false;

@@ -1,6 +1,7 @@
 package org.dao;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import org.entity.SaysAlbum;
@@ -56,4 +57,7 @@ public interface ISaysAlbumDao extends IBaseDao<SaysAlbum>{
 	  * @throws DataAccessException
 	  */
 	 public SaysAlbum findAlbumByalbumid(Serializable albumid)throws DataAccessException;
+	 
+	 
+	 public SaysAlbum getAlbumByuserid(Serializable userid)throws DataAccessException;
 }

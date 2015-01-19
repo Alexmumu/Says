@@ -31,6 +31,7 @@
 			<!-- 所有以'get'开头的方法是read-only的 -->
 			<tx:method name="get*" read-only="true"/>
 			<tx:method name="find*" read-only="true"/>
+			<tx:method name="select*" read-only="true"/>
 			<!-- 其他方法使用默认的事务设置 -->
 			<tx:method name="*"/>
 		</tx:attributes>

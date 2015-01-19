@@ -100,4 +100,24 @@ public class SaysShouShouServiceImplTest extends TestCase{
  	}
  	assertTrue(istest);
  }
+// public void testfindAllShuoShuo()
+// {
+// 	Boolean istest=false;
+//   SaysShuoshuo ss1=new SaysShuoshuo();
+//   ss1.setShuostatus(1);
+//   SaysUser user=new SaysUser();
+//   user.setUserid("U001");
+//   ss1.setUserid(user);
+//    Page<SaysShuoshuo> page=new Page<SaysShuoshuo>();
+// 	page.setPageNo(1);
+// 	page.setPageSize(2);
+//    if(ss.findAllShuoShuo(ss1, page, ss1.getShuostatus())!=null){
+// 		istest=true;
+// 	}
+// 	assertTrue(istest);
+// }
+ 
+ public void testdeleteShuoShuo(){
+	 assertTrue(ss.deleteShuoShuo("S006"));
+ }
  }

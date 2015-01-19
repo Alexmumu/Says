@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SyasPhotoDaoImpl extends AbstractBaseDao<SaysPhoto> implements ISaysPhotoDao{
 	private static final String FINDPHOTOBYALBUMID_HQL="select ph from SaysPhoto ph where ph.albumid.albumid=? and ph.photostatus!=? order by photodate desc";
-     
+    private static final String DELECT_PHOTO_HQL="update SaysPhoto ph set ph.photostatus=0 where ph.photoid=?" ;
 	@SuppressWarnings("unchecked")
 	public List<SaysPhoto> findPhotoByAlbumId(Serializable albumid,
 			int firstResult, int maxResults,String photostatus) throws DataAccessException {
@@ -54,6 +54,20 @@ public class SyasPhotoDaoImpl extends AbstractBaseDao<SaysPhoto> implements ISay
 
 	@Override
 	public SaysPhoto getPhotoByphotoid(Serializable photoid)
+			throws DataAccessException {
+		 
+		return this.getById(photoid);
+	}
+
+	@Override
+	public void delect(Serializable photoid) throws DataAccessException {
+		 System.out.println("ok1");
+		this.findByHql(DELECT_PHOTO_HQL,photoid);
+		System.out.println("ok2");
+	}
+
+	@Override
+	public SaysPhoto getPhotoid(Serializable photoid)
 			throws DataAccessException {
 		 
 		return this.getById(photoid);

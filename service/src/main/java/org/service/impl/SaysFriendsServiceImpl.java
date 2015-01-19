@@ -27,6 +27,12 @@ public class SaysFriendsServiceImpl implements ISaysFriendsService {
 		
 		List<SaysFriends> fd=friendsDao.findbyuseridallSaysFriends(data, page
 				.getFirstResult(), page.getMaxResults());
+		for(SaysFriends f:fd){
+			friendsDao.initialize(f.getFriendid());
+			friendsDao.initialize(f.getUserid());
+			friendsDao.initialize(f.getUserfriendid());
+		}
+		
 		if(fd.size()==0)
 		{
 			System.out.println("您当前没有好友！");
@@ -60,10 +66,10 @@ public class SaysFriendsServiceImpl implements ISaysFriendsService {
 	}
 
 	@Override
-	public boolean deletedFriends(String friendid)
+	public void deletedFriends(String friendid)
 			throws DataAccessException {
 		
-		return friendsDao.deletedFriendsbyid(friendid);
+		 friendsDao.deletedFriendsbyid(friendid);
 		
 	}
 

@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.dao.ISaysRelayDao;
+import org.entity.SaysComments;
+import org.entity.SaysLeaveword;
 import org.entity.SaysRelay;
+import org.entity.SaysReply;
 import org.service.ISaysRelayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.vo.Page;
 @Service
 public class SaysRelayServiceImpl implements ISaysRelayService{
 	@Autowired
@@ -47,6 +51,35 @@ public class SaysRelayServiceImpl implements ISaysRelayService{
 	}
 
 	@Override
+	public int countByRelayFromAndUseridAndUseridareSaysRelay(Serializable relayfrom,
+			Serializable userid, Serializable useridare) {
+		return this.saysRelayDao.countByRelayFromAndUseridAndUseridareSaysRelay(relayfrom, userid, useridare);
+	}
+
+	@Override
+	public int countByRelayFromAndUseridareSaysRelay(Serializable relayfrom,
+			Serializable useridare) {
+		 return this.saysRelayDao.countByRelayFromAndUseridareSaysRelay(relayfrom, useridare);
+		
+	}
+
+	@Override
+	public Page<SaysRelay> findCommentsByPage(Serializable relayfrom,
+			Page<SaysRelay> page) {
+		page.setDataSum(saysRelayDao.countByRelayfromSaysRelay(relayfrom));
+		List<SaysRelay> list = saysRelayDao.FindSaysRelayByPage(relayfrom, page.getFirstResult(), page.getMaxResults());
+		page.setResult(list);
+		for(SaysRelay sl:list){
+			//sl.setUserid(null);
+			saysRelayDao.initialize(sl.getUserid());
+			saysRelayDao.initialize(sl.getUseridare());
+		}
+		page.setResult(list);
+		System.out.println(page.getDataSum());
+		return page;
+		
+	}
+
 	public SaysRelay findByUseridAndRelayafterSaysRelay(
 			Serializable userid, Serializable relayafter) {
 		SaysRelay sr=this.saysRelayDao.findByUseridAndRelayafterSaysRelay(userid, relayafter);

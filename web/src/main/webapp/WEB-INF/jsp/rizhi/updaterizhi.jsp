@@ -46,8 +46,14 @@
       <div class="am-form-group">
       <label for="doc-select-1">日志类型:</label>
       <select id="doc-select-1" name="rizhitype.typeid">
+      
         <c:forEach items="${type}" var="t">
+        <c:if test="${rz1.rizhitype.typeid==t.typeid}">
         <option  selected="selected" value="${t.typeid}">${t.typename}</option>
+        </c:if>
+         <c:if test="${rz1.rizhitype.typeid!=t.typeid}">
+        <option  value="${t.typeid}">${t.typename}</option>
+        </c:if>
         </c:forEach>
       </select>
       <span class="am-form-caret"></span>

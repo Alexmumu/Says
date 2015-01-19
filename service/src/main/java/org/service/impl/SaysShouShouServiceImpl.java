@@ -4,16 +4,24 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.List;
+
 
 import org.dao.ISaysBrowseDao;
 import org.dao.ISaysCommentsDao;
 import org.dao.ISaysLikeDao;
+
+
+
+
+
+
+
 import org.dao.ISaysNewsDao;
 import org.dao.ISaysRelayDao;
 import org.dao.ISaysShouShousDao;
 import org.dao.ISaysUserDao;
-import org.entity.SaysAlbum;
 import org.entity.SaysNews;
 import org.entity.SaysRelay;
 import org.entity.SaysShuoshuo;
@@ -43,7 +51,7 @@ public class SaysShouShouServiceImpl extends AbstractBaseService implements Isay
 	@Autowired
 	private ISaysUserDao userDao;
   
- 
+
 	@Override
 	public void updateShouShou(SaysShuoshuo ss) {
 		shoushouDao.updateShouShou(ss);
@@ -99,7 +107,8 @@ public class SaysShouShouServiceImpl extends AbstractBaseService implements Isay
 		System.out.println(list.size());
 		System.out.println(content.size());
 		System.out.println(conrtentpage.getDataSum());
-
+		
+	
 		return conrtentpage;
 	}
 	public boolean deleteShuoShuo(Serializable shuoid){

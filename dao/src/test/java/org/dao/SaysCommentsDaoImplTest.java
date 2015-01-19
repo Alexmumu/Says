@@ -63,7 +63,7 @@ public class SaysCommentsDaoImplTest extends TestCase {
     	SaysUser userare = new SaysUser();
     	userare.setUserid("U002");
     	comm.setUserid(user);
-    	comm.setUseridare("U002");
+    	//comm.setUseridare("U002");
     	if(commentsDao.AddComments(comm) != null){
     		istest=true;
     	}

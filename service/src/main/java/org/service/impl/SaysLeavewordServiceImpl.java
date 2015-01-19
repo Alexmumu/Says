@@ -19,10 +19,10 @@ public class SaysLeavewordServiceImpl extends AbstractBaseService implements ISa
 		page.setPageSum(saysLeavewordDao.countAllSaysLeaveword(sysleaveword.getUserid().getUserid(), sysleaveword.getLevewodidstatus()));
 		List<SaysLeaveword> list=this.saysLeavewordDao.findSaysLeavewords(page.getFirstResult(),page.getMaxResults(), sysleaveword.getUserid().getUserid(), sysleaveword.getLevewodidstatus());
 		for(SaysLeaveword sl:list){
-			sl.setUserid(null);
-			//saysLeavewordDao.initialize(sl.getUserid());
+			//sl.setUserid(null);
+			saysLeavewordDao.initialize(sl.getFromuserid());
 		}
-		page.setResult(list);
+		page.setResult(list);	
 		return page;
 	}
 	@Override
@@ -34,7 +34,10 @@ public class SaysLeavewordServiceImpl extends AbstractBaseService implements ISa
 	
 	@Override
 	public void deleteSaysLeaveword(Serializable leavewordid) {
-		this.saysLeavewordDao.deleteSaysLeaveword(leavewordid);
+		SaysLeaveword saysLeaveword=this.saysLeavewordDao.getById(leavewordid);
+		saysLeaveword.setLevewodidstatus(0);
+		this.saysLeavewordDao.update(saysLeaveword);
+		//this.saysLeavewordDao.deleteSaysLeaveword(leavewordid);
 		
 	}
 	
