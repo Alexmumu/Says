@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.entity.SaysVisit;
 import org.springframework.dao.DataAccessException;
+import org.vo.FankeVo;
 import org.vo.Page;
 
 public interface ISaysVisitService {
@@ -17,7 +18,7 @@ public interface ISaysVisitService {
 	 * @return list集合
 	 * @throws DataAccessException
 	 */
-	public Page<SaysVisit> findSaysVisitsUseridByAndPage(SaysVisit data,Page<SaysVisit> page) throws DataAccessException;
+	public Page<FankeVo> findSaysVisitsUseridByAndPage(SaysVisit data,Page<FankeVo> page) throws DataAccessException;
 	//public List<SaysVisit> fandSaysVisit(Serializable userid, int firstResult,int maxResults) throws DataAccessException;
 
 	/**
@@ -29,7 +30,7 @@ public interface ISaysVisitService {
 	 * @throws DataAccessException
 	 */
 
-	Page<SaysVisit> fandMySaysVisit(SaysVisit data, Page<SaysVisit> page) throws DataAccessException;
+	Page<FankeVo> findMySaysVisit(SaysVisit data, Page<FankeVo> page) throws DataAccessException;
 
 	
 	/**
@@ -54,16 +55,7 @@ public interface ISaysVisitService {
 	  * @throws DataAccessException
 	  */
 	 public Serializable addSaysVisit(SaysVisit saysVisit) throws DataAccessException;
-	 
-
-	 /**
-	  * 根据访问的用户第二访问时，实行时间的更新
-	  * @param fromuserid 访问人的用户ID
-	  * @return
-	  * @throws DataAccessException
-	  */
-	 public void updateVisitIdTime(SaysVisit saysVisit) throws DataAccessException;
-     /**
+    /**
       * 根据访问客标的ID删除访问记录  真的删除
       * @param fromuserid
       * @return

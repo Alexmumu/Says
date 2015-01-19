@@ -58,7 +58,7 @@ public class SaysRizhiServiceImplTest extends TestCase{
 	             System.out.println(srz+"userid");
 	  	         System.out.println(p.getPageNo()+"pageno");
 	  	         System.out.println(p.getPageSize()+"pageSize");
-	      	     System.out.println(srzs.fandSaysRizhi(srz,p));
+	      	     System.out.println(srzs.findSaysRizhi(srz,p));
 	  	//ps.saveProvince(p);;
 	             assertTrue( true );
 	  }

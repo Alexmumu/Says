@@ -51,12 +51,6 @@ public class SaysRelayServiceImpl implements ISaysRelayService{
 	}
 
 	@Override
-	public List<SaysRelay> findByUseridAndRelayafterSaysRelay(
-			Serializable userid, Serializable relayafter) {
-			return this.findByUseridAndRelayafterSaysRelay(userid, relayafter);
-	}
-
-	@Override
 	public int countByRelayFromAndUseridAndUseridareSaysRelay(Serializable relayfrom,
 			Serializable userid, Serializable useridare) {
 		return this.saysRelayDao.countByRelayFromAndUseridAndUseridareSaysRelay(relayfrom, userid, useridare);
@@ -86,5 +80,16 @@ public class SaysRelayServiceImpl implements ISaysRelayService{
 		
 	}
 
+	public SaysRelay findByUseridAndRelayafterSaysRelay(
+			Serializable userid, Serializable relayafter) {
+		SaysRelay sr=this.saysRelayDao.findByUseridAndRelayafterSaysRelay(userid, relayafter);
+		sr.setUserid(null);
+		System.out.println(sr.getRelayfor());
+		//saysRelayDao.initialize(sr.getUserid().getUserid());
+		saysRelayDao.initialize(sr.getUseridare());
+		return sr;
+			
+	
+	}
 
 }

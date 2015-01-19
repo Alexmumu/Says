@@ -51,7 +51,7 @@ public class SaysRizhiImplDaoTest extends TestCase{
     	System.out.println("查询所有的日志并分页");
 //    	SaysUser user = new SaysUser(); 
 //    	user.setUserid("U001");
-    	if(saysRizhidao.fandSaysRizhi("U001",1,1,2)!=null){
+    	if(saysRizhidao.findSaysRizhi("U001",1,1,2)!=null){
     		istest=true;
     	}
     	assertTrue(istest);
@@ -82,45 +82,7 @@ public class SaysRizhiImplDaoTest extends TestCase{
     	assertTrue(istest);
     }
 	    
-	  public void testupdatesaysRizhitype(){
-		System.out.println("修改日志信息");
-		SaysRizhi rz = new SaysRizhi();
-		
-		rz.setRizhiid("RZ01");
-		rz.setRizhititle("会做饭的女人");
-		rz.setRizhicontent("我女朋友会做饭");
-		SaysUser user = new SaysUser();
-		user.setUserid("U001");
-		rz.setRizhiuserid(user);
-		rz.setRizhistatus(1);
-		SaysRizhitype rzt = new SaysRizhitype();
-		rzt.setTypeid("T001");
-		rz.setRizhitype(rzt);
-		rz.setRizhinature(0);
-		saysRizhidao.updateSaysRizhi(rz);
-		
-		assertTrue(true);
-		}
-    public void testaddsaysRizhitype(){
-    	System.out.println("添加日志信息");
-    	SaysRizhi rz = new SaysRizhi();
-    	
-    	rz.setRizhiid("RZ01");
-    	rz.setRizhititle("会做饭的女人");
-    	rz.setRizhicontent("我女朋友会做饭");
-    	SaysUser user = new SaysUser();
-    	user.setUserid("U001");
-    	rz.setRizhiuserid(user);
-    	rz.setRizhistatus(1);
-    	SaysRizhitype rzt = new SaysRizhitype();
-    	rzt.setTypeid("T001");
-    	rz.setRizhitype(rzt);
-    	rz.setRizhinature(0);
-    	saysRizhidao.addSaysRizhi(rz);
-    	
-    	assertTrue(true);
-    	}
-    
+
    
 
 }

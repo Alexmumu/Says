@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 
+
 import org.entity.SaysNews;
 import org.vo.ContentData;
 import org.vo.Page;
@@ -17,6 +18,9 @@ public interface ISaysNewsService {
 	 */
 	public Page<ContentData<Object>> findNewsByUser(Serializable userid,Page<SaysNews> page);
 	
+	
+	public Page<ContentData<Object>> findMyNewsByUser(Serializable userid,Page<SaysNews> page);
+	
 	public Serializable addNews(SaysNews news);
 	
 	public boolean deleteNews(Serializable newsid);
@@ -27,5 +31,11 @@ public interface ISaysNewsService {
 	 * @return
 	 */
 	public int countFriends(Serializable userid);
+	/**
+	 * 记录传入的用户的总动态数
+	 * @param userid
+	 * @return
+	 */
+	public int countByMy(Serializable userid);
 	
 }

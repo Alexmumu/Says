@@ -22,10 +22,10 @@ ISaysRelayDao {
 	private static final String FINDBYUSERID_HQL="select sr from SaysRelay sr where sr.useridare.userid=? order by sr.relaytime desc";
 	private static final String FINDBYRelayfrom_HQL="select sr from SaysRelay sr where sr.relayfrom=? order by sr.relaytime desc";
 	private static final String FINDBYRelayafter_HQL="select sr from SaysRelay sr where sr.relayafter=? order by sr.relaytime desc";
-	private static final String FINDBYUSERIDAndRelayafter_HQL="select sr from SaysRelay sr where sr.useridare.userid=? and sr.relayafter=? order by sr.relaytime desc";
 	private static final String FINDBYRelayfromAndUSERIDAndUserIdare_HQL="select sr from SaysRelay sr where sr.relayfrom=? and sr.userid.userid=? and sr.useridare.userid=?  order by sr.relaytime desc";
 	private static final String FINDBYRelayfromAndUserIdare_HQL="select sr from SaysRelay sr where sr.relayfrom=?  and sr.useridare.userid=?  order by sr.relaytime desc";
 	
+	private static final String FINDBYUSERIDAndRelayafter_HQL="select sr from SaysRelay sr where sr.userid.userid=? and sr.relayafter=?";
 	@Override
 	public void saveSaysRelay(SaysRelay ar) throws DataAccessException {
 		this.save(ar);	
@@ -60,14 +60,7 @@ ISaysRelayDao {
 		return this.countByHql(FINDBYRelayafter_HQL, new Object[]{relayafter});
 		
 	}
-	@Override
-	public List<SaysRelay> findByUseridAndRelayafterSaysRelay(
-			Serializable userid, Serializable relayafter)
-			throws DataAccessException {
-		@SuppressWarnings("unchecked")
-		List<SaysRelay> list= this.findByHql(FINDBYUSERIDAndRelayafter_HQL,userid,relayafter);
-		return list;
-	}
+
 	
 	@Override
 	public int countByRelayFromAndUseridAndUseridareSaysRelay(Serializable relayfrom,
@@ -98,4 +91,18 @@ ISaysRelayDao {
 		return this.findByHql(FINDBYRelayfrom_HQL, firstResult,maxResults,new Object[]{relayfrom});
 		
 	}
+
+	
+	@Override
+	public SaysRelay findByUseridAndRelayafterSaysRelay(Serializable userid, Serializable relayafter)
+			throws DataAccessException {
+		List list=this.findByHql(FINDBYUSERIDAndRelayafter_HQL, new Object[]{userid,relayafter});
+		System.out.println(list.size());
+		if(list!=null||list.size()>0){
+			SaysRelay sr= (SaysRelay)list.get(0) ;
+			return sr;
+		}
+		return null;
+	}
+
 }

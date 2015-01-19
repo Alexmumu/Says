@@ -13,7 +13,7 @@ public class MsgDataVo {
 	
 	private int mcstatus;
 	
-	private Timestamp msctime;
+	private String msctime;
 	
 	private String fromid;
 	
@@ -53,12 +53,13 @@ public class MsgDataVo {
 	public void setMcstatus(int mcstatus) {
 		this.mcstatus = mcstatus;
 	}
+	
 
-	public Timestamp getMsctime() {
+	public String getMsctime() {
 		return msctime;
 	}
 
-	public void setMsctime(Timestamp msctime) {
+	public void setMsctime(String msctime) {
 		this.msctime = msctime;
 	}
 

@@ -14,9 +14,10 @@ public interface ISaysRelayService {
 	List<SaysRelay> findByUseridSaysRelay(Serializable userid);
 	int countByRelayfromSaysRelay(Serializable relayfrom);
 	int countByRelayafterSaysRelay(Serializable relayafter);
-	List<SaysRelay> findByUseridAndRelayafterSaysRelay(Serializable userid,Serializable relayafter);
 	int countByRelayFromAndUseridAndUseridareSaysRelay(Serializable relayfrom,Serializable userid,Serializable useridare);
 	int countByRelayFromAndUseridareSaysRelay(Serializable relayfrom,Serializable useridare) ;
 	public Page<SaysRelay> findCommentsByPage(Serializable relayfrom,Page<SaysRelay> page);
 	
+	public SaysRelay findByUseridAndRelayafterSaysRelay(
+			Serializable userid, Serializable relayafter);
 }

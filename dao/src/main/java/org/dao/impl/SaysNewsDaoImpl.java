@@ -16,6 +16,7 @@ public class SaysNewsDaoImpl extends AbstractBaseDao<SaysNews> implements
 	private static final String FIND_NEWSBYUSER = "from SaysNews as news where news.userid.userid = ? order by news.newtime";
 	private static final String FIND_NRWS = "select count(*) from SaysNews as news where news.newsid = ?";
 	private static final String COUNT_NEWS = "select count(*) from SaysNews as news where news.userid.userid = ? ";
+	private static final String GET_NEWSBYCONTENT = "from SaysNews as news where news.newscontent = ?";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -48,6 +49,14 @@ public class SaysNewsDaoImpl extends AbstractBaseDao<SaysNews> implements
 	public int CountNews(Serializable userid) throws DataAccessException {
 
 		return this.countByHql(COUNT_NEWS, new Object[]{userid});
+		
+	}
+
+	@Override
+	public SaysNews getNewsIDBynewscontent(Serializable id)
+			throws DataAccessException {
+		
+		return (SaysNews) this.findByHql(GET_NEWSBYCONTENT,new Object[]{id}).get(0);
 		
 	}
 

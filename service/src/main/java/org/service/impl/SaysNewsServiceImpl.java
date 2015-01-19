@@ -1,7 +1,11 @@
 package org.service.impl;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.dao.ISaysBrowseDao;
@@ -13,10 +17,14 @@ import org.dao.ISaysPhotoDao;
 import org.dao.ISaysRelayDao;
 import org.dao.ISaysRizhiDao;
 import org.dao.ISaysShouShousDao;
+import org.dao.ISaysUserDao;
+import org.entity.SaysAlbum;
 import org.entity.SaysFriends;
 import org.entity.SaysNews;
 import org.entity.SaysPhoto;
+import org.entity.SaysRelay;
 import org.entity.SaysRizhi;
+import org.entity.SaysRizhitype;
 import org.entity.SaysShuoshuo;
 import org.entity.SaysUser;
 import org.service.ISaysNewsService;
@@ -46,7 +54,8 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 	private ISaysBrowseDao browseDao;
 	@Autowired
 	private ISaysLikeDao likeDao;
-	
+	@Autowired
+	private ISaysUserDao userDao;
 
 	@Override
 	public int countFriends(Serializable userid) {
@@ -84,67 +93,256 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 	public Page<ContentData<Object>> findNewsByUser(Serializable userid,
 			Page<SaysNews> page) {
 		Page<ContentData<Object>> conrtentpage = new Page<ContentData<Object>>();
-		page.setDataSum(newsDao.CountNews(userid));
-		
+		conrtentpage.setDataSum(this.countFriends(userid));
 		List<SaysFriends> listFriend = friendsDao.findbyuseridallSaysFriends(userid, 0,Integer.MAX_VALUE);
-		List<SaysNews> list = newsDao.FindNewsByUser(userid, page.getFirstResult(), page.getMaxResults());
-		page.setResult(list);
+		List<SaysNews> list = newsDao.FindNewsByUser(userid,0, Integer.MAX_VALUE);
 		System.out.println(page.getDataSum());
 		for(SaysFriends fd:listFriend){
 			
 			String id = fd.getUserfriendid().getUserid();
-			List<SaysNews> listF2 = newsDao.FindNewsByUser(id, page.getFirstResult(), page.getMaxResults());
+			List<SaysNews> listF2 = newsDao.FindNewsByUser(id, 0, Integer.MAX_VALUE);
 			for(SaysNews news:listF2){
 				list.add(news);
 			}
 		}
 		
+		//排序
+		Collections.sort(list);
+		
+		//手工分页
+		List<SaysNews>  listnews=new ArrayList<SaysNews>();
+		int start=page.getFirstResult();
+		int end=page.getMaxResults();
+		if(end>conrtentpage.getDataSum()){
+			end=conrtentpage.getDataSum();
+		}
+		System.out.println(start  +"\\\\" +end);
+		for(int i=start;i<=end-1;i++){
+			listnews.add(list.get(i));
+		}
+		
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		
 		List<ContentData<Object>> content= new ArrayList<ContentData<Object>>();
-		for(SaysNews news:list){
+		for(SaysNews news:listnews){
+			//发表或转发说说
 			if(news.getNewsstatus() == 1 || news.getNewsstatus() == 2)
 			{
 				ContentData<Object> con = new ContentData<Object>();
 				String id = news.getNewscontent();
-				con.setData(shouShousDao.loadByID(id));
+				
 				con.setPinglunnum(commDao.CountComments(id,"1"));
-				//con.setZhuanfanum(relayDao.countByUseridSaysRelay(userid));
-				//con.setYuedunum(browseDao.countByUseridSaysBrowse(userid));
-				//con.setDianzannum(likeDao.countByUseridSaysLike(userid));
-				con.setDatadate(((SaysShuoshuo)con.getData()).getShuodate());
-				SaysShuoshuo shuoshuo=(SaysShuoshuo)con.getData();
-				shouShousDao.initialize(shuoshuo.getUserid());
+
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
+				SaysShuoshuo shuoshuo =  shouShousDao.getById(id);
+				System.out.println(shuoshuo);
+				SaysUser user=new SaysUser();
+				user.setUserid(shuoshuo.getUserid().getUserid());
+				user.setUsername(shuoshuo.getUserid().getUsername());
+				user.setUserimg(shuoshuo.getUserid().getUserimg());
+				shuoshuo.setUserid(user);
+				con.setData(shuoshuo);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysShuoshuo)con.getData()).getShuodate();
+				con.setDatadate(sdf.format(date));
+				if(news.getNewsstatus() == 2){
+					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
+					con.setRalaycontent(relay.getRelayfor());
+					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
+					con.setFromid(fromuser.getUserid());
+					con.setFromname(fromuser.getUsername());
+				}
 				content.add(con);
 			}
 			if(news.getNewsstatus() == 3 || news.getNewsstatus() == 4){
 				ContentData<Object> con = new ContentData<Object>();
 				String id = news.getNewscontent();
-				con.setData(rizhiDao.loadByID(id));
+				System.out.println("日志ID"+id);
 				con.setPinglunnum(commDao.CountComments(id, "1"));
-				con.setDatadate(((SaysRizhi)con.getData()).getRizhidate());
-				SaysRizhi sr=(SaysRizhi) con.getData();
-				rizhiDao.initialize(sr.getRizhitype());
-				sr.getRizhitype().setUserid(null);
-				rizhiDao.initialize(sr.getRizhiuserid());
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
+				SaysRizhi rizhi=rizhiDao.getById(id);
+				SaysRizhitype rizhitype = new SaysRizhitype();
+				rizhitype.setTypeid(rizhi.getRizhitype().getTypeid());
+				rizhitype.setTypename(rizhi.getRizhitype().getTypename());
+				rizhitype.setUserid(null);
+				rizhi.setRizhitype(rizhitype);
+				SaysUser user = new SaysUser();
+				user.setUserid(rizhi.getRizhiuserid().getUserid());
+				user.setUsername(rizhi.getRizhiuserid().getUsername());
+				user.setUserimg(rizhi.getRizhiuserid().getUserimg());
+				rizhi.setRizhiuserid(user);
+				con.setData(rizhi);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysRizhi)con.getData()).getRizhidate();
+				con.setDatadate(sdf.format(date));
 				content.add(con);
 			}
 			if(news.getNewsstatus() == 5 || news.getNewsstatus() == 6){
 				ContentData<Object> con = new ContentData<Object>();
 				String id = news.getNewscontent();
-				con.setData(photoDao.loadByID(id));
 				con.setPinglunnum(commDao.CountComments(id, "1"));
-				con.setDatadate(((SaysPhoto)con.getData()).getPhotodate());
-				SaysPhoto sp=(SaysPhoto) con.getData();
-				photoDao.initialize(sp.getAlbumid());
-				sp.getAlbumid().setUserid(null);
-				photoDao.initialize(sp.getUserid());
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
+				SaysPhoto photo = photoDao.getById(id);
+				SaysAlbum album = new SaysAlbum();
+				album.setAlbumid(photo.getAlbumid().getAlbumid());
+				album.setAlbumtitle(photo.getAlbumid().getAlbumtitle());
+				album.setUserid(null);
+				photo.setAlbumid(album);
+				SaysUser user = new SaysUser();
+				user.setUserid(photo.getUserid().getUserid());
+				user.setUsername(photo.getUserid().getUsername());
+				user.setUserimg(photo.getUserid().getUserimg());
+				photo.setUserid(user);
+				con.setData(photo);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysPhoto)con.getData()).getPhotodate();
+				con.setDatadate(sdf.format(date));
 				content.add(con);
 			}
 		}
-		conrtentpage.setDataSum(this.countFriends(userid));
+
 		conrtentpage.setResult(content);
 		System.out.println(content.size());
 		System.out.println(conrtentpage.getDataSum());
+
 		return conrtentpage;
+
+	}
+
+	
+	public Page<ContentData<Object>> findMyNewsByUser(Serializable userid,
+			Page<SaysNews> page) {
+		Page<ContentData<Object>> conrtentpage = new Page<ContentData<Object>>();
+		conrtentpage.setDataSum(newsDao.CountNews(userid));
+		List<SaysNews> list = newsDao.FindNewsByUser(userid,0, Integer.MAX_VALUE);
+		System.out.println(page.getDataSum());
+		
+		//排序
+		Collections.sort(list);
+		
+		//手工分页
+		List<SaysNews>  listnews=new ArrayList<SaysNews>();
+		int start=page.getFirstResult();
+		int end=page.getMaxResults();
+		if(end>conrtentpage.getDataSum()){
+			end=conrtentpage.getDataSum();
+		}
+		System.out.println(start  +"\\\\" +end);
+		for(int i=start;i<=end-1;i++){
+			listnews.add(list.get(i));
+		}
+		
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		
+		List<ContentData<Object>> content= new ArrayList<ContentData<Object>>();
+		for(SaysNews news:listnews){
+			//发表或转发说说
+			if(news.getNewsstatus() == 1 || news.getNewsstatus() == 2)
+			{
+				ContentData<Object> con = new ContentData<Object>();
+				String id = news.getNewscontent();
+				
+				con.setPinglunnum(commDao.CountComments(id,"1"));
+
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
+				SaysShuoshuo shuoshuo =  shouShousDao.getById(id);
+				System.out.println(shuoshuo);
+				SaysUser user=new SaysUser();
+				user.setUserid(shuoshuo.getUserid().getUserid());
+				user.setUsername(shuoshuo.getUserid().getUsername());
+				user.setUserimg(shuoshuo.getUserid().getUserimg());
+				shuoshuo.setUserid(user);
+				con.setData(shuoshuo);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysShuoshuo)con.getData()).getShuodate();
+				con.setDatadate(sdf.format(date));
+				if(news.getNewsstatus() == 2){
+					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
+					con.setRalaycontent(relay.getRelayfor());
+					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
+					con.setFromid(fromuser.getUserid());
+					con.setFromname(fromuser.getUsername());
+				}
+				content.add(con);
+			}
+			if(news.getNewsstatus() == 3 || news.getNewsstatus() == 4){
+				ContentData<Object> con = new ContentData<Object>();
+				String id = news.getNewscontent();
+				System.out.println("日志ID"+id);
+				con.setPinglunnum(commDao.CountComments(id, "1"));
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
+				SaysRizhi rizhi=rizhiDao.getById(id);
+				SaysRizhitype rizhitype = new SaysRizhitype();
+				rizhitype.setTypeid(rizhi.getRizhitype().getTypeid());
+				rizhitype.setTypename(rizhi.getRizhitype().getTypename());
+				rizhitype.setUserid(null);
+				rizhi.setRizhitype(rizhitype);
+				SaysUser user = new SaysUser();
+				user.setUserid(rizhi.getRizhiuserid().getUserid());
+				user.setUsername(rizhi.getRizhiuserid().getUsername());
+				user.setUserimg(rizhi.getRizhiuserid().getUserimg());
+				rizhi.setRizhiuserid(user);
+				con.setData(rizhi);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysRizhi)con.getData()).getRizhidate();
+				con.setDatadate(sdf.format(date));
+				content.add(con);
+			}
+			if(news.getNewsstatus() == 5 || news.getNewsstatus() == 6){
+				ContentData<Object> con = new ContentData<Object>();
+				String id = news.getNewscontent();
+				con.setPinglunnum(commDao.CountComments(id, "1"));
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(id));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(id));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(id));
+				con.setDatatype(news.getNewsstatus());
+				SaysPhoto photo = photoDao.getById(id);
+				SaysAlbum album = new SaysAlbum();
+				album.setAlbumid(photo.getAlbumid().getAlbumid());
+				album.setAlbumtitle(photo.getAlbumid().getAlbumtitle());
+				album.setUserid(null);
+				photo.setAlbumid(album);
+				SaysUser user = new SaysUser();
+				user.setUserid(photo.getUserid().getUserid());
+				user.setUsername(photo.getUserid().getUsername());
+				user.setUserimg(photo.getUserid().getUserimg());
+				photo.setUserid(user);
+				con.setData(photo);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date date = ((SaysPhoto)con.getData()).getPhotodate();
+				con.setDatadate(sdf.format(date));
+				content.add(con);
+			}
+		}
+
+		conrtentpage.setResult(content);
+		System.out.println(content.size());
+		System.out.println(conrtentpage.getDataSum());
+
+		return conrtentpage;
+	}
+	
+
+	@Override
+	public int countByMy(Serializable userid) {
+		return this.newsDao.CountNews(userid);
 	}
 
 

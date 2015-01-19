@@ -43,7 +43,7 @@ public class SaysRelayDaoImplTest
      * Rigourous Test :-)
      */
     public void testApp()
-    {	
+    {	    
         assertTrue( true );
     }
     public void testCountAll(){
