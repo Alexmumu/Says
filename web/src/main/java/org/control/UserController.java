@@ -109,8 +109,8 @@ public class UserController {
 	@RequestMapping("myhome")
 	public String toUserMyHome(Model model ,SaysUser user){
 		Map<String,Object> map=this.commonServiceImpl.findMyCountByUserid(user.getUserid());
+		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid(user.getUserid()).get(0);
 		model.addAttribute("usercount", map);
-		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid((String)user.getUserid()).get(0);
 		model.addAttribute("zyuser",user);
 		return "wodelingtu";
 	}
@@ -119,7 +119,6 @@ public class UserController {
 		
 		return "zhuyedongtai";
 	}
-	
 	
 	@RequestMapping("toManger")
 	public String toManger(Model model,int type){
@@ -132,6 +131,9 @@ public class UserController {
 		session.removeAttribute("myuser");
 		return "user/login";
 	}
+
+
+
 
 
 }

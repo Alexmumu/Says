@@ -22,7 +22,9 @@ ISaysRelayDao {
 	private static final String FINDBYUSERID_HQL="select sr from SaysRelay sr where sr.useridare.userid=? order by sr.relaytime desc";
 	private static final String FINDBYRelayfrom_HQL="select sr from SaysRelay sr where sr.relayfrom=? order by sr.relaytime desc";
 	private static final String FINDBYRelayafter_HQL="select sr from SaysRelay sr where sr.relayafter=? order by sr.relaytime desc";
+
 	private static final String FINDBYUSERIDAndRelayafter_HQL="select sr from SaysRelay sr where sr.userid.userid=? and sr.relayafter=?";
+
 	@Override
 	public void saveSaysRelay(SaysRelay ar) throws DataAccessException {
 		this.save(ar);	

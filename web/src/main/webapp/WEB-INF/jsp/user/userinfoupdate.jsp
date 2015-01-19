@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <div class="am-form-group">
                     <input type="file" name="tximg" id="user-pic">
                     <p class="am-form-help">请选择要上传的文件...</p>
-                    <button type="sublime" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                    <button type="submit" class="am-btn am-btn-primary am-btn-xs">保存</button>
                   </div>
                 </form>
               </div>
@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="am-panel-bd">
            <div class="user-info">
                <h3>安全等级: 一般</h3>
-               <h3 align="center">${msg}</h3>
+               <h3 align="center"></h3>
                
 <%--                	<c:if test="${uplist==null}"> --%>
 <!--               		 <a href="protection/toprotection"><button type="button" class="am-btn am-btn-primary am-btn-block">添加密保</button></a> -->

@@ -44,6 +44,6 @@ public interface ISaysNewsDao extends IBaseDao<SaysNews> {
 	 */
 	public boolean HasNew(Serializable newsid)throws DataAccessException;
 	
-	
+	public SaysNews getNewsIDBynewscontent(Serializable id)throws DataAccessException;
 
 }

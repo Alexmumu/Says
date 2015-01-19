@@ -1,23 +1,41 @@
 package org.service.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.dao.ISaysCommentsDao;
+import org.dao.ISaysNewsDao;
 import org.dao.ISaysPhotoDao;
+import org.dao.ISaysRelayDao;
 import org.entity.SaysAlbum;
+import org.entity.SaysNews;
 import org.entity.SaysPhoto;
 import org.service.AbstractBaseService;
+import org.service.ISaysLikeService;
+import org.service.ISaysNewsService;
 import org.service.ISaysPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.vo.ContentData;
 import org.vo.Page;
 
 @Service
 public class SaysPhotoServiceImpl extends AbstractBaseService implements ISaysPhotoService{
      @Autowired
 	private ISaysPhotoDao photoDao;
- 
-
+     @Autowired
+    private ISaysCommentsDao commDao;
+     
+     @Autowired
+    private ISaysLikeService likeDao;
+     
+     @Autowired
+    private ISaysRelayDao relDao;
+     
+     @Autowired 
+     private ISaysNewsDao newDao;
+     
 	@Override
 	public Serializable addPhotoIntoAlbum(SaysPhoto ph) {
 		 
@@ -37,15 +55,42 @@ public class SaysPhotoServiceImpl extends AbstractBaseService implements ISaysPh
 		return photoDao.countPhotoByAlbum(albumid, photostatus);
 	}
 
+ 
+	public Page<ContentData<Object>> findPhotoByAlbumId(String albumid,Page<SaysPhoto> page) {
+		Page<ContentData<Object>> pagecount=new Page<ContentData<Object>>();
+        page.setDataSum(photoDao.countPhotoByAlbum(albumid, "0"));
+		List<SaysPhoto> list = photoDao.findPhotoByAlbumId(albumid, page.getFirstResult(),page.getMaxResults(), "0");
+		List<ContentData<Object>> content= new ArrayList<ContentData<Object>>();
+		for(SaysPhoto ph:list)
+		{
+			ContentData<Object> conn = new ContentData<Object>();
+			conn.setData(ph);
+			//统计评论
+			conn.setPinglunnum(commDao.CountComments(ph.getPhotoid(), "1"));
+			//统计转发
+			conn.setZhuanfanum(relDao.countByRelayfromSaysRelay(ph.getPhotoid()));
+			//统计点赞
+			conn.setDianzannum(likeDao.countByLikeforSaysLike(ph.getPhotoid()));
+			
+			
+			content.add(conn);
+		}
+		pagecount.setResult(content);
+		return pagecount;
+	}
+
+ 
+
 	@Override
-	public Page<SaysPhoto> findPhotoByAlbumId(SaysPhoto ph,
-		Page<SaysPhoto> page, String photostatus) {
-		page.setDataSum(photoDao.countPhotoByAlbum(ph.getAlbumid().getAlbumid(), photostatus));
-		List<SaysPhoto> list = photoDao.findPhotoByAlbumId(ph.getAlbumid().getAlbumid(), page.getFirstResult(),page.getMaxResults(), photostatus);
-        page.setResult(list);
-		System.out.println(page.getDataSum());
-		System.out.println(page.getPageSum());
-		return page;
+	public void delect(Serializable photoid) {
+		// TODO Auto-generated method stub
+		SaysPhoto ph= photoDao.getPhotoid(photoid);
+		ph.setPhotostatus("0");
+		photoDao.update(ph);
+	    SaysNews sw=newDao.getNewsIDBynewscontent(photoid);
+	    newDao.delete(sw);
+		System.out.println("删除了");
+		 
 	}
 
 

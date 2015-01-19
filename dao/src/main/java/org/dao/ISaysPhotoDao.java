@@ -69,4 +69,19 @@ public interface ISaysPhotoDao extends IBaseDao<SaysPhoto>{
      * @throws DataAccessException
      */
     public SaysPhoto getPhotoByphotoid(Serializable photoid)throws DataAccessException;
+    
+    
+    /**
+     * 删除一个相片（修改状态）
+     * @param photoid
+     * @throws DataAccessException
+     */
+    public void delect(Serializable photoid)throws DataAccessException;
+    /**
+     * 根据ID查找信息
+     * @param photoid
+     * @return SaysPhoto
+     * @throws DataAccessException
+     */
+    public SaysPhoto getPhotoid(Serializable photoid)throws DataAccessException;
 }

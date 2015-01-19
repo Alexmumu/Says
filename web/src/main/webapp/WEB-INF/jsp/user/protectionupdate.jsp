@@ -40,11 +40,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
     <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">回答问题</strong> / 
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">修改密保</strong> / 
       <small>
-      		<c:forEach items="${ user}" var="u">
-      			帐号：${u.username}
-      		</c:forEach>
+<%--       		<c:forEach items="${ user}" var="u"> --%>
+<%--       			帐号：${u.username} --%>
+<%--       		</c:forEach> --%>
       </small></div>
 
     </div>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 
+
 import org.entity.SaysNews;
 import org.vo.ContentData;
 import org.vo.Page;
@@ -16,6 +17,9 @@ public interface ISaysNewsService {
 	 * @return
 	 */
 	public Page<ContentData<Object>> findNewsByUser(Serializable userid,Page<SaysNews> page);
+	
+	
+	public Page<ContentData<Object>> findMyNewsByUser(Serializable userid,Page<SaysNews> page);
 	
 	public Serializable addNews(SaysNews news);
 	

@@ -17,6 +17,7 @@ import java.util.List;
 
 
 
+
 import javax.servlet.http.HttpSession;
 
 import org.entity.SaysProtection;
@@ -129,10 +130,13 @@ public class ProtectionControl {
 		@RequestMapping(value="/protectionupdate")
 		public  String protectionupdate(SaysProtection saysprotection,Model model){
 			
+			String msg = "修改成功！";
 			System.out.println(saysprotection.toString());
 			boolean up = saysprotectionImpl.updateSaysProtections(saysprotection);
 			System.out.println(up);
-			return "user/userinfo";
+			model.addAttribute("msg", msg);
+			return "user/userinfoupdate";
+
 		}
 		
 		
