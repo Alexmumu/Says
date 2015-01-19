@@ -40,6 +40,9 @@ body {
 					<div>
 						<a href="javascript:history.go(-1)"
 							class="am-btn am-btn-default am-round">返回</a>
+							<span class="am-icon-eye am-fr">
+							 	 ${yuedu}人浏览
+							 </span>
 					</div>
 					<div class="am-article-hd" align="center">
 						<h1 class="am-article-title">
@@ -52,16 +55,16 @@ body {
 										<small class="am-article-meta" style="font-size: 14px;">
 											转载自 </small>
 										<small style="color: #236; font-size: 14px;">
-											${rzr.useridare.usernickname}</small>
+											<a href="user/myhome?userid=${rzr.useridare.userid}"target="view_window">${rzr.useridare.usernickname}</a></small>
 									</c:if>
-								</p></span>
+								  </span>
 						</h1>
 						<p class="am-article-meta" style="font-size: 16px">${srz.data.rizhitype.typename}</p>
 					</div>
 
 					<div class="am-article-bd">
 						<div class="am-article-lead">${srz.data.rizhicontent}</div>
-						<p style="float: right; text-align: center; width: 280px;">
+						<p style="float: right; text-align: center;">
 							发表时间：${srz.datadate}</p>
 					</div>
 				</article>

@@ -60,7 +60,7 @@ function tanchuang(url){
 				<c:if test="${page.dataSum==0}" ><tr><td>
 				<c:if test="${uid!=myuser.userid}">您的好友在这个分类下还没有保存日志！</c:if>
 				<c:if test="${uid==myuser.userid}">您在这个分类下还没有保存日志
-				，<a href="rizhi/toaddrizhi">立刻添加一篇，与朋友分享您的生活吧。</a></c:if>
+				，<a href="rizhi/toaddrizhi?userid=${myuser.userid}">立刻添加一篇，与朋友分享您的生活吧。</a></c:if>
 				</td>
 				</tr></c:if>
 				<c:if test="${page.dataSum>0}">
@@ -77,7 +77,7 @@ function tanchuang(url){
 				  </td>
 				  <td>
 				  	   <span> 
-                                 <a href="rizhi/getRizhiid?rizhiid=${rz.rizhiid}">${rz.rizhititle}</a>
+                                 <a href="rizhi/getRizhiid?rizhiid=${rz.rizhiid}&rizhiuserid.userid=${rz.rizhiuserid.userid}">${rz.rizhititle}</a>
 					   </span>
 				  </td>
 				  <td>
@@ -105,22 +105,22 @@ function tanchuang(url){
 				<ul class="am-pagination am-pagination-centered ">
 					<c:if test="${page.pageNo<=1}">
 						<li class="am-pagination am-disabled"><a
-							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo-1}&rizhitype.typeid=${typeid}">&laquo;
+							href="rizhi/${rz}Rizhi?userid=${uid}&pageNo=${page.pageNo-1}&rizhitype.typeid=${typeid}">&laquo;
 								上一页</a>
 					</c:if>
 					<c:if test="${page.pageNo>1}">
 						<li class="am-pagination"><a
-							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo-1}&rizhitype.typeid=${typeid}">&laquo;
+							href="rizhi/${rz}Rizhi?userid=${uid}&pageNo=${page.pageNo-1}&rizhitype.typeid=${typeid}">&laquo;
 								上一页</a>
 					</c:if>
 					<c:if test="${page.pageNo==page.pageSum}">
 						<li class="am-pagination am-disabled"><a
-							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo+1}&rizhitype.typeid=${typeid}">下一页
+							href="rizhi/${rz}Rizhi?userid=${uid}&pageNo=${page.pageNo+1}&rizhitype.typeid=${typeid}">下一页
 								&raquo;</a>
 					</c:if>
 					<c:if test="${page.pageNo!=page.pageSum}">
 						<li class="am-pagination"><a
-							href="rizhi/${rz}Rizhi?userid=U001&pageNo=${page.pageNo+1}&rizhitype.typeid=${typeid}">下一页
+							href="rizhi/${rz}Rizhi?userid=${uid}&pageNo=${page.pageNo+1}&rizhitype.typeid=${typeid}">下一页
 								&raquo;</a>
 					</c:if>
 				</ul>

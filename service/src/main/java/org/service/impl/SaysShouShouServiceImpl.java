@@ -3,8 +3,10 @@ package org.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.dao.ISaysNewsDao;
 import org.dao.ISaysShouShousDao;
 import org.entity.SaysAlbum;
+import org.entity.SaysNews;
 import org.entity.SaysShuoshuo;
 import org.service.AbstractBaseService;
 import org.service.IsaysShouShouService;
@@ -17,7 +19,8 @@ public class SaysShouShouServiceImpl extends AbstractBaseService implements Isay
  
 	@Autowired
 	private ISaysShouShousDao shoushouDao;
-  
+    @Autowired
+	private ISaysNewsDao newsDao;
  
 	@Override
 	public void updateShouShou(SaysShuoshuo ss) {
@@ -33,7 +36,27 @@ public class SaysShouShouServiceImpl extends AbstractBaseService implements Isay
 	@Override
 	public Serializable addShouShou(SaysShuoshuo ss) {
 		// TODO Auto-generated method stub
-		return shoushouDao.addShouShou(ss);
+		Serializable ssid = this.shoushouDao.addShouShou(ss);
+		SaysNews news = new SaysNews();
+		news.setUserid(ss.getUserid());
+		news.setNewsstatus(1);
+		news.setNewscontent((String)ssid);
+		this.newsDao.AddNew(news);
+		return ssid;
+	}
+	
+	public boolean deleteShuoShuo(Serializable shuoid){
+		try {
+			SaysShuoshuo shuoshuo = shoushouDao.getById(shuoid);
+			shuoshuo.setShuostatus(0);
+			shoushouDao.update(shuoshuo);
+			SaysNews news = this.newsDao.getNewsIDBynewscontent(shuoid);
+			this.newsDao.delete(news);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	@Override

@@ -12,6 +12,7 @@ import org.dao.ISaysNewsDao;
 import org.dao.ISaysRelayDao;
 import org.dao.ISaysRizhiDao;
 import org.dao.ISaysRizhitypeDao;
+import org.entity.SaysBrowse;
 import org.entity.SaysNews;
 import org.entity.SaysRelay;
 import org.entity.SaysRizhi;
@@ -41,7 +42,7 @@ public class SaysRizhiServiceImpl implements ISaysRizhiService {
 	private ISaysLikeDao saysLikeDao;
 	@Autowired
 	private	ISaysBrowseDao saysBrowseDao;
-	
+
 	
 	@Override
 	public Serializable addSaysRizhi(SaysRizhi saysrizhi)
@@ -53,9 +54,10 @@ public class SaysRizhiServiceImpl implements ISaysRizhiService {
 		    SaysNews news = new SaysNews();
 			news.setNewscontent((String)a);
 			SaysUser user = new SaysUser();
+			System.out.println(saysrizhi.getRizhiuserid().getUserid());
 			user.setUserid(saysrizhi.getRizhiuserid().getUserid());
 		    news.setUserid(user);
-		    news.setNewsstatus(4);
+		    news.setNewsstatus(3);
 			saysNewsDao.AddNew(news);
 		return a;
 	}
@@ -64,15 +66,16 @@ public class SaysRizhiServiceImpl implements ISaysRizhiService {
 	public ContentData<SaysRizhi> SaysRizhiById(Serializable rizhiid)
 			throws DataAccessException {
 		// TODO Auto-generated method stub
+		//封装一天日志的所有信息
 		ContentData<SaysRizhi> data = new ContentData<SaysRizhi>();
 		System.out.println(rizhiid);
 		SaysRizhi rz=this.saysRizhiDao.SaysRizhiById(rizhiid);
 		saysRizhiDao.initialize(rz.getRizhiuserid().getUserid());
-		saysRizhiDao.initialize(rz.getRizhitype());
-		 
+	    saysRizhiDao.initialize(rz.getRizhitype());
 		data.setPinglunnum(this.saysCommentsDao.CountComments(rz.getRizhiuserid().getUserid(),(String)rizhiid));
 		data.setDianzannum(this.saysLikeDao.countByLikeforSaysLike(rizhiid));
 		data.setZhuanfanum(this.saysRelayDao.countByRelayfromSaysRelay(rizhiid));
+		data.setYuedunum(this.saysBrowseDao.countByBrowseforSaysBrowse(rizhiid));
 		data.setData(rz);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd HH:MM:SS");
 		Date date = rz.getRizhidate();
@@ -102,6 +105,8 @@ public class SaysRizhiServiceImpl implements ISaysRizhiService {
 		// TODO Auto-generated method stub
 		SaysRizhi saysRizhi=this.saysRizhiDao.getById(rizhiid);
 		saysRizhi.setRizhistatus(0);
+		SaysNews news = this.saysNewsDao.getNewsIDBynewscontent(rizhiid);
+		this.saysNewsDao.deleteById(news.getNewsid());
 		System.out.println(saysRizhi.getRizhistatus());
 	    this.saysRizhiDao.update(saysRizhi);;
 

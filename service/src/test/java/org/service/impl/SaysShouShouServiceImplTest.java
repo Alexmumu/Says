@@ -97,4 +97,8 @@ public class SaysShouShouServiceImplTest extends TestCase{
  	assertTrue(istest);
  }
  
+ public void testdeleteShuoShuo(){
+	 assertTrue(ss.deleteShuoShuo("S006"));
+ }
+ 
 }
