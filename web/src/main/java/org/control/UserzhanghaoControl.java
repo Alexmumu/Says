@@ -25,7 +25,7 @@ public class UserzhanghaoControl {
 	@RequestMapping("/touserzhanghao")
 	public String touserzhanghao(){
 		
-		return "userzhanghao";
+		return "user/userzhanghao";
 	}
 	
 	
@@ -41,7 +41,7 @@ public class UserzhanghaoControl {
 			model.addAttribute("user", userinfo);
 			if(userinfo.size()==0||userinfo==null){
 				model.addAttribute("msg", msg);
-				return "userzhanghao";
+				return "user/userzhanghao";
 			}else{
 				System.out.println("执行了问题方法");
 				List<SaysProtection> plist=saysProtectionServiceImpl.findSaysProtectionbyid(userinfo.get(0).getUserid());
@@ -49,14 +49,14 @@ public class UserzhanghaoControl {
 				System.out.println(plist.get(0).getProtectionid());
 				if(plist.size()!=0){
 					model.addAttribute("plist", plist);
-					return "userHuidawenti";
+					return "user/userHuidawenti";
 				}
 			}
 		}catch(RuntimeException e){
 			//e.printStackTrace();
 			msg="您目前没有设置密保！";
 			model.addAttribute("msg", msg);
-			return "userHuidawenti";
+			return "user/userHuidawenti";
 		}
 		return msg;
 	}
@@ -81,7 +81,7 @@ public class UserzhanghaoControl {
 		System.out.println(user);
 		
 		saysUserServiceImpl.updateSaysUserinfo(user);
-		return "login";
+		return "user/login";
 	}
 	
 	

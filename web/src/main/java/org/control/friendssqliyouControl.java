@@ -2,8 +2,10 @@ package org.control;
 
 import java.util.List;
 
+import org.entity.SaysFriends;
 import org.entity.SaysUser;
 import org.service.ISaysFriendsService;
+import org.service.ISaysMsgcenterService;
 import org.service.ISaysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +28,13 @@ public class friendssqliyouControl {
 	public String tomyfriends(String userid,Model model){
 		System.out.println(userid);
 		model.addAttribute("bsquser",saysUserServiceImpl.selectSaysuserbyid(userid).get(0));
-		return "sqliyou";
+		return "user/sqliyou";
 	}
 	
 	
 	//搜索用户
 	@RequestMapping(value="/findfriend")
-	public String findfriend(String username,Page<SaysUser> page,Model model)
+	public String findfriend(String username,String userid,Page<SaysUser> page,Model model)
 	{
 		System.out.println(username+"用户名");
 	
@@ -44,12 +46,25 @@ public class friendssqliyouControl {
 		page= saysUserServiceImpl.mhcxSaysUserinfo(username, p);
 		System.out.println("xy"+page.getResult());
 		model.addAttribute("page",page);
-		return "findfriends";
+		
+		
+		
+		Page<SaysFriends> p2= new Page<SaysFriends>();
+    	p2.setPageNo(1);
+    	p2.setPageSize(7);
+    	
+    	System.out.println("userid2"+userid);
+		Page<SaysFriends> page2 =saysfriendsservice.findbyuseridallFriends(userid, p2);
+		model.addAttribute("page2", page2);
+		System.out.println("page2222"+page2.getDataSum());
+		
+		
+		
+		
+		
+		return "user/findfriends";
 	}
 	
-
-	
-
 	
 	
 }

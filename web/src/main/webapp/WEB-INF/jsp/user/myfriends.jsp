@@ -26,23 +26,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <small>Security question</small>
       </div>
       	
-      <div class="am-fr am-cf">
-      	  <button class="am-btn am-btn-default " ><a href="friends/finduserid?userid=${u.userid}">添加好友</a></button>
-  </div>
+<!--       <div class="am-fr am-cf"> -->
+<%--       	  <button class="am-btn am-btn-default " ><a href="friends/finduserid?userid=${u.userid}">添加好友</a></button> --%>
+<!--   </div> -->
   
-  	<form action="friends/findallfriends" method="post" style="float: right;">
-         		<input type="hidden" name="userid" value="U004">
-         		<input type="submit" class="am-btn am-btn-default " value="我的好友">
-    </form>
+<!--   	<form action="friends/findallfriends" method="post" style="float: right;"> -->
+<!--          		<input type="hidden" name="userid" value="U004"> -->
+<!--          		<input type="submit" class="am-btn am-btn-default " value="我的好友"> -->
+<!--     </form> -->
   
 	</div>
       </div>
 
     <hr>
 
+	<c:if test="${not empty list}">
+      		<p>您还木有好友，去查找哦！</p>
+     </c:if>
     <div class="am-g am-container am-text-centere">
       <ul class="am-avg-sm-2 am-avg-md-5 am-avg-lg-4 am-thumbnails" id="haoyou">
-      
+      	${msg }
             <c:forEach items="${page.result}" var="p">
               <li>
           <div id="hyneirong">

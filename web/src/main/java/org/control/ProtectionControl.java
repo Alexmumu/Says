@@ -43,19 +43,19 @@ public class ProtectionControl {
 	@RequestMapping("/toprotection")
 	public String toprotection(){
 		
-		return "protectionAdd";
+		return "user/protectionAdd";
 	}
 	
 	@RequestMapping("/toprotectionupdate")
 	public String toprotectionupdate(){
 		
-		return "protectionupdate";
+		return "user/protectionupdate";
 	}
 	
 	@RequestMapping("/touserinfo")
 	public String touserinfo(){
 		
-		return "userinfo";
+		return "user/userinfo";
 	}
 	
 	//添加密保
@@ -68,11 +68,11 @@ public class ProtectionControl {
 		System.out.println(sp+"sp");
 		if((boolean) (sp=false)){
 			model.addAttribute("msg", msg);
-			return "userinfo";
+			return "user/toprotectionupdate";
 		}else{
 			msg="您已添加密保,无法再次添加！";
 			model.addAttribute("msg", msg);
-			return "userinfo";
+			return "user/protectionupdate";
 		}
 	}
 
@@ -96,9 +96,9 @@ public class ProtectionControl {
 			System.out.println(uinfo+"用户信息");
 			if(sp==false)
 			{
-				return "login";
+				return "user/login";
 			}else{
-				return "userUpdatepwd";
+				return "user/userUpdatepwd";
 			}
 		}
 		
@@ -112,7 +112,7 @@ public class ProtectionControl {
 			System.out.println(user);
 			
 			saysUserServiceImpl.updateSaysUserinfo(user);
-			return "login";
+			return "user/login";
 		}
 	
 		
@@ -123,7 +123,7 @@ public class ProtectionControl {
 			List<SaysProtection> pulist=saysprotectionImpl.findSaysProtectionbyid(saysprotection.getUserid().getUserid());
 			System.out.println(pulist.toString());
 			model.addAttribute("pulist", pulist);
-			return "protectionupdate";
+			return "user/protectionupdate";
 		}
 		//修改密保问题
 		@RequestMapping(value="/protectionupdate")
@@ -132,7 +132,7 @@ public class ProtectionControl {
 			System.out.println(saysprotection.toString());
 			boolean up = saysprotectionImpl.updateSaysProtections(saysprotection);
 			System.out.println(up);
-			return "userinfo";
+			return "user/userinfo";
 		}
 		
 		

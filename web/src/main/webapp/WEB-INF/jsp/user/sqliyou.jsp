@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"><h1>申请添加${bsquser.username}为好友</h1></strong> / <small>Security question</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"><h1>申请添加"${bsquser.username}""为好友</h1></strong> / <small>Security question</small></div>
 
     </div>
 
@@ -39,11 +39,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <div class="am-g">
     
-	 <form class="am-form am-form-horizontal" onsubmit="return message()" name="d1" action="friends/addfrequest" method="post" >
+	 <form class="am-form am-form-horizontal" onsubmit="return message()" name="d1" action="friends/addfrequest?fruser.userid=${myuser.userid}" method="post" >
 	    <label>申请理由</label>
 	    <input type="text" name="shenqiliyou">
-	    <input type="text" name="fruserare.userid" value="${bsquser.userid}">
-		<input type="text" name="fruser.userid" value="U004">
+	    <input type="hidden" name="fruserare.userid" value="${bsquser.userid}">
+	    <input type="hidden" name="userid.userid" value="${myuser.userid}">
 	    <input type="submit" class="am-btn am-btn-success" value="确定">
 	</form>
     </div>

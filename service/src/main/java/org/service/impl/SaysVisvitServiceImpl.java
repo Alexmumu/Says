@@ -36,48 +36,47 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 		return saysVisitDao.countMyByUserid(fromuserid);
 	}
 
-
-	@Override
-	public void updateVisitIdTime(SaysVisit saysVisit)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
-		this.saysVisitDao.updateVisitIdTime(saysVisit);
-
-	}
-
 	@Override
 	public void deleteVisitId(Serializable visitid) throws DataAccessException {
 		// TODO Auto-generated method stub
-		this.saysVisitDao.deleteVisitId(visitid);
+		this.saysVisitDao.deleteById(visitid);
 	}
+
 	/********
 	 * 处理添加，如果查到访问的好友的新这更新查到的好友访问记录的时间
 	 */
 	@Override
-	public Serializable addSaysVisit(SaysVisit saysVisit) throws DataAccessException {
-		List list=saysVisitDao.findByVisitId(saysVisit.getUserid().getUserid(),saysVisit.getFromuserid().getUserid());
-		 //获取系统最新时间
+	public Serializable addSaysVisit(SaysVisit saysVisit)
+			throws DataAccessException {
+
+		List list = saysVisitDao.findByVisitId(saysVisit.getUserid()
+				.getUserid(), saysVisit.getFromuserid().getUserid());
+		// 获取系统最新时间
 		saysVisit.setVisittime(new Timestamp(new Date().getTime()));
-		 if(list==null||list.size()==0){
-			 System.out.println("进入添加 访客表");
-			 return saysVisitDao.addSaysVisit(saysVisit);
-		 }else{
-			 System.out.println("已有记录 更新中。。。访客表");
-			 saysVisit =(SaysVisit) list.get(0);
-			 this.updateVisitIdTime(saysVisit);
-			 return saysVisit.getVisitid();
-		 }
-		
+		if (list == null || list.size() == 0) {
+			System.out.println("进入添加 访客表");
+			return saysVisitDao.save(saysVisit);
+		} else {
+			System.out.println("已有记录 更新中。。。访客表");
+			saysVisit = (SaysVisit) list.get(0);
+			saysVisitDao.update(saysVisit);
+			return saysVisit.getVisitid();
+		}
 
 	}
 
 	@Override
-	public Page<SaysVisit> findMySaysVisit(SaysVisit data,
-			Page<SaysVisit> page) throws DataAccessException {
+	public Page<SaysVisit> findMySaysVisit(SaysVisit data, Page<SaysVisit> page)
+			throws DataAccessException {
 		// TODO Auto-generated method stub
-		page.setDataSum(saysVisitDao.countMyByUserid(data.getFromuserid().getUserid()));
-		List<SaysVisit> list = saysVisitDao.fandMySaysVisit(data.getFromuserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		page.setDataSum(saysVisitDao.countMyByUserid(data.getFromuserid()
+				.getUserid()));
+
+		List<SaysVisit> list = saysVisitDao.findMySaysVisit(data
+				.getFromuserid().getUserid(), page.getFirstResult(), page
+				.getMaxResults());
 		page.setResult(list);
+
 		return page;
 
 	}
@@ -87,14 +86,14 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 	public Page<SaysVisit> findSaysVisitsUseridByAndPage(SaysVisit data,
 			Page<SaysVisit> page) throws DataAccessException {
 		// TODO Auto-generated method stub
-		page.setDataSum(saysVisitDao.countByUserid(data.getUserid().getUserid()));
-		List<SaysVisit> list = saysVisitDao.fandSaysVisit(data.getUserid().getUserid(),page.getFirstResult(), page.getMaxResults());
+		page.setDataSum(saysVisitDao
+				.countByUserid(data.getUserid().getUserid()));
+
+		List<SaysVisit> list = saysVisitDao.findSaysVisit(data.getUserid()
+				.getUserid(), page.getFirstResult(), page.getMaxResults());
 		page.setResult(list);
-		return page; 
+
+		return page;
 	}
-
-
-
-
 
 }

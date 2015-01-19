@@ -47,15 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <img class="am-img-circle am-img-thumbnail" src="http://amui.qiniudn.com/bw-2014-06-19.jpg?imageView/1/w/900/h/900/q/80" alt="">
               </div>
               <div class="am-u-md-7">
-                <p>你可以使用<a href="">gravatar.com</a>提供的头像或者使用本地上传头像。 </p>
+                <p>你可以登陆后使用本地上传头像。 </p>
                
-                <form class="am-form" action="user/userupdate" method="post">
-                  <div class="am-form-group">
-                    <input type="file" name="userimg" id="user-pic">
-                    <p class="am-form-help">请选择要上传的文件...</p>
-                    <button type="button" class="am-btn am-btn-primary am-btn-xs">保存</button>
-                  </div>
-                </form>
               </div>
             </div>
           </div>
@@ -67,16 +60,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <h3>安全信息</h3> 
                <h3 align="center">${msg}</h3>
                
-               	<c:if test="${msg==null}">
-              		 <a href="protection/toprotection"><button type="button" class="am-btn am-btn-primary am-btn-block">添加密保</button></a>
-             		  <p>安全等级：</p>
-              		<div class="am-progress am-progress-sm">
-                		<div class="am-progress-bar am-progress-bar-success" style="width: 30%"></div>
-           			</div>   			
-           		</c:if>
-           		<c:if test="${msg!=null}">
-           			 <a href="protection/findidprotection?userid.userid=U004"><button type="button" class="am-btn am-btn-primary am-btn-block">修改密保</button></a>
-           		</c:if>
+<%--                	<c:if test="${msg==null}"> --%>
+<!--               		 <a href="protection/toprotection"><button type="button" class="am-btn am-btn-primary am-btn-block">添加密保</button></a> -->
+             		  <p style="color: red;">请登陆后及时添加密保！！！</p>
+<!--               		<div class="am-progress am-progress-sm"> -->
+<!--                 		<div class="am-progress-bar am-progress-bar-success" style="width: 30%"></div> -->
+<!--            			</div>   			 -->
+<%--            		</c:if> --%>
+<%--            		<c:if test="${msg!=null}"> --%>
+<!--            			 <a href="protection/findidprotection?userid.userid=U004"><button type="button" class="am-btn am-btn-primary am-btn-block">修改密保</button></a> -->
+<%--            		</c:if> --%>
             </div>
           </div>
         </div>
@@ -91,7 +84,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		<input type="hidden" name="username" value="${h.username}">
         		<input type="hidden" name="userpassword" value="${h.userpassword}">
         		<input type="hidden" name="userimg" value="${h.userimg}">
-        		<input type="hidden" name="userbirthday" value="${h.userbirthday}">
         		<input type="hidden" name="userregisterday" value="${h.userregisterday}">
         	</c:forEach>
           <div class="am-form-group">
@@ -111,7 +103,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
           </div>
 
-        
+         <div class="am-form-group">
+            <label class="am-u-sm-3 am-form-label">出生年月/ birthday</label>
+            <div class="am-u-sm-9" style="float: left;">
+				<input type="text" name="userbirthday"  >
+				<small>日期格式：如2015-03-29 22:35:55</small>
+            </div>
+          </div>
 
           <div class="am-form-group">
             <label class="am-u-sm-3 am-form-label">所在地/ location</label>

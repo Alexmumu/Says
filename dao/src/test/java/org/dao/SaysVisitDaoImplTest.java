@@ -43,7 +43,7 @@ public class SaysVisitDaoImplTest extends TestCase {
 	  public void testfandMySaysVisit(){
 	    System.out.println("所有我访问的记录");
 		Boolean istest=false;
-		if(saysVisitdao.fandMySaysVisit("U002", 1, 2)!=null){
+		if(saysVisitdao.findMySaysVisit("U002", 1, 2)!=null){
 			istest=true;
 		}
 		assertTrue(istest);
@@ -51,7 +51,7 @@ public class SaysVisitDaoImplTest extends TestCase {
 	    public void testfandSaysVisit(){
 	        System.out.println("所有的访问信息");
 	    	Boolean istest=false;
-	    	if(saysVisitdao.fandSaysVisit("U001", 1, 2)!=null){
+	    	if(saysVisitdao.findSaysVisit("U001", 1, 2)!=null){
 	    		istest=true;
 	    	}
 	    	assertTrue(istest);
@@ -73,31 +73,6 @@ public class SaysVisitDaoImplTest extends TestCase {
 		    assertTrue(istest);
 	      }
 	    
-	      public void testaddsaysRizhitype(){
-		     System.out.println("添加一个访问记录");
-		     SaysVisit v = new SaysVisit();
-		     SaysUser user = new SaysUser();
-		     SaysUser user2 = new SaysUser();
-		     user.setUserid("U001");
-		     user2.setUserid("U004");
-	       	 v.setUserid(user);
-		     v.setFromuserid(user2);;
-		     saysVisitdao.addSaysVisit(v);;
-		     assertTrue(true);
-		}
-	      public void testupdateVisitIdTime(){
-	 	     System.out.println("更新时间");
-	 	     SaysVisit v = new SaysVisit();
-	 	     v.setVisitid("V001");
-	 	     SaysUser user = new SaysUser();
-	 	     SaysUser user2 = new SaysUser();
-	 	     user.setUserid("U001");
-	 	     user2.setUserid("U004");
-	        	 v.setUserid(user);
-	 	     v.setFromuserid(user2);
-	 	     saysVisitdao.updateVisitIdTime(v);
-	 	     assertTrue(true);
-	 	}
 	    public void testfandByVisitId(){
 	    	
 	    	System.out.println("访问的用户ID查询是否有了访问记录");
@@ -107,12 +82,7 @@ public class SaysVisitDaoImplTest extends TestCase {
 		    }
 		    assertTrue(istest);
 	      }
-//      public void testdeleteSaysVisit(){
-//       System.out.println("所有我访问的记录");
-//     
-//	   saysVisitdao.deleteVisitId("2bf1df254adf2bc9014adf2caeab0002");
-//	   assertTrue(true);
-//      }
+
       
       
     

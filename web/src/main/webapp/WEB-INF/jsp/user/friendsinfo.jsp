@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 <c:forEach items="${ufid}" var="uf">
 	<div style="padding-left: 11%;">
-			<p class="am-text-primary am-text-lg">${uf.username}的个人资料</p>
+			<p class="am-text-primary am-text-lg">"${uf.username}"的个人资料</p>
 <%-- 			<c:forEach items="${ hh}" var="h"> --%>
 <%--       			帐号：${h.username} --%>
 <%--       		</c:forEach> --%>
@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
         
         <div align="center">
-          <a href="friends/touserinfo"><button class="am-btn am-btn-default ">返回</button></a></div>
+          <a href="friends/findallfriends?userid=${myuser.userid}"><button class="am-btn am-btn-default ">返回</button></a></div>
       </div>
     </div>
     </c:forEach>

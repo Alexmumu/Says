@@ -37,7 +37,7 @@ public class SaysRizhitypeServiceImpl implements ISaysRizhitypeService {
 		System.out.println("此类型已存在");
 		throw new RuntimeException("此类型已存在");
 		}else{
-			saysRizhitypeDao.updataRizhitype(saysRizhitype);
+			saysRizhitypeDao.update(saysRizhitype);
 		}
 
 	}
@@ -47,6 +47,7 @@ public class SaysRizhitypeServiceImpl implements ISaysRizhitypeService {
 			throws DataAccessException {
 		
 		int i = 0;
+		System.out.println("删除！");
 		List<SaysRizhi> list = this.saysRizhiDao.findRizhitypes(rizhitype.getUserid().getUserid(), rizhitype.getTypeid(),0);
 		
 		for(SaysRizhi srz:list){
@@ -77,10 +78,22 @@ public class SaysRizhitypeServiceImpl implements ISaysRizhitypeService {
 			System.out.println("此类型已存在");
 			throw new RuntimeException("此类型已存在");
 			}else{
-		  return  saysRizhitypeDao.addRizhitype(saysRizhitype);
+				  saysRizhitype.setTypestatus(1);
+		  return  saysRizhitypeDao.save(saysRizhitype);
 		}
 		
 	}
+
+
+	@Override
+	public SaysRizhitype SaysRizhiById(Serializable typeid)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		return this.saysRizhitypeDao.getById(typeid);
+	}
+
+
+	
 
 
 }

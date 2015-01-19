@@ -17,20 +17,8 @@ public interface ISaysRizhitypeDao extends IBaseDao<SaysRizhitype> {
 	 */
 	public List<SaysRizhitype> find(Serializable userid,Serializable typestatus) throws DataAccessException;
 	
-	/**
-	 * 添加一个日志类型
-	 * @param saysRizhitype 日志表的对象
-	 * @throws DataAccessException
-	 */
-	public Serializable addRizhitype(SaysRizhitype saysRizhitype) throws DataAccessException;
-	
-	/**
-	 * 修改日志类型的信息
-	 * @param saysRizhitype 日志表的对象
-	 * @throws DataAccessException
-	 */
-	public void updataRizhitype(SaysRizhitype saysRizhitype) throws DataAccessException;
-	
+
+
 
 	/**
 	 * 根据日志类型的ID查询日志类型的详细信息

@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("myuser")
 @RequestMapping("/user")
-public class UserControl {
+public class UserController {
 
 	@Autowired
 	private ISaysUserService saysUserServiceImpl;
@@ -45,7 +45,7 @@ public class UserControl {
 	@RequestMapping("/toLogin")
 	public String toLogin() {
 		
-		return "login";
+		return "user/login";
 	}
 	
 	/**
@@ -110,12 +110,27 @@ public class UserControl {
 	public String toUserMyHome(Model model ,SaysUser user){
 		Map<String,Object> map=this.commonServiceImpl.findMyCountByUserid(user.getUserid());
 		model.addAttribute("usercount", map);
+		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid((String)user.getUserid()).get(0);
+		model.addAttribute("zyuser",user);
 		return "wodelingtu";
 	}
 	@RequestMapping("zhuyedongtai")
 	public String tozhuyedongtai(){
 		
 		return "zhuyedongtai";
+	}
+	
+	
+	@RequestMapping("toManger")
+	public String toManger(Model model,int type){
+		model.addAttribute("type",type);
+		return "manager";
+	}
+	
+	@RequestMapping("exit")
+	public String exit(HttpSession session){
+		session.removeAttribute("myuser");
+		return "user/login";
 	}
 
 

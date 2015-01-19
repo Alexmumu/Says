@@ -58,6 +58,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
     <div class="am-g">
  <form class="am-form am-form-horizontal" action="protection/protectionupdate" method="post">
+ <c:if test="${empty pulist}">
+ 	<p>您没有设置密保哟!</p>
+ 	<a href="protection/toprotection">添加密保</a>
+ </c:if>
   <c:forEach items="${pulist}" var="pu">
   <div class="am-form-group">
   	<input type="hidden" name="protectionid" value="${pu.protectionid}">
@@ -103,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
    <div class="am-form-group">
     <div class="am-u-sm-10 am-u-sm-offset-2">
-      <button type="submit" class="am-btn am-btn-default">确定</button>
+      <button type="submit" class="am-btn am-btn-default">保持修改</button>
     </div>
   </div>
   <hr>

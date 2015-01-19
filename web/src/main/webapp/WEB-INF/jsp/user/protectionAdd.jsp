@@ -70,9 +70,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <div class="am-g">
  <form action="protection/protectionadd" method="post" class="am-form am-form-horizontal" name="aq">
- 	<c:forEach items="${ uinfo}" var="uf">
-					<input type="text" name="userid.userid" value="U004">
-     </c:forEach>
+ 	
+					<input type="hidden" name="userid.userid" value="${myuser.userid }">
+     
   <div class="am-form-group">
     <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">问题1：</label>
     <div class="am-u-sm-10">

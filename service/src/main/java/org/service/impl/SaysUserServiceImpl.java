@@ -79,7 +79,7 @@ public class SaysUserServiceImpl implements ISaysUserService{
 		    	ur.setUserid((String)s);
 		    	rzt.setUserid(ur);
 		    	rzt.setTypestatus(2);
-		    	Serializable rz=rizhidao.addRizhitype(rzt);
+		    	Serializable rz=rizhidao.save(rzt);
 		     	System.out.println(rz.toString()+"默认日志类型");
 		     	
 		     	return s;
