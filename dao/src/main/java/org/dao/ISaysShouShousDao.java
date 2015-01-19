@@ -49,4 +49,12 @@ public interface ISaysShouShousDao extends IBaseDao<SaysShuoshuo> {
 	 * @throws DataAccessException
 	 */
 	public int countShouShouByUserId(Serializable userid,int shuostatus)throws DataAccessException;
+	
+	/**
+	 * 根据说说ID查询
+	 * @param shouid
+	 * @returnSaysShuoshuo
+	 * @throws DataAccessException
+	 */
+	public SaysShuoshuo fingByID(Serializable shouid)throws DataAccessException;
 }

@@ -49,6 +49,11 @@ public class AlbumControl implements ServletContextAware{
 	@RequestMapping("/listalbum" )
 	public String listAlbum(@RequestParam("userid")String userid, Page<SaysAlbum> page,Model model )
 	{
+		if(page.getPageNo()==null)
+		  {
+			page.setPageNo(1);
+		  }
+		System.out.println("wolaol");
 		SaysUser user =new SaysUser();
 		user.setUserid(userid);
 		SaysAlbum al=new SaysAlbum();
@@ -92,22 +97,22 @@ public class AlbumControl implements ServletContextAware{
 	@RequestMapping("/updateAlbum")
 	public String updateAlbum(SaysAlbum al,@RequestParam("img")MultipartFile file)
 	{
-		System.out.println("快乐修改");
-		System.out.println("相册ID"+al.getAlbumid());
-		System.out.println(al.getAlbumtitle());
-		System.out.println(al.getAlbumremark());
-		System.out.println("开始上传1");
-        SaysUser user=new SaysUser();
-        System.out.println("开始上传2");
-		user.setUserid("U001");
-		System.out.println("开始上传3");
+       System.out.println("tupian"+al.getAlbumtopimg());
+	    SaysUser user=new SaysUser();
+        user.setUserid("U001");
 		al.setUserid(user);
+		al.setAlbumstatus(1);
+		String title=al.getAlbumtitle();
+		al.setAlbumtitle(title);
+		String remark=al.getAlbumremark();
+		al.setAlbumremark(remark);
 		System.out.println("开始上传4");
+	
           // 把临时文件保存到指定的目标中
 		if (!file.isEmpty()) {
 			System.out.println("开始上传5");
 			// 获得文件上传的目标
-			String fileuppath = this.servletContext.getRealPath("/images/albumimg");
+			String fileuppath = this.servletContext.getRealPath("WEB-INF/images/albumimg");
 			// 根据路径创建File对象
 			File uploadFile = new File(fileuppath);
 			if (!uploadFile.exists()) {  // 判断是否存在目录
@@ -121,9 +126,10 @@ public class AlbumControl implements ServletContextAware{
 				 FileCopyUtils.copy(file.getBytes(), out);
 					
 					System.out.println("修改了噢噢噢噢");
-					al.setAlbumtopimg(fileuppath+"/"+ al.getAlbumid()+".jpg"+"");
-					System.out.println("修改中噢噢噢噢");
-					this.albumService.updateAlbum(al);
+					 
+						al.setAlbumtopimg(al.getAlbumid()+".jpg"+"");
+					 System.out.println("修改中噢噢噢噢");
+				    //this.albumService.updateAlbum(al);
 					System.out.println("修改后噢噢噢噢");
 				
 			} catch (FileNotFoundException e) {
@@ -133,8 +139,9 @@ public class AlbumControl implements ServletContextAware{
 			}
 
 		}
+		 this.albumService.updateAlbum(al);
 		
-		return "redirect:listalbum";
+		return "redirect:/album/listalbum?userid="+al.getUserid().getUserid();
  }
 	
 	/**
@@ -161,7 +168,7 @@ public class AlbumControl implements ServletContextAware{
 			}
 			
 			Serializable sli= this.albumService.addAlbum(al);
-			al.setAlbumtopimg(fileuppath+"/"+ sli+".jpg"+"");
+			al.setAlbumtopimg(sli+".jpg"+"");
 			this.albumService.updateAlbum(al);
 			FileOutputStream out;
 			try {
@@ -178,7 +185,7 @@ public class AlbumControl implements ServletContextAware{
 
 		}
 		
-		return "redirect:listalbum";
+		return "redirect:/album/listalbum?userid="+userId;
 		
 	}
 	
@@ -188,12 +195,12 @@ public class AlbumControl implements ServletContextAware{
 	 * @param Ralbumid
 	 */
 	@RequestMapping("delectAlbum")
-	public ModelAndView delectAlbum(String albumid)
+	public String delectAlbum(String albumid)
 	{
 		String userid="U001";
 		System.out.println("删除相册");
 		albumService.delectAlbum(albumid);
-		return  new ModelAndView("redirect:/listalbum？userid="+userid+"&albumstatus="+0);
+		return "redirect:/album/listalbum?userid="+userid;
 	}
 
 	@Override

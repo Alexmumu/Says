@@ -57,4 +57,6 @@ public interface ISaysAlbumDao extends IBaseDao<SaysAlbum>{
 	  * @throws DataAccessException
 	  */
 	 public SaysAlbum findAlbumByalbumid(Serializable albumid)throws DataAccessException;
+	 
+	 
 }

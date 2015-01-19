@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
     <div class="am-form-group">
     <div class="am-u-sm-10 am-u-sm-offset-2">
-      <button type="submit" class="am-btn am-btn-default">确定</button>
+      <button type="submit" class="am-btn am-btn-default" onclick="javascript:parent.location.reload();">确定</button>
        <button type="submit" class="am-btn am-btn-default">取消</button>
     </div>
   </div>
