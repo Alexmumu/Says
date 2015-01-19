@@ -70,10 +70,10 @@ public class SaysFriendsServiceImplTest
 	    public void testaddnewSaysFriends()
 	    {	
 	    	SaysUser us= new SaysUser();
-	    	us.setUserid("U001");
+	    	us.setUserid("U005");
 	    	
 	    	SaysUser u= new SaysUser();
-	    	u.setUserid("U004");
+	    	u.setUserid("U001");
 	    	
 	    	SaysFriends f=new SaysFriends();
 	    	f.setUserid(us);

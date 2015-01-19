@@ -99,9 +99,9 @@
 						class="am-icon-caret-down"></span>
 				</a>
 					<ul class="am-dropdown-content">
-						<li><a href="#"><span class="am-icon-group"></span> 好友管理</a></li>
-						<li><a href="#"><span class="am-icon-cog"></span>个人资料</a></li>
-						<li><a href="#"><span class="am-icon-power-off"></span>
+						<li><a href="user/toManger?type=1" ><span class="am-icon-group"></span> 好友管理</a></li>
+						<li><a href="user/toManger?type=2" ><span class="am-icon-cog"></span>个人资料</a></li>
+						<li><a href="user/exit"><span class="am-icon-power-off"></span>
 								退出</a></li>
 					</ul></li>
 			</ul>

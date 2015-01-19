@@ -84,6 +84,7 @@ public class SaysUserServiceImplTest
 	    	us.setUserarea("武汉");
 
 	    	Serializable as = suser.addnewSaysuser(us);
+	    	System.out.println(as.toString());
 	    	
 	    }
     

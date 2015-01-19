@@ -67,11 +67,8 @@ public class SaysProtectionServiceImplTest
 	    public void testaddnewSaysProtection()
 	    {	
 	    	SaysUser u=new SaysUser();
-	    	u.setUserid("U003");
-	    	List p=ps.findSaysProtectionbyid(u.getUserid());
-	    	System.out.println(p.size());
-	    	if(p.size()==0)
-	    	{
+	    	u.setUserid("U004");
+	    	
 	    		SaysProtection p1=new SaysProtection();
 	    		p1.setQuestionno1("个地方");
 	    		p1.setQuestionno2("同一人");
@@ -82,10 +79,7 @@ public class SaysProtectionServiceImplTest
 	    		p1.setUserid(u);
 	    		
 	    		ps.addnewSaysProtection(p1);
-	    		System.out.println("密保添加成功！");
-	    	}else{
-	    		System.out.println("您已添加密保，无法再次添加！");
-	    	}
+	    
 	    }
 	    
 	    

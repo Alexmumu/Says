@@ -35,7 +35,7 @@ public interface ISaysFriendsService {
 	 * @return
 	 * @throws DataAccessException
 	 */
-	public boolean deletedFriends(String friendid)throws DataAccessException;
+	public void deletedFriends(String friendid)throws DataAccessException;
 	
 	/**
 	 * 4.根据好友id，查询出好友的详细信息

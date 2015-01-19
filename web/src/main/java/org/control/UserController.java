@@ -45,7 +45,7 @@ public class UserController {
 	@RequestMapping("/toLogin")
 	public String toLogin() {
 		
-		return "login";
+		return "user/login";
 	}
 	
 	/**
@@ -119,6 +119,21 @@ public class UserController {
 		
 		return "zhuyedongtai";
 	}
+	
+	@RequestMapping("toManger")
+	public String toManger(Model model,int type){
+		model.addAttribute("type",type);
+		return "manager";
+	}
+	
+	@RequestMapping("exit")
+	public String exit(HttpSession session){
+		session.removeAttribute("myuser");
+		return "user/login";
+	}
+
+
+
 
 
 }

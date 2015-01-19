@@ -46,4 +46,12 @@ public class SaysShouShouDaoImpl extends AbstractBaseDao<SaysShuoshuo> implement
 		    return this.countByHql(FIND_ALL_SHOUSHOU_HQL, new Object[]{userid,shuostatus});
 	}
 
+
+	@Override
+	public SaysShuoshuo fingByID(Serializable shouid)
+			throws DataAccessException {
+		 
+		return this.getById(shouid);
+	}
+
 }

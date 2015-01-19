@@ -6,7 +6,9 @@ import java.util.List;
 
 
 
+
 import org.dao.ISaysProtectionDao;
+import org.entity.SaysFriends;
 import org.entity.SaysProtection;
 import org.entity.SaysUser;
 import org.service.ISaysProtectionService;
@@ -24,22 +26,35 @@ public class SaysProtectionServiceImpl  implements ISaysProtectionService{
 	public List<SaysProtection> findSaysProtectionbyid(String userid)
 			throws DataAccessException {
 
-		return protectionDao.findSaysProtectionbyuserid(userid);
+		List<SaysProtection> pd = protectionDao.findSaysProtectionbyuserid(userid);
+		for(SaysProtection f:pd){
+			protectionDao.initialize(f.getUserid());
+			protectionDao.initialize(f.getQuestionno1());
+			protectionDao.initialize(f.getQuestionno2());
+			protectionDao.initialize(f.getQuestionno3());
+			protectionDao.initialize(f.getAnswerno1());
+			protectionDao.initialize(f.getAnswerno2());
+			protectionDao.initialize(f.getAnswerno3());
+		}
+		return pd;
 	}
 
 	@Override
 	public Serializable addnewSaysProtection(SaysProtection saysprotection)
 			throws DataAccessException {
 			boolean istest=false;
-			if(protectionDao.findSaysProtectionbyuserid(saysprotection.getUserid().getUserid())==null)
+			List<SaysProtection> pp = protectionDao.findSaysProtectionbyuserid(saysprotection.getUserid().getUserid());
+			if(pp.size()==0)
 			{
 				Serializable ap= protectionDao.addSaysProtection(saysprotection);
-				if(ap!=null)
-				{
-					istest=true;
-				}
+				System.out.println("密保添加成功！");
+				istest=true;
+				return istest;
+			}else
+			{
+				System.out.println("您已设置密保无法再次添加！");
+				return istest; 
 			}
-			return istest; 
 	}
 
 	@Override

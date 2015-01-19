@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public class SaysFriendsDaoImpl extends AbstractBaseDao<SaysFriends> implements
 		ISaysFriendsDao {
 
-	private static final String FINDBYUSERID_HQL="select f from SaysFriends f, SaysUser s where f.userid.userid=s.userid and f.userid.userid=?";
+	private static final String FINDBYUSERID_HQL="select f from SaysFriends f  where  f.userid.userid=?";
 	private static final String FINDBYID_HQL="select s from SaysFriends f,SaysUser s where f.userfriendid.userid=s.userid and f.userfriendid.userid=?";
 	private static final String COUNT_HQL="select count(sf) from SaysFriends sf where sf.userid.userid=?";
 
@@ -32,9 +32,8 @@ public class SaysFriendsDaoImpl extends AbstractBaseDao<SaysFriends> implements
 
 
 	@Override
-	public boolean deletedFriendsbyid(String friendid) throws DataAccessException {
+	public void deletedFriendsbyid(String friendid) throws DataAccessException {
 		this.deleteById(friendid);
-		return true;
 	}
 
 
@@ -50,7 +49,7 @@ public class SaysFriendsDaoImpl extends AbstractBaseDao<SaysFriends> implements
 	@Override
 	public int countSaysFriends(Serializable userid) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return this.countByHql(COUNT_HQL, userid);
+		return this.countByHql(FINDBYUSERID_HQL, userid);
 	}
 
 	
