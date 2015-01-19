@@ -11,6 +11,6 @@ public interface ISaysAlbumService {
 	Serializable addAlbum(SaysAlbum al);
 	void updateAlbum(SaysAlbum al);
 	int countByUserid(Serializable userid);
-	void delectAlbum(Serializable albumid);
+	void delectAlbum(Serializable albumid,String userid);
 	SaysAlbum findAlbumByalbumid(Serializable albumid);
 }

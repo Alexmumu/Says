@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <%
 	String path = request.getContextPath();
@@ -32,16 +31,19 @@
 </head>
 <body>
 <div>
-<form class="am-form">
+<form class="am-form" action="shuoshuo/addshuoshuo"
+ method="post" enctype="multipart/form-data">
   <fieldset>
     
     <div class="am-form-group">
-      <label for="doc-ta-1">发表说说</label>
-      <textarea class="" rows="5" id="doc-ta-1"></textarea>
+      <label>发表说说</label>
+      <textarea name="shuocontent1" rows="5" ></textarea>
+       <input type="hidden" name="userid.userid" value="U001">
     </div>
     <div class="am-form-group">
     <div>
-    <input type="file" style="border: 0;">
+  
+    <input type="file" name="shuoimg" style="border: 0;">
     <p class="am-form-help">请选择要上传的图片...</p>
     </div>
     <div style="float: right;"><p><button type="submit" class="am-btn am-btn-secondary">发表</button></p></div>  
@@ -60,7 +62,7 @@
 <!--内容开始-->
 	<div class="am-u-lg-9  ">
 
-         <c:forEach items="${shou.result }" var="s">
+
 		<!-- 说说动态模版 -->
 		<div class="am-g">
 			<!--左边头像-->
@@ -77,8 +79,8 @@
 						<div class="pop-triangle"></div>
 						<!--日志的例子-->
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">  I'm diandian</a>
-							 ${s.data.shuodate } 发表了一篇说说
+							<a class="am-link-muted" href="">  I'm diandian</a> 于
+							 2015-12-12:08:11 发表了一篇说说
 							 <span class="am-icon-eye am-fr">
 							 	 40人浏览
 							 </span>
@@ -92,7 +94,12 @@
 							</h3>
 						</div>
 						<div class="am-g am-text-sm">
-                              ${p.data.shuocontent}
+							现在这个是一篇说说
+							现在这个是一篇说说
+							现在这个是一篇说说
+							现在这个是一篇说说
+							现在这个是一篇说说
+							现在这个是一篇说说
 							<img src="C:\Users\Public\Pictures\Sample Pictures\壁纸.jpg">
 						</div><hr>
 
@@ -111,7 +118,7 @@
 							</div>
 							<div class="am-popup-bd">
 
-								 <iframe src="pinglun.html" name="rightF" width="600px" height="550px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
+								 <iframe src="pinglun.jsp" name="rightF" width="600px" height="550px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
 
 					</div>
 					</div>
@@ -146,7 +153,7 @@
 			</div>
 		</div>
 		<!-- 说说动态模版结束 -->
-</c:forEach>
+
 
 
 

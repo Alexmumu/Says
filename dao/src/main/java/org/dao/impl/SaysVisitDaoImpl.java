@@ -18,10 +18,9 @@ public class SaysVisitDaoImpl extends AbstractBaseDao<SaysVisit> implements
 	private static final String FINDBYUSERID_HQL="select sv from SaysVisit sv where sv.userid.userid=? order by sv.visittime desc";
 	private static final String FINDMYBYUSERID_HQL="select sv from SaysVisit sv where sv.fromuserid.userid=? order by sv.visittime desc";
 	private static final String FINDBYUSERID_FROMUSERID_HQL="select sv from SaysVisit sv where sv.userid.userid=? and sv.fromuserid.userid=? order by sv.visittime desc";
-	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SaysVisit> fandSaysVisit(Serializable userid, int firstResult,
+	public List<SaysVisit> findSaysVisit(Serializable userid, int firstResult,
 			int maxResults) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
@@ -36,7 +35,7 @@ public class SaysVisitDaoImpl extends AbstractBaseDao<SaysVisit> implements
 	
 	
 	@Override
-	public List<SaysVisit> fandMySaysVisit(Serializable fromuserid,
+	public List<SaysVisit> findMySaysVisit(Serializable fromuserid,
 			int firstResult, int maxResults) throws DataAccessException {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unchecked")
@@ -50,33 +49,16 @@ public class SaysVisitDaoImpl extends AbstractBaseDao<SaysVisit> implements
 	}
 
 	
-
-	@Override
-	public Serializable addSaysVisit(SaysVisit saysVisit) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return this.save(saysVisit);
-	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SaysVisit> fandByVisitId(Serializable userid,Serializable fromuserid)
+	public List<SaysVisit> findByVisitId(Serializable userid,Serializable fromuserid)
 			throws DataAccessException {
 		// TODO Auto-generated method stub
 		List<SaysVisit> list = this.findByHql(FINDBYUSERID_FROMUSERID_HQL,userid,fromuserid);
 		return list;
 	}
-	@Override
-	public void updateVisitIdTime(SaysVisit saysVisit)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
-          this.update(saysVisit);
-	}
-	@Override
-	public void deleteVisitId(Serializable visitid)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
-		this.deleteById(visitid);
-	}
+
 
 
 

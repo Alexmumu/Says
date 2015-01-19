@@ -71,6 +71,7 @@ public class Page<T> implements Serializable {
 	 * @return the pageSum
 	 */
 	public Integer getPageSum() {
+
 		int sum= this.getDataSum() % this.getPageSize() == 0 ? this.getDataSum()
 					/ this.getPageSize() : (this.getDataSum() / this.getPageSize()
 					+ 1);

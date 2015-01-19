@@ -1,17 +1,19 @@
 package org.service.impl;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.dao.ISaysCommentsDao;
+import org.dao.ISaysNewsDao;
 import org.dao.ISaysPhotoDao;
 import org.dao.ISaysRelayDao;
 import org.entity.SaysAlbum;
+import org.entity.SaysNews;
 import org.entity.SaysPhoto;
 import org.service.AbstractBaseService;
 import org.service.ISaysLikeService;
+import org.service.ISaysNewsService;
 import org.service.ISaysPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,9 @@ public class SaysPhotoServiceImpl extends AbstractBaseService implements ISaysPh
      
      @Autowired
     private ISaysRelayDao relDao;
+     
+     @Autowired 
+     private ISaysNewsDao newDao;
      
 	@Override
 	public Serializable addPhotoIntoAlbum(SaysPhoto ph) {
@@ -82,6 +87,9 @@ public class SaysPhotoServiceImpl extends AbstractBaseService implements ISaysPh
 		SaysPhoto ph= photoDao.getPhotoid(photoid);
 		ph.setPhotostatus("0");
 		photoDao.update(ph);
+	    SaysNews sw=newDao.getNewsIDBynewscontent(photoid);
+	    newDao.delete(sw);
+		System.out.println("删除了");
 		 
 	}
 

@@ -63,19 +63,23 @@ public class SaysAlbumServiceImpl extends AbstractBaseService implements ISaysAl
 	
 	
 	@Override
-	public void delectAlbum(Serializable albumid) {
- 
+	public void delectAlbum(Serializable albumid,String userid) {
+    System.out.println("hyp"+userid);
 	List<SaysPhoto> list=phptoDao.getPhotoByAlbumId(albumid, "0");
-	SaysAlbum al=new SaysAlbum();
-	al.setAlbumid("albumid");
-	System.out.println(list.size());
+    System.out.println(list.size());
 	if(list!=null)
 	{
+	     SaysAlbum als=	albumDao.getAlbumByuserid(userid);
+	     SaysAlbum al=new SaysAlbum();
+		al.setAlbumid(als.getAlbumid());
 		for(SaysPhoto ph1:list){
 		 ph1.setAlbumid(al);
 		 phptoDao.update(ph1);
 			}
-	   albumDao.delectAlbum(albumid);
+		SaysAlbum al1=albumDao.findAlbumByalbumid(albumid);
+		al1.setAlbumstatus(0);
+		System.out.println("修改状态");
+		  albumDao.update(al1);
 	} 
 		
 	}

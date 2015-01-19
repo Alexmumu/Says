@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.entity.SaysNews;
 import org.entity.SaysUser;
 import org.service.ISaysNewsService;
@@ -23,16 +25,25 @@ public class SaysNewsController {
 	private ISaysNewsService newsService;
 	
 	@RequestMapping("/listNews")
-	public @ResponseBody Map<String,Object> listNews(String id,Page<SaysNews> page){
-		Page<ContentData<Object>> pages=newsService.findNewsByUser((Serializable)id,page );
+	public @ResponseBody Map<String,Object> listNews(HttpSession session,Page<SaysNews> page){
+		System.out.println(page.getPageNo());
+		System.out.println("-----------------");
+		System.out.println(page.getPageSize());
+		SaysUser user = (SaysUser)session.getAttribute("myuser");
+		Page<ContentData<Object>> pages=newsService.findNewsByUser(user.getUserid(),page );
+
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("pageSum",page.getPageSum());
+		map.put("pageSum",pages.getPageSum());
 		map.put("dataSum",pages.getDataSum());
 //		System.out.println(pages.getResult().get(0).getData().getClass());
 		map.put("newslist",pages.getResult());
 					
 		return map;
+	}
+	@RequestMapping("tolistNews")
+	public String tolistNews(){
 		
+		return "haoyoudongtai";
 	}
 	
 	

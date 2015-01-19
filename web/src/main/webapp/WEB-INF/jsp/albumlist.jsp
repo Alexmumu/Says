@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" type="text/css" href="css/amazeui.css">
   <link rel="stylesheet" type="text/css" href="css/album.css">
    <link rel="stylesheet" type="text/css" href="css/laypage.css">
+    <link rel="stylesheet" type="text/css" href="css/appdefault.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/amazeui.js"></script>
   <script src="js/laypage.js"></script>
@@ -32,41 +33,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     })
   
+    
+    function tanchuang(url){
+	//1.获取父窗口的元素 这个元素我方在了top。jsp里面 然后改属性 就是改url地址
+	$('#myframe',window.parent.document).attr('src',url);
+	//2.使用模态窗口的方法 激活弹出
+	$('#my-popup',window.parent.document).modal('open');
+}s
   </script>
 </head>
 
 
-<body>
-<div class="am-panel am-panel-default">
-  <div class="am-panel-hd">相册
-  
-  <a href="javascripg:void(0)" data-am-modal="{target: '#my-album'}" c class=" am-icon-wrench am-fr">创建相册</a>
+<body style="background-color: rgb(237, 237, 239);" >
+<div class="am-g am-animation-slide-left ">
+<div class="am-container">
+<div class="am-panel am-panel-default block">
+
+  <div class="am-panel-hd">${user.usernickname}的相册
+     <c:if test="${user.userid==myuser.userid}">
+     <a href="javascripg:void(0)" onclick="tanchuang('album/toaddalbum')">创建相册</a>
+     </c:if>
+   
   </div>
   
   <div class="am-panel-bd">
   <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  am-avg-md-4 am-avg-lg-5 am-gallery-bordered" data-am-gallery="{  }">
+  am-avg-md-4 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }">
      <c:forEach items="${page.result}" var="a">
    <li>
     <div class="am-gallery-item">
         <img id="img" src="images/albumimg/${a.albumtopimg}"
-        alt="${a.albumremark }" />
+        />
            <div class="bianji" style="position: absolute;  margin-top:-30px;color:#fff;float:right;
           margin-left:130px;width:70px;">
+          <c:if test="${user.userid==myuser.userid}">
                 <c:if test="${a.albumstatus==2 }">
                  <a href="javascripg:void(0)" data-am-modal="{target: '#update-album'}" class="am-icon-edit am-icon-md" style="display: none;"></a>
                  <a href="javascripg:void(0)" class="am-icon-trash am-icon-md" style="display: none;"></a>
                 </c:if>
              
                  <c:if test="${a.albumstatus!=2 }">
-                 <a href="javascripg:void(0)"class="am-icon-edit am-icon-md" 
-                 data-am-modal="{target: '#my-popup2${a.albumid}'}" ></a>
+                 <a href="javascripg:void(0)"onclick="tanchuang('album/getAlbumbyAlbumid?albumid=${a.albumid}')"  class="am-icon-edit am-icon-md" ></a>
                  
                  <a href="album/delectAlbum?albumid=${a.albumid}" 
                  class="am-icon-trash am-icon-md" id="shanchu"></a>
+                 </c:if>
                 </c:if>
           </div>
-        <h3 class="am-gallery-title"><a href="photo/listphoto?albumid=${a.albumid}&pageNo=1">${a.albumtitle}</a></h3>
+        <h3 class="am-gallery-title"><a href="photo/listphoto?albumid=${a.albumid}&userid=${a.userid.userid}">${a.albumtitle}</a></h3>
         <div class="am-gallery-desc">${a.albumdate}</div>
         
     </div>
@@ -122,7 +136,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </div>
   </div>
   </div>
-  
+  </div>
+  </div>
   
   
 

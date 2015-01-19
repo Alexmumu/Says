@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   
       
-      <input type="text" id="doc-ipt-3" value="${album.albumid}" name="albumid">
+      <input type="hidden" id="doc-ipt-3" value="${album.albumid}" name="albumid">
  
     <div class="am-form-group">
     <div class="am-u-sm-10 am-u-sm-offset-2">

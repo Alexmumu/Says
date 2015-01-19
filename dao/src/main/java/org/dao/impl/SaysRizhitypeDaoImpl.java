@@ -23,20 +23,6 @@ public class SaysRizhitypeDaoImpl extends AbstractBaseDao<SaysRizhitype>
 		return this.findByHql(FINDBYUSERID_HQL,userid,typestatus);
 	}
 
-	@Override
-	public Serializable addRizhitype(SaysRizhitype saysRizhitype)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
-		return this.save(saysRizhitype);
-		
-	}
-
-	@Override
-	public void updataRizhitype(SaysRizhitype saysRizhitype)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
-		this.update(saysRizhitype);
-	}
 
 
 	@SuppressWarnings("unchecked")

@@ -42,6 +42,10 @@ public interface ISaysRelayDao extends IBaseDao<SaysRelay>{
 	 * @throws DataAccessException
 	 */
 	public List<SaysRelay> findByUseridSaysRelay(Serializable userid)throws DataAccessException;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> refs/heads/hyp
 	public SaysRelay findByUseridAndRelayafterSaysRelay(Serializable userid, Serializable relayafter)throws DataAccessException;
 }

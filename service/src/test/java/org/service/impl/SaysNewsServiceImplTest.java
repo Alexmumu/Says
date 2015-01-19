@@ -64,9 +64,9 @@ public class SaysNewsServiceImplTest extends TestCase {
     	Page<SaysNews> page = new Page<SaysNews>();
     	page.setPageNo(1);
     	page.setPageSize(999);
-    	if(newsService.findNewsByUser("U001",page) != null){
-    		Page<ContentData<Object>> page2= (newsService.findNewsByUser("U001",page));
-    		for(ContentData cd:page2.getResult()){
+    	if(newsService.findMyNewsByUser("U001",page) != null){
+    		Page<ContentData<Object>> page2= (newsService.findMyNewsByUser("U001",page));
+    		for(ContentData<Object> cd:page2.getResult()){
     			System.out.println(cd.getData());
     		}
     		istest=true;

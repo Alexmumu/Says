@@ -6,9 +6,16 @@
 border-width: 0 1px;
 margin-left: -1px;
 }
+#caidan li a span{
+	padding-top: 13px;
+}
 #caidan li:first-child{
 	border-left: none;
 }
 #caidan li:last-child{
 	border-right: none;
+}
+#jieshaolan p{
+	margin: 5px;
+	padding: 5px;
 }

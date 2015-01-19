@@ -9,13 +9,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.entity.SaysAlbum;
 import org.entity.SaysUser;
 import org.service.ISaysAlbumService;
+import org.service.ISaysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +43,9 @@ public class AlbumControl implements ServletContextAware{
 
 	@Autowired
 	private ISaysAlbumService albumService;
+	
+	@Autowired
+	private ISaysUserService userService;
 	/**
 	 * 分页查询所有相册
 	 * @param userid
@@ -62,16 +69,18 @@ public class AlbumControl implements ServletContextAware{
 		System.out.println("xy"+page.getResult());
 		model.addAttribute("page",page);
 		model.addAttribute("dqyhid", userid);
+	    List user1=userService.selectSaysuserbyid(userid);
+	    System.out.println("用户"+user1);
+		model.addAttribute("user",user1.get(0));
 		return "albumlist";
 		
 	}
 	
 	@RequestMapping("/toaddalbum" )
-	public String toaddalbum(String userid ,Model model)
+	public String toaddalbum(Model model,HttpSession session)
 	{
-		System.out.println("Hello++toaddalbum");
-		String userid1="U001";
-		model.addAttribute("userid", userid1);
+		SaysUser suser=(SaysUser) session.getAttribute("myuser");
+		model.addAttribute("userid", suser.getUserid());
 		return "addalbum";
 	}
 	/**
@@ -95,11 +104,11 @@ public class AlbumControl implements ServletContextAware{
 	 * @param al
 	 */
 	@RequestMapping("/updateAlbum")
-	public String updateAlbum(SaysAlbum al,@RequestParam("img")MultipartFile file)
+	public String updateAlbum(SaysAlbum al,@RequestParam("img")MultipartFile file,HttpSession session)
 	{
-       System.out.println("tupian"+al.getAlbumtopimg());
-	    SaysUser user=new SaysUser();
-        user.setUserid("U001");
+		SaysUser user1=(SaysUser)session.getAttribute("myuser");
+		SaysUser user=new SaysUser();
+        user.setUserid(user1.getUserid());
 		al.setUserid(user);
 		al.setAlbumstatus(1);
 		String title=al.getAlbumtitle();
@@ -111,7 +120,7 @@ public class AlbumControl implements ServletContextAware{
           // 把临时文件保存到指定的目标中
 		if (!file.isEmpty()) {
 			System.out.println("开始上传5");
-			// 获得文件上传的目标
+	        // 获得文件上传的目标
 			String fileuppath = this.servletContext.getRealPath("WEB-INF/images/albumimg");
 			// 根据路径创建File对象
 			File uploadFile = new File(fileuppath);
@@ -121,16 +130,18 @@ public class AlbumControl implements ServletContextAware{
 
 		    FileOutputStream out;
 			try {
+				//获取当前的毫秒数
+				long time = System.currentTimeMillis();
 				out = new FileOutputStream(fileuppath + File.separator
-						+ al.getAlbumid()+".jpg");
+						+time+".jpg");
 				 FileCopyUtils.copy(file.getBytes(), out);
 					
 					System.out.println("修改了噢噢噢噢");
 					 
-						al.setAlbumtopimg(al.getAlbumid()+".jpg"+"");
-					 System.out.println("修改中噢噢噢噢");
-				    //this.albumService.updateAlbum(al);
-					System.out.println("修改后噢噢噢噢");
+						al.setAlbumtopimg(time+".jpg"+"");
+//					 System.out.println("修改中噢噢噢噢");
+//				    this.albumService.updateAlbum(al);
+//					System.out.println("修改后噢噢噢噢");
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -195,11 +206,12 @@ public class AlbumControl implements ServletContextAware{
 	 * @param Ralbumid
 	 */
 	@RequestMapping("delectAlbum")
-	public String delectAlbum(String albumid)
+	public String delectAlbum(String albumid,HttpSession session)
 	{
-		String userid="U001";
+		SaysUser user=(SaysUser)session.getAttribute("myuser");
+		String userid=user.getUserid();
 		System.out.println("删除相册");
-		albumService.delectAlbum(albumid);
+		albumService.delectAlbum(albumid,userid);
 		return "redirect:/album/listalbum?userid="+userid;
 	}
 

@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <input type="file" id="doc-ipt-3" placeholder="选择封面" name="albumtopimg2">
     </div>
   </div>
-  <input type="text" id="doc-ipt-3"  value="${userid}" name="userId">
+  <input type="hidden" id="doc-ipt-3"  value="${userid}" name="userId">
  
     <div class="am-form-group">
     <div class="am-u-sm-10 am-u-sm-offset-2">
