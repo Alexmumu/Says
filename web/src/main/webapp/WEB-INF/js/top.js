@@ -41,5 +41,17 @@ function findXiaoxi(){
 		
 	});
 }
+//通过消息ID修改消息状态
+function updateMsgStatus(id,i){
+	//ajax异步请求
+	$.ajax({
+		url: 'Msgcenter/deleteMsg',
+		type: 'post',
+		data: {id: id}
+	})
+	var num = '#remove'+i;
+	$(num).remove();
+	
+}
 
 

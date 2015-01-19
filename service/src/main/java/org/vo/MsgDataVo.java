@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class MsgDataVo {
 
+	private String msgid;
 	
 	private Object data;
 	
@@ -17,10 +18,20 @@ public class MsgDataVo {
 	
 	private String fromid;
 	
+	private String fromname;
+	
 	private String msgcontent;
 	
 	
 	
+
+	public String getMsgid() {
+		return msgid;
+	}
+
+	public void setMsgid(String msgid) {
+		this.msgid = msgid;
+	}
 
 	public Object getData() {
 		return data;
@@ -77,6 +88,14 @@ public class MsgDataVo {
 
 	public void setMsgcontent(String msgcontent) {
 		this.msgcontent = msgcontent;
+	}
+
+	public String getFromname() {
+		return fromname;
+	}
+
+	public void setFromname(String fromname) {
+		this.fromname = fromname;
 	}
 	
 	

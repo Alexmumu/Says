@@ -112,11 +112,13 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 		//手工分页
 		List<SaysNews>  listnews=new ArrayList<SaysNews>();
 		int start=page.getFirstResult();
-		int end=page.getMaxResults();
+		int end=page.getFirstResult()+page.getMaxResults();
+		System.out.println(page.getFirstResult()+"\\\f"+page.getMaxResults());
 		if(end>conrtentpage.getDataSum()){
 			end=conrtentpage.getDataSum();
 		}
-		System.out.println(start  +"\\\\" +end);
+		
+		System.out.println(start  +"\\\\" +end+"\\"+conrtentpage.getDataSum());
 		for(int i=start;i<=end-1;i++){
 			listnews.add(list.get(i));
 		}
@@ -146,7 +148,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(shuoshuo.getUserid().getUserimg());
 				shuoshuo.setUserid(user);
 				con.setData(shuoshuo);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = ((SaysShuoshuo)con.getData()).getShuodate();
 				con.setDatadate(sdf.format(date));
 				if(news.getNewsstatus() == 2){
@@ -179,7 +181,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(rizhi.getRizhiuserid().getUserimg());
 				rizhi.setRizhiuserid(user);
 				con.setData(rizhi);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = ((SaysRizhi)con.getData()).getRizhidate();
 				con.setDatadate(sdf.format(date));
 				content.add(con);
@@ -204,7 +206,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(photo.getUserid().getUserimg());
 				photo.setUserid(user);
 				con.setData(photo);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = ((SaysPhoto)con.getData()).getPhotodate();
 				con.setDatadate(sdf.format(date));
 				content.add(con);
@@ -224,21 +226,18 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 			Page<SaysNews> page) {
 		Page<ContentData<Object>> conrtentpage = new Page<ContentData<Object>>();
 		conrtentpage.setDataSum(newsDao.CountNews(userid));
-		List<SaysNews> list = newsDao.FindNewsByUser(userid,0, Integer.MAX_VALUE);
+		List<SaysNews> list = newsDao.FindNewsByUser(userid,page.getFirstResult(), page.getMaxResults());
 		System.out.println(page.getDataSum());
-		
+		System.out.println(list);
 		//排序
 		Collections.sort(list);
 		
+		System.out.println("-----------"+list);
+		
 		//手工分页
 		List<SaysNews>  listnews=new ArrayList<SaysNews>();
-		int start=page.getFirstResult();
-		int end=page.getMaxResults();
-		if(end>conrtentpage.getDataSum()){
-			end=conrtentpage.getDataSum();
-		}
-		System.out.println(start  +"\\\\" +end);
-		for(int i=start;i<=end-1;i++){
+
+		for(int i=0;i<=list.size()-1;i++){
 			listnews.add(list.get(i));
 		}
 		
@@ -267,7 +266,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(shuoshuo.getUserid().getUserimg());
 				shuoshuo.setUserid(user);
 				con.setData(shuoshuo);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = ((SaysShuoshuo)con.getData()).getShuodate();
 				con.setDatadate(sdf.format(date));
 				if(news.getNewsstatus() == 2){
@@ -300,7 +299,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(rizhi.getRizhiuserid().getUserimg());
 				rizhi.setRizhiuserid(user);
 				con.setData(rizhi);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = ((SaysRizhi)con.getData()).getRizhidate();
 				con.setDatadate(sdf.format(date));
 				content.add(con);
@@ -325,7 +324,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				user.setUserimg(photo.getUserid().getUserimg());
 				photo.setUserid(user);
 				con.setData(photo);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = ((SaysPhoto)con.getData()).getPhotodate();
 				con.setDatadate(sdf.format(date));
 				content.add(con);

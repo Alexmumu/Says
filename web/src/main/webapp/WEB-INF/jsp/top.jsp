@@ -21,7 +21,7 @@
 <script src="/web/js/top.js"></script>
 
 
-<script type="text/javascript" id="xiaoximb">
+<script type="text/html" id="xiaoximb">
 <h1 class="am-text-center">消息中心</h1>
 <!-- 消息中心的列表折叠开始 -->
 <div class="am-panel-group" id="accordion">
@@ -29,11 +29,22 @@
 	{{#if(d.msglist[i].mctype==1) { }}
 	<div class="am-panel am-panel-default">
 	<div class="am-panel-hd">
-		<p class="am-panel-title"
-			data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
-			好友申请</p>
+		{{#if(d.msglist[i].mcstatus==1) { }}
+			<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+				data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+				好友申请
+				<span id="remove{{i}}" class="am-badge am-badge-warning">
+				<i>1</i></span>
+			</p>
+		{{# } }}
+		{{#if(d.msglist[i].mcstatus==0) { }}
+			<p class="am-panel-title"
+				data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+				好友申请
+			</p>
+		{{# } }}
 	</div>
-	<div id="doc{{i}}" class="am-panel-collapse am-collapse am-in">
+	<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 		<div class="am-panel-bd">
 			<a href="">{{d.msglist[i].data.fruserare.username}}</a>申请与你为好友
 			<hr>
@@ -58,6 +69,234 @@
 		</div>
 	</div>
 </div>
+	{{# } }}
+	<!--说说被评论-->
+	{{#if(d.msglist[i].mctype==2) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								说说被评论
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								说说被评论
+							</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}"  class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">
+									{{d.msglist[i].fromname}}
+								</a> 评论你的说说 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--说说被转发-->
+	{{#if(d.msglist[i].mctype==3) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								说说被转发
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								说说被转发</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 转发你的说说 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--说说被赞-->
+	{{#if(d.msglist[i].mctype==4) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								说说被赞
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								说说被赞</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的说说 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--日志被评论-->
+	{{#if(d.msglist[i].mctype==5) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								日志被评论
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								日志被评论</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 评论了你的日志 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--日志被转发-->
+	{{#if(d.msglist[i].mctype==6) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								日志被转发
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								日志被转发</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 转发了你的日志 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--日志被赞-->
+	{{#if(d.msglist[i].mctype==7) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								日志被赞
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								日志被赞</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的日志 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--相片被评论-->
+	{{#if(d.msglist[i].mctype==8) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								相片被评论
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								相片被评论</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 评论了你的相片 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--相片被转发-->
+	{{#if(d.msglist[i].mctype==9) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}},i')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								相片被转发
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								相片被转发</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 转发了你的相片 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	<!--相片被赞-->
+	{{#if(d.msglist[i].mctype==10) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								相片被赞
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								相片被赞</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的相片 <br />
+								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
 	{{# } }}
 {{# } }}
 </div>

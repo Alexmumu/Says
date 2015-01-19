@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.entity.SaysMsgcenter;
+import org.entity.SaysNews;
 import org.entity.SaysUser;
 import org.service.ICommonService;
 import org.service.ISaysAlbumService;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.vo.Page;
 
 @Controller
 @SessionAttributes("myuser")
@@ -36,6 +38,8 @@ public class UserController {
 	private ISaysMsgcenterService saysMesscenterServiceImpl; 
 	@Autowired
 	private ICommonService commonServiceImpl;
+	@Autowired
+	private ISaysNewsService newsServiceImpl;
 	
 	
 	/**
@@ -115,8 +119,12 @@ public class UserController {
 		return "wodelingtu";
 	}
 	@RequestMapping("zhuyedongtai")
-	public String tozhuyedongtai(){
-		
+	public String tozhuyedongtai(SaysUser user,Model model){
+		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid(user.getUserid()).get(0);
+		model.addAttribute("zhuyeuser",user);
+		Page<SaysNews> page =new Page<SaysNews>();
+		page.setPageNo(1);
+		model.addAttribute("zongyeshu",newsServiceImpl.findMyNewsByUser(user.getUserid(),page ).getPageSum());
 		return "zhuyedongtai";
 	}
 

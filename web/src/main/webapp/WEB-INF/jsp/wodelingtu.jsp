@@ -48,8 +48,8 @@
 			</div>
 			<div class="am-g">
 				<ul class="am-avg-sm-1 am-avg-md-5 am-margin am-padding am-text-center admin-content-list " id='caidan'>
-		      <li><a href="#" class="am-link-muted" ><span class="am-icon-btn am-icon-newspaper-o"></span><br>主页动态<br>${usercount.newscount}条</a></li>
-		      <li><a href="#" class="am-link-muted" ><span class="am-icon-btn am-icon-twitch"></span><br>说说<br>${usercount.shuoshuocount}条</a></li>
+		      <li><a onclick="tiaozhuan('user/zhuyedongtai?userid=${zyuser.userid}')" href="javascript:;" class="am-link-muted" ><span class="am-icon-btn am-icon-newspaper-o"></span><br>主页动态<br>${usercount.newscount}条</a></li>
+		      <li><a onclick="tiaozhuan('Shuoshuo/toshuoshuo?userid=${zyuser.userid}')" href="javascript:;" class="am-link-muted" ><span class="am-icon-btn am-icon-twitch"></span><br>说说<br>${usercount.shuoshuocount}条</a></li>
 		      <li><a onclick="tiaozhuan('rizhi/toRizhi?userid=${zyuser.userid}')" href="javascript:;" class="am-link-muted" ><span class="am-icon-btn am-icon-edit"></span><br>日志<br>${usercount.rizhicount}条</a></li>
 		      <li><a href="#" class="am-link-muted" ><span class="am-icon-btn am-icon-image"></span><br>相册<br>${usercount.rizhicount }条</a></li>
 		      <li><a href="#" class="am-link-muted" ><span class="am-icon-btn am-icon-reorder"></span><br>留言板<br>${usercount.liuyancount }条</a></li>
@@ -60,7 +60,7 @@
 	</div>
 </div>
 <!--主页展示top部分结束-->
-<iframe src="user/zhuyedongtai"  id="mainframe" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;" width="100%">
+<iframe src="user/zhuyedongtai?userid=${zyuser.userid }"  id="mainframe" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;" width="100%">
 		
 </iframe>
 <script type="text/javascript">

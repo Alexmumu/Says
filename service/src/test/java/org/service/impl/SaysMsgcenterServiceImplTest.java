@@ -63,7 +63,7 @@ public class SaysMsgcenterServiceImplTest extends TestCase {
     
     public void testFindNewMsg(){
     	Boolean istest=false;
-    	int a = msgcenterService.findNewMsg("U001");
+    	int a = msgcenterService.findNewMsg("U006");
     	System.out.println("------------a-----------");
     	System.out.println("a="+a);
     	if(a>0){
@@ -79,6 +79,14 @@ public class SaysMsgcenterServiceImplTest extends TestCase {
     	page.setPageNo(1);
     	page.setPageSize(9999);
     	if(msgcenterService.findMsgByUser("U001",page) != null){
+    		istest=true;
+    	}
+    	assertTrue(istest);
+    }
+    
+    public void testdeleteMsg(){
+    	Boolean istest=false;
+    	if(msgcenterService.deleteMsg("2c948a844ae216ea014ae21accd80001")){
     		istest=true;
     	}
     	assertTrue(istest);

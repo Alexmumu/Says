@@ -33,5 +33,12 @@ public class SaysMsgcenterController {
 		
 	}
 	
+	@RequestMapping("/deleteMsg")
+	public @ResponseBody Map<String,Object> deleteMsg(String id){
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("status", msgcenterService.deleteMsg(id));
+		return map;
+	}
+	
 	
 }

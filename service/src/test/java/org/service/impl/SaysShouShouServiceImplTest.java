@@ -8,6 +8,7 @@ import org.service.ISaysPhotoService;
 import org.service.IsaysShouShouService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.vo.ContentData;
 import org.vo.Page;
 
 import junit.framework.Test;
@@ -84,17 +85,19 @@ public class SaysShouShouServiceImplTest extends TestCase{
  {
  	Boolean istest=false;
    SaysShuoshuo ss1=new SaysShuoshuo();
-   ss1.setShuostatus(1);
+   ss1.setShuostatus(0);
    SaysUser user=new SaysUser();
    user.setUserid("U001");
-   ss1.setUserid(user);
     Page<SaysShuoshuo> page=new Page<SaysShuoshuo>();
  	page.setPageNo(1);
- 	page.setPageSize(2);
-    if(ss.findAllShuoShuo(ss1, page, ss1.getShuostatus())!=null){
+ 	page.setPageSize(10);
+    if(ss.findAllShuoShuo(user.getUserid(), page, 0)!=null){
+		Page<ContentData<Object>> page2= (ss.findAllShuoShuo(user.getUserid(), page,0));
+		for(ContentData<Object> cd:page2.getResult()){
+			System.out.println(cd.getData());
  		istest=true;
+		}
  	}
  	assertTrue(istest);
  }
- 
-}
+ }

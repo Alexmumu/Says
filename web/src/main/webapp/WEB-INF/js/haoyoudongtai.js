@@ -2,7 +2,20 @@
 $(function(){
 	wokanguoshui();
 	shuikanguowo();
-	dongtai();
+	laypage({
+	    cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象,
+	    pages: $('#zongyeshu').val(), //总页数
+	    groups: 0, //连续分数数0
+	    prev: false, //不显示上一页
+	    next: '点击查看更多',
+	    skin: 'flow', //设置信息流模式的样式
+	    jump: function(obj){
+	        if(obj.curr === ($('#zongyeshu').val()-1)){
+	            this.next = '没有更多了';
+	        }
+	        dongtai(obj.curr);
+	    }
+	});
 })
 
 //查询我看过谁 访客记录 的ajax请求
@@ -21,9 +34,9 @@ function shuikanguowo(){
 ////////////////////////////////////////////////////////////////////////////////
 
 //查询动态
-function dongtai(){
-	$.getJSON('News/listNews?pageNo=1&pageSize=100',function(json,textStatus){
-		xuanranDongTai(json,'showdongtai','dongtai');
+function dongtai(mypageNo){
+	$.getJSON('News/listNews',{pageNo:mypageNo},function(json,textStatus){
+		xuanranDongTai(json,'dongtai');
 	});
 }
 //访客模版渲染
@@ -43,9 +56,9 @@ function xuanranFk(json,dizhi){
 }
 
 //渲染动态
-function xuanranDongTai(json,address,moban){
+function xuanranDongTai(json,moban){
 	var gettpl = document.getElementById(moban).innerHTML;
 	laytpl(gettpl).render(json, function(html){
-	    document.getElementById(address).innerHTML = html;
+		$('#showdongtai').append(html);
 	});
 }

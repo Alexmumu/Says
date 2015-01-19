@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -14,10 +15,14 @@
 <base href="<%=basePath%>">
 <link rel="stylesheet" type="text/css" href="css/amazeui.css">
 <link rel="stylesheet" type="text/css" href="css/appdefault.css">
+<link rel="stylesheet" type="text/css" href="js/laypage/skin/laypage.css">
+
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.js"></script>
 <script src="js/haoyoudongtai.js"></script>
 <script src="js/laytpl.js"></script>
+<script src="js/laypage/laypage.js"></script>
+
  <style type="text/css">
   		.line-clamp{
 					  overflow : hidden;
@@ -181,17 +186,18 @@
 						<div class="am-g am-text-lg">
 							{{# if(d.newslist[i].datatype===3){ }}
 								<h3 style="margin:0px;padding:0px;">
-								<a class="am-link-muted" href="">
+								<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}">
 								<i class="am-icon-quote-left"></i>{{d.newslist[i].data.rizhititle}}
 								<i class="am-icon-quote-right"></i></a>
 							</h3>
 							{{# } }}
 							{{# if(d.newslist[i].datatype===4){ }}
 							<h3 style="margin:0px;padding:0px;">
-								<a class="am-link-muted" href="">
+						<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}">
 								<strong>「转」</strong>
 								<i class="am-icon-quote-left"></i>{{d.newslist[i].data.rizhititle}}
-								<i class="am-icon-quote-right"></i></a>
+								<i class="am-icon-quote-right"></i>
+						</a>
 							</h3>
 							{{# } }}
 						</div>
@@ -199,7 +205,7 @@
 							<p class="line-clamp">
 									{{d.newslist[i].data.rizhicontent}}
 								</p>
-									<a href="javascript:;" class="am-link-muted"style=" float: right;">
+									<a href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}" class="am-link-muted"style=" float: right;">
 										 查看日志 <i class="am-icon-chevron-circle-right"></i>
 									</a>
 						</div><hr>
@@ -353,8 +359,11 @@
 	<!-- 导入头部文件jsp -->
 	<%@include file="/WEB-INF/jsp/top.jsp"%>
 	<!-- 导入结束 -->
-
-	<!-- 页面的标题开始 -->
+	
+	<input type="hidden" id="myuserid" value="${myuser.userid}">
+	<input type="hidden" id="zongyeshu" value="${zongyeshu }">
+	
+	<!-- 页面的标题开始 --> 
 	<div class="am-g am-animation-slide-top">
 		<div class="am-container">
 			<div class="am-u-lg-12 block">
@@ -371,7 +380,7 @@
 		<div class="am-container">
 			<!-- 左边边栏开始 -->
 			<div class="am-u-lg-9  " id="showdongtai">
-			
+			&nbsp;
 			</div>
 			<!--左边栏结束 -->
 			<!-- -----------------分割线---------------------- -->
@@ -394,6 +403,7 @@
 				</div>
 			</div>
 			<!--右边栏结束-->
+			<div id="page1"></div>
 		</div>
 	</div>
 	<!-- 主页展示核心结束 -->
