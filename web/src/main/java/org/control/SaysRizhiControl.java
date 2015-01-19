@@ -3,13 +3,16 @@ package org.control;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Service.Mode;
 
 import org.dao.impl.SyasPhotoDaoImpl;
+import org.entity.SaysBrowse;
 import org.entity.SaysRelay;
 import org.entity.SaysRizhi;
 import org.entity.SaysRizhitype;
 import org.entity.SaysUser;
+import org.service.ISaysBrowseService;
 import org.service.ISaysRelayService;
 import org.service.ISaysRizhiService;
 import org.service.ISaysRizhitypeService;
@@ -30,7 +33,8 @@ public class SaysRizhiControl {
 	private ISaysRizhitypeService saysRizhitypeService;
 	@Autowired
 	private ISaysRelayService saysRelayService; 
-	
+	@Autowired
+	private ISaysBrowseService saysBrowseService;
 	
 	@RequestMapping("/toRizhi")
 	private String toRizhi(Model model,Page<SaysRizhi> page,SaysUser user){
@@ -119,10 +123,23 @@ public class SaysRizhiControl {
 	}
 	
 	@RequestMapping("/getRizhiid")
-	private String getRizhiid(Model model,	SaysRizhi rz){
+	private String getRizhiid(Model model,	SaysRizhi rz,HttpSession session){
+		SaysUser user=(SaysUser) session.getAttribute("myuser");
 		ContentData<SaysRizhi>  data= saysRizhiService.SaysRizhiById(rz.getRizhiid());
+		//添加一天阅读信息表
+		SaysBrowse saysBrowse = new SaysBrowse();
+		SaysUser rzuserid = new SaysUser();
+		rzuserid.setUserid(rz.getRizhiuserid().getUserid());
+		saysBrowse.setUserid(rzuserid);
+		saysBrowse.setUseridare(user);
+		saysBrowse.setBrowsefor(rz.getRizhiid());
+		this.saysBrowseService.saveSaysBrowse(saysBrowse);
+		//阅读信息表结束
+		
+		
 		//System.out.println(srz.getRizhitype().getTypename());
 		SaysRizhi srz = data.getData();
+		//判断是否转发日志
 		if(srz.getRizhinature()==1){
 			System.out.println(srz.getRizhiid());
 			System.out.println(srz.getRizhiuserid().getUserid());
@@ -132,6 +149,7 @@ public class SaysRizhiControl {
 		}
 		model.addAttribute("uid",data.getData().getRizhiuserid().getUserid());
 		model.addAttribute("srz",data);
+		model.addAttribute("yuedu",this.saysBrowseService.countByBrowseforSaysBrowse(rz.getRizhiid()));
 		return "rizhi/rizhibyid";
 		
 	}

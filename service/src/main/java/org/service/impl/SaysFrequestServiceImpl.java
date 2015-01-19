@@ -21,26 +21,36 @@ public class SaysFrequestServiceImpl implements ISaysFrequestService{
 	@Autowired
 	private ISaysFrequestDao frequestDao;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Serializable addnewSaysFrequest(SaysFrequest saysfrequest)
 			throws DataAccessException {
 		
-		Boolean istest=false;
+		List<SaysFrequest> sp=frequestDao.selectbyfruerandfruserare(saysfrequest.getFruser().getUserid(), saysfrequest.getFruserare().getUserid());
 		
-		List sp=frequestDao.selectbyfruerandfruserare(saysfrequest.getFruser().getUserid(), saysfrequest.getFruserare().getUserid());
+		for(SaysFrequest f:sp){
+			frequestDao.initialize(f.getFrid());
+			frequestDao.initialize(f.getFruser());
+			frequestDao.initialize(f.getFruserare());
+			
+		}
 		
 		if(sp.size()!=0){
-			System.out.println("该申请记录已存在！");
+			System.out.println("该申请记录已存在！");	
+			return null;
+			
 		}else
 		{
 			Serializable f=frequestDao.addSaysFrequest(saysfrequest);
 			if(f!=null)
 			{
-				System.out.println("申请记录添加成功！");
-				istest=true;
-			}
+				System.out.println("申请记录添加成功！");	
+				
+			}	
+			return  f;
 		}
-		return istest;
+		
+		
 	}
 
 	@Override

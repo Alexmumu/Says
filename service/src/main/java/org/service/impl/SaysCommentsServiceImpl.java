@@ -64,4 +64,5 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 		return this.commentsDao.FindCommentsNopage(commentsforid, userid, useridare);
 		
 	}
+
 }

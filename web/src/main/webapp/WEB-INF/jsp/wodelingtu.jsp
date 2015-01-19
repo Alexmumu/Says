@@ -49,10 +49,12 @@
 			<div class="am-g">
 				<ul class="am-avg-sm-1 am-avg-md-5 am-margin am-padding am-text-center admin-content-list " id='caidan'>
 		      <li><a href="#" class="am-link-muted" ><span class="am-icon-btn am-icon-newspaper-o"></span><br>主页动态<br>${usercount.newscount}条</a></li>
-		      <li><a href="#" class="am-link-muted" ><span class="am-icon-btn am-icon-twitch"></span><br>说说<br>${usercount.shuoshuocount}条</a></li>
+		      <li><a onclick="tiaozhuan('shuoshuo/toshuoshuo?userid=${zyuser.userid}')" href="javascript:;" ><span class="am-icon-btn am-icon-twitch"></span><br>说说<br>${usercount.shuoshuocount}条</a></li>
 		      <li><a onclick="tiaozhuan('rizhi/toRizhi?userid=${zyuser.userid}')" href="javascript:;" class="am-link-muted" ><span class="am-icon-btn am-icon-edit"></span><br>日志<br>${usercount.rizhicount}条</a></li>
-		      <li><a href="#" class="am-link-muted" ><span class="am-icon-btn am-icon-image"></span><br>相册<br>${usercount.rizhicount }条</a></li>
+
+		      <li><a onclick="tiaozhuan('album/listalbum?userid=${zyuser.userid}')" href="javascript:;"  class="am-link-muted" ><span class="am-icon-btn am-icon-image"></span><br>相册<br>${usercount.rizhicount }条</a></li>
 		      <li><a onclick="tiaozhuan('Leavword/toLeavword?userid=${zyuser.userid}')" href="javascript:;" class="am-link-muted" ><span class="am-icon-btn am-icon-reorder"></span><br>留言板<br>${usercount.liuyancount }条</a></li>
+
   		 </ul>
 			</div>				
 		</div>

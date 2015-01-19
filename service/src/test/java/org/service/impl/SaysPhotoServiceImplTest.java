@@ -85,21 +85,21 @@ public class SaysPhotoServiceImplTest extends TestCase{
 //    	 assertTrue(istest);
 //    }
     
-    public void testfindPhotoByAlbumId()
-    {
-    	Boolean istest=false;
-    	SaysAlbum al1=new SaysAlbum();
-    	al1.setAlbumid("A001");
-        Page<SaysPhoto> page=new Page<SaysPhoto>();
-    	page.setPageNo(1);
-    	page.setPageSize(2);
-        SaysPhoto ph1=new SaysPhoto();
-        ph1.setAlbumid(al1);
-        ph1.setPhotostatus("1");
-    	if(ph.findPhotoByAlbumId(ph1, page, ph1.getPhotostatus())!=null){
-    		istest=true;
-    	}
-    	assertTrue(istest);
-    }
+//    public void testfindPhotoByAlbumId()
+//    {
+//    	Boolean istest=false;
+//    	SaysAlbum al1=new SaysAlbum();
+//    	al1.setAlbumid("A001");
+//        Page<SaysPhoto> page=new Page<SaysPhoto>();
+//    	page.setPageNo(1);
+//    	page.setPageSize(2);
+//        SaysPhoto ph1=new SaysPhoto();
+//        ph1.setAlbumid(al1);
+//        ph1.setPhotostatus("0");
+//    	if(ph.findPhotoByAlbumId(ph1, page, ph1.getPhotostatus())!=null){
+//    		istest=true;
+//    	}
+//    	assertTrue(istest);
+//    }
 
 }

@@ -50,13 +50,13 @@
   </fieldset>
    
       <div class="am-form-group">
-       
+       <input type="hidden" name="rizhiuserid.userid" value="${myuser.userid}">
       <label for="doc-select-1">日志类型:</label>
       <select id="doc-select-1" name="rizhitype.typeid">
       <c:forEach items="${type}" var="t">
       <c:if test="${t.typestatus==2}">
         <option  selected="selected" value="${t.typeid}">${t.typename}</option>
-         <input type="hidden" name="rizhiuserid.userid" value="${myuser.userid}">
+         
       </c:if>
        <c:if test="${t.typestatus==1}">
        <option value="${t.typeid}">${t.typename}</option>

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public class SaysProtectionDaoImpl extends AbstractBaseDao<SaysProtection> implements
 		ISaysProtectionDao{
 
-	private static final String FINDBYID_HQL="select p from SaysProtection p,SaysUser s where p.userid.userid=s.userid and p.userid.userid=?";
+	private static final String FINDBYID_HQL="select p from SaysProtection p where p.userid.userid=?";
 
 	@SuppressWarnings("unchecked")
 	@Override

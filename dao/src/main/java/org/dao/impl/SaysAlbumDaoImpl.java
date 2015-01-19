@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SaysAlbumDaoImpl extends AbstractBaseDao<SaysAlbum> implements
 		ISaysAlbumDao {
-	private static final String FINDBYUSERID_HQL="select al from SaysAlbum al where al.userid.userid=? and albumstatus!=?  order by albumdate desc";
+	private static final String FINDBYUSERID_HQL="select al from SaysAlbum al where al.userid.userid=? and al.albumstatus!=?  order by albumdate asc";
+	
+	private static final String GETBYALBUM_HQL="select al from SaysAlbum al where al.userid.userid=? and al.albumstatus=2";
 	@SuppressWarnings("unchecked")
 	
 	public List<SaysAlbum> findByUserId(Serializable userid, int firstResult,
@@ -41,6 +43,15 @@ public class SaysAlbumDaoImpl extends AbstractBaseDao<SaysAlbum> implements
 			throws DataAccessException {
 		 
 		return this.getById(albumid);
+	}
+
+	@Override
+	public SaysAlbum getAlbumByuserid(Serializable userid)
+			throws DataAccessException {
+		 
+		List<SaysAlbum> list=this.findByHql(GETBYALBUM_HQL,userid);
+		SaysAlbum al=list.get(0);
+		return al; 
 	}
 	
 

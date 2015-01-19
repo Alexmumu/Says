@@ -16,6 +16,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/amazeui.js"></script>
   <script src="js/login.js"></script>
   <title>登录页面</title>
+ <script type="text/javascript">
+	 function message()
+	 {
+		 var uname = document.d1.username.value;
+		 var upwd = document.d1.userpassword.value;
+			if(uname.length==0){
+				alert("输入账号不能为空");
+				return false;
+			}
+			if(upwd.length==0){
+				alert("输入密码不能为空");
+				return false;
+			} 
+	 }
+	 
+	 function message2()
+	 {
+		 var uname = document.d2.username.value;
+		 var upwd = document.d2.userpassword.value;
+			if(uname.length==0){
+				alert("输入账号不能为空");
+				return false;
+			}
+			if(upwd.length==0){
+				alert("输入密码不能为空");
+				return false;
+			} 
+	 }
+</script> 
+  
 </head>
 <body style="height:100%; background-color:#f1f5f8;" >
 	<!-- 登录失败报错弹窗开始 -->
@@ -32,6 +62,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 <!-- 登录失败报错结束 -->
+
+  <!--忘记密码弹出框开始-->
+  <div class="am-popup" id="my-popup" style="display: none;">
+    <div class="am-popup-inner">
+      	<div class="am-popup-hd">
+      	  <h4 class="am-popup-title">输入窗口</h4>
+        <span data-am-modal-close="关闭" class="am-close">关闭</span>
+      	</div>
+      	<div class="am-popup-bd">
+         	<iframe src="userzh/touserzhanghao" name="rightF" width="100%" height="620px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
+  		</div>
+  	</div>
+  </div>
+<!--忘记密码弹出框结束-->
 	
   <div class="header" style="text-align:center;background: url(images/body_1.png);color:#FFF;min-height:220px;box-shadow: 0 2px 3px rgba(0,0,0,0.3);">
     <div class="am-g">
@@ -59,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div data-tab-panel-0 class="am-tab-panel am-active">
             <form id="dengluform" class="am-form" method="post">
               <fieldset style="margin-bottom: 0px;">
-                <legend>用户登录</legend>
+                <legend>用户登录</legend> ${msg}
                 <div class="am-form-group">
                   <label >帐号：</label>
                   <input type="text" name="username"  placeholder="帐号" />
@@ -73,20 +117,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </form>
               <div >
                 <button class="am-btn am-btn-default" id="dengluok">登录</button>
-                 <input type="button" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr"></div>
+                 <input type="button" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr" data-am-modal="{target: '#my-popup'}"></div>
             	</div>
-            <div data-tab-panel-1 class="am-tab-panel">
-              <form action="" class="am-form" data-am-validator>
+           <div data-tab-panel-1 class="am-tab-panel">
+              <form action="user/useradd" method="post" onsubmit="return message2()" class="am-form" data-am-validator name="d2">
                 <fieldset>
                   <legend>用户注册</legend>
+                  
                   <div class="am-form-group">
                     <label for="doc-vld-name-2">帐号：</label>
-                    <input type="text" id="doc-vld-name-2" minlength="3" placeholder="输入注册帐号（至少 3 个字符）" required/>
+                    <input type="text" id="doc-vld-name-2" name="username" placeholder="输入注册帐号"/>
                   </div>
 
                   <div class="am-form-group">
                     <label for="doc-vld-email-2">密码：</label>
-                    <input type="password"  placeholder="输入注册密码" required/>
+                    <input type="password"  placeholder="输入注册密码" name="userpassword" />
                   </div>
                   <button class="am-btn am-btn-default" type="submit">注册</button>
                 </fieldset>

@@ -51,13 +51,27 @@ public class ContentData<T> implements Serializable {
 	 * 转发内容
 	 */
 	private String ralaycontent;
+	
 	/**
-	 * 来源用户
+	 * 转发时间
+	 * @return
 	 */
+	private Timestamp ralaydate;
+	
+	/**
+	 * 来源用户ID
+	 * @return
+	 */
+	
 	private String fromid;
 	
+	/**
+	 * 来源用户
+	 * @return
+	 */
 	private String fromname;
-
+	
+	
 	public T getData() {
 		return data;
 	}
@@ -113,6 +127,12 @@ public class ContentData<T> implements Serializable {
 	public void setDatadate(String datadate) {
 		this.datadate = datadate;
 	}
+	public Timestamp getRalaydate() {
+		return ralaydate;
+	}
+	public void setRalaydate(Timestamp ralaydate) {
+		this.ralaydate = ralaydate;
+	}
 
 	public String getRalaycontent() {
 		return ralaycontent;
@@ -137,8 +157,6 @@ public class ContentData<T> implements Serializable {
 	public void setFromname(String fromname) {
 		this.fromname = fromname;
 	}
-
-
 	
 	
 

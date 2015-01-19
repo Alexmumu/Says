@@ -19,4 +19,6 @@ public interface ISaysCommentsService {
 	List<SaysComments> FindCommentsNopage(Serializable commentsforid,
 			Serializable userid, Serializable useridare);
 	
+	
+	
 }
