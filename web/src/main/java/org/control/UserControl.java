@@ -33,6 +33,7 @@ public class UserControl {
 		String msg="shibai";
 		try{
 			List userlist=saysUserServiceImpl.loginuser(user.getUsername(),user.getUserpassword());
+			System.out.println(userlist.size()+"ssssssssssd");
 			msg="chenggong";
 
 		}catch(RuntimeException e){

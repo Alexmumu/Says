@@ -55,13 +55,13 @@ public class SaysUserwordDaoImplTest
 //    	saysUserwordDao.saveSaysUserword(suw);
 //    		istest=true;
     //	saysUserwordDao.deleteById("9b92e2c64ad32a36014ad32a4af30000");
-    	SaysUserword us=new SaysUserword();
-    	us.setUserwordid("UW01");
-    	us.setUserwordcontent("sdsdas");
-    	SaysUser u = new SaysUser();
-    	u.setUserid("U001");
-    	us.setUserid(u);
-    	saysUserwordDao.updateSaysUserword(us);
+//    	SaysUserword us=new SaysUserword();
+//    	us.setUserwordid("UW01");
+//    	us.setUserwordcontent("sdsdas");
+//    	SaysUser u = new SaysUser();
+//    	u.setUserid("U001");
+//    	us.setUserid(u);
+//    	saysUserwordDao.updateSaysUserword(us);
     	assertTrue(true);
     }
 }

@@ -34,7 +34,11 @@ public interface ISaysRelayDao extends IBaseDao<SaysRelay>{
 	public int countByUseridSaysRelay(Serializable userid)throws DataAccessException;
 	public int countByRelayfromSaysRelay(Serializable relayfrom)throws DataAccessException;
 	public int countByRelayafterSaysRelay(Serializable relayafter)throws DataAccessException;
-	
+	public int countByRelayFromAndUseridAndUseridareSaysRelay(Serializable relayfrom,Serializable userid,Serializable useridare)throws DataAccessException;
+	public int countByRelayFromAndUseridareSaysRelay(Serializable relayfrom,Serializable useridare)throws DataAccessException;
+	public List<SaysRelay> FindSaysRelayByPage(Serializable relayfrom, int firstResult,
+			int maxResults )throws DataAccessException;
+	public List<SaysRelay> findByRelayfromSaysRelay(Serializable relayfrom)throws DataAccessException;
 	/**
 	 * 查询所属用户被访问的用户
 	 * @param userid

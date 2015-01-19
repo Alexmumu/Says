@@ -35,7 +35,6 @@ public class SaysLikeControl {
 		model.addAttribute("Likecount", aa);
 		return "rizhi/rizhineirong";
 	}
-	
 	@RequestMapping("/clickReturnDianZanNum")
 	public @ResponseBody Map<String,Object> clickReturnDianZanNum(SaysLike sl,Model model){
 		System.out.println(sl.getUserid().getUserid());

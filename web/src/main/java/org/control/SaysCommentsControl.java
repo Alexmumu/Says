@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.dao.ISaysCommentsDao;
 import org.entity.SaysComments;
 import org.entity.SaysUser;
 import org.service.ISaysCommentsService;
@@ -19,36 +20,52 @@ import org.vo.Page;
 @RequestMapping("/Comments")
 public class SaysCommentsControl {
 	@Autowired
+	private ISaysCommentsDao saysCommentsDaoImpl;
+	@Autowired
 	private ISaysCommentsService saysCommentsServiceImpl;
 	@RequestMapping("/toComments")
 	public String toComments(SaysComments cs,Model model,Page<SaysComments> page){
-		page=this.saysCommentsServiceImpl.findComments((String)cs.getCommentid(), page,"0");
-		model.addAttribute("page", page);
-		return "pinlun/pinlun";
-	}
-	
-	@RequestMapping("/toAddComments")
-	public @ResponseBody Map<String,Object> toAddComments(SaysComments cs,Model model){
-		System.out.println(cs.getCommentcontent());
-		System.out.println(cs.getUserid().getUserid());
-		System.out.println(cs.getUseridare().getUserid());
-		System.out.println(cs.getCommentsforid());
-		cs.setCommentstatus("1");
-		saysCommentsServiceImpl.addComments(cs);
-		cs.setSaysreply(null);
-		List<SaysComments> list=saysCommentsServiceImpl.FindCommentsNopage(cs.getCommentsforid(), cs.getUserid().getUserid(), cs.getUseridare().getUserid());	
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("pinlunlist", list);
-		return map;
 		
+			System.out.println(page.getPageNo());
+			page.setPageSize(4);
+			Page page1=saysCommentsServiceImpl.findComments("S001", page, "1");
+			model.addAttribute("page1", page1);
+		
+		return "pinlun/pinlunneirong";
+	}
+
+	@RequestMapping("/toCommentsaa")
+	public String toCommentsaa(SaysComments cs,Model model,Page<SaysComments> page){
+		cs.setCommentsforid("S001");
+		int i=saysCommentsDaoImpl.CountComments(cs.getCommentsforid(),"1");
+		System.out.println("iiiiii"+i);
+		page.setPageSize(4);
+		page.setDataSum(i);
+		System.out.println("aassdfff"+page.getPageSum());
+		model.addAttribute("pageSum", page.getPageSum());
+		return "pinlun/pinlun";
 	}
 	
 	@RequestMapping("/deleteComment")
 	public String deleteComment(SaysComments cs,Model model){
-		System.out.println(cs.getCommentid());
+		System.out.println("dddddddddddssssssssssss"+cs.getCommentid());
+		SaysComments cs2=saysCommentsDaoImpl.getById(cs.getCommentid());
+		cs2.setCommentstatus("0");
+		saysCommentsDaoImpl.update(cs2);
 		
-		saysCommentsServiceImpl.deleteComments(cs);
-		return null;
+		System.out.println(cs2.getCommentcontent());
+		return "redirect:/Comments/toCommentsaa";
+	}
+	@RequestMapping("/addComments")
+	public String addComments(SaysComments cs,Model model){
+		System.out.println("99999666666666"+cs.getUserid().getUserid());
+		System.out.println("sssssaaaa"+cs.getUseridare().getUserid());
+		System.out.println("fsdsad"+cs.getCommentsforid());
+		System.out.println("fsdsssaaaad"+cs.getCommentcontent());
+		cs.setCommentstatus("1");
+		
+		saysCommentsDaoImpl.save(cs);
+		return "redirect:/Comments/toCommentsaa";
 	}
 	
 }

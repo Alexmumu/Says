@@ -14,128 +14,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>Insert title here</title>
  <base href="<%=basePath%>">
 	<link rel="stylesheet" type="text/css" href="css/amazeui.css">
+	<link rel="stylesheet" type="text/css" href="css/laypage/skin/laypage.css">
 	<script src="js/jquery.min.js"></script>
   	<script src="js/amazeui.js"></script>
+  	<script src="css/laypage/laypage.js"></script>
+  
   	<script type="text/javascript">
   	$(function(){
-  		$("#pllist").click(function(){
-  			$.post(
-  	  				"Comments/toAddComments",
-  	  				{
-  	  	  				'userid.userid':'U001',
-  	  	  				'useridare.userid':'U002',
-  	  	  				'commentsforid':'S001',
-  	  	  				'commentcontent':$("#commentcontent").val(),
-  	  	  				},
-  	  				function(data){
-  	  	  			  var content = "<table border='1' width='100%'>";
-						content += "<tbody>";
-  	  	  				$.each(data.pinlunlist,function(i,c){
-							content += "<tr>";
-							content += "<td style='font-size: 14px;'>"+c.userid.userimg + "</td>";	
-							content += "<td style='font-size: 14px;'>"+c.commentcontent + "</td>";		
-							content += "<td style='font-size: 14px;'>评论于"+c.commentdate + "</td>";		
-							content +="<td><a  style='  background-color:A2A2A2; font-size:14px; color:blue;  float:right;' class='am-close am-close-alt am-close-spin'>x</a></td>";
-							content += "</tr>";											
-						});
-  	  	  			content += "</tbody></table>";
-						$("#pinlunlist").html(content);
-  	  				}	
-  	  			);	
-  		})		
-  	})
+  		//alert($("#pageSum").val());
+  			laypage({
+		    cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象,
+		    pages:  $("#pageSum").val(), //总页数
+		    skin: '#AF0000', //加载内置皮肤，也可以直接赋值16进制颜色值，如:#c00
+		    groups: 5, //连续显示分页数
+		    jump: function(e){
+		    	//alert(e.curr);
+		    	$("#pageNotb").val(e.curr);
+		    	$("#pinlunframe").attr("src","Comments/toComments?"+$("#myform").serialize()+""); 	
+				   
+		    }
+		});
+  	});
   	</script>
+  	
+  	<style type="text/css">
+  	li{ list-style-type:none}
+  	</style>
+  	
 </head>
 <body>
 <div class="am-g" style="background: #fafafa; border:1px dashed #ededef;">
 
 		<!--评论框-->
-							<div class="am-g">
-							     <div class="am-u-lg-12">
-							     	<textarea style="width:100%" name="commentcontent" id="commentcontent"></textarea>
-							     </div>
-							     </div>
-
-							     <div class="am-g">
-							     	 <div class="am-u-lg-12 ">
-							     	 <button type="button" id="pllist" class="am-btn am-btn-default am-fr" >确定</button>
-							     	</div>
-							     </div>
-								 
+						
 
 <!--评论列表-->
 							     <div class="am-g">
-				     	<div class="am-u-lg-12">
-	
-<ul class="am-comments-list">
-	
-	<li class="am-comment am-comment-primary">
-  <a href="#link-to-user-home">
-    <img src="" alt="" class="am-comment-avatar" width="48" height="48"/>
-  </a>
-
-  <div class="am-comment-main">
-    <header class="am-comment-hd">
-      <!--<h3 class="am-comment-title">评论标题</h3>-->
-      <div class="am-comment-meta">
-        <a href="#link-to-user" class="am-comment-author">某人</a>
-        评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
-        <a href="" class="am-fr"> 回复</a>
-      </div>
-    </header>
-
-    <div class="am-comment-bd">
-      ...
-    </div>
-  </div>
-</li>
-<li class="am-comment am-comment-flip ">
-  <a href="#link-to-user-home">
-    <img src="" alt="" class="am-comment-avatar" width="48" height="48"/>
-  </a>
-
-  <div class="am-comment-main">
-    <header class="am-comment-hd">
-      <!--<h3 class="am-comment-title">评论标题</h3>-->
-      <div class="am-comment-meta">
-        <a href="#link-to-user" class="am-comment-author">某人</a>
-        评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
-        <a href="" class="am-fr"> 回复</a>
-      </div>
-    </header>
-
-    <div class="am-comment-bd">
-      你现在在哪列呢？
-    </div>
-  </div>
-</li>
-</ul>
-							     	</div>
+				 <iframe scrolling="no"  id="pinlunframe" src="" name="rightF" width="100%" height="560px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
+				
 							     </div>
 							</div>
-
-<div id="pinlunlist">
-	<table style=" border: solid 1px black; width:100%">
-				<tbody>
-					<c:forEach items="${list}" var="l" >
-						<tr>
-							<td >	
-							${l.userid.userimg}
-							</td>
-							<td >
-							${l.commentcontent}	
-							</td>
-							<td >
-							${l.commentdate}	
-							</td>
-							 <td><a href="Comments/deleteComment?commentid=${l.commentid}" name="l.commentid"  style="background-color:A2A2A2; font-size:14px; color:blue;  float:right;" class="am-close am-close-alt am-close-spin" >
-  x
-</a></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-					</table>
-</div>
-
+							<form id="myform">
+							<input type="hidden" id="pageNotb" name="pageNo" value="2"> 
+							
+							
+							</form>
+							<input type="hidden" id="pageSum" value="${pageSum}">
+							<div id="page1"></div>
 </body>
 </html>

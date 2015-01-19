@@ -22,9 +22,10 @@ public class SaysLikeDaoImpl extends AbstractBaseDao<SaysLike> implements
 ISaysLikeDao {
 	private static final String FINDBYLikefor_HQL="select sl from SaysLike sl where sl.likefor=?  order by sl.liketime desc";
 	private static final String FINDBYUseridare_HQL="select sl from SaysLike sl where sl.useridare.userid=?  order by sl.liketime desc";
+	private static final String FINDBYLikeforAndUseridare_HQL="select sl from SaysLike sl where  sl.likefor=? and sl.useridare.userid=?  order by sl.liketime desc";
 	
 	private static final String FINDBYUSERID_HQL="select sl from SaysLike sl where sl.userid.userid=?  order by sl.liketime desc";
-	private static final String FINDBYUSERIDToUseridareForLikeforSaysLike_HQL="select sl from SaysLike sl where sl.likefor=? and sl.userid.userid=? and sl.useridare.userid=? ";
+	private static final String FINDBYUSERIDToUseridareForLikeforSaysLike_HQL="select sl from SaysLike sl where sl.likefor=? and sl.userid.userid=? and sl.useridare.userid=?";
 	@Override
 	public boolean saveSaysLike(SaysLike sl) throws DataAccessException {
 		this.save(sl);
@@ -71,6 +72,19 @@ ISaysLikeDao {
 			throws DataAccessException {
 		return this.countByHql(FINDBYLikefor_HQL,new Object[]{likefor});
 	
+	}
+	@Override
+	public int countByLikeforAndUseridSaysLike(Serializable likefor,
+			Serializable userid) throws DataAccessException {
+		return this.countByHql(FINDBYLikeforAndUseridare_HQL, new Object[]{likefor,userid});
+		 
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SaysLike> findByLikeforAndUseridSaysLike(Serializable likefor,
+			Serializable userid) throws DataAccessException {
+		return this.findByHql(FINDBYLikeforAndUseridare_HQL, new Object[]{likefor,userid});
+		
 	}
 	
 	

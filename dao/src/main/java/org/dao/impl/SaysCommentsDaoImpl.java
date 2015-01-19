@@ -13,9 +13,10 @@ import org.springframework.stereotype.Repository;
 public class SaysCommentsDaoImpl extends AbstractBaseDao<SaysComments>
 		implements ISaysCommentsDao {
 	
-	private static final String FIND_COMMENTS = "from SaysComments as comm where comm.commentsforid = ? and comm.commentstatus = ? order by comm.commentdate asc";
+	private static final String FIND_COMMENTS = "from SaysComments as comm where comm.commentsforid = ? and comm.commentstatus = ? order by comm.commentdate desc";
 	private static final String FIND_COMMENT = "select count(*) from SaysComments as comm where comm.commentid = ?";
 	private static final String COUNT_COMMENTS = "select count(*) from SaysComments as comm where comm.commentsforid = ? and comm.commentstatus = ?";
+	private static final String FIND_COMMENTSNopage = "select  comm from SaysComments as comm where comm.commentsforid = ? and comm.userid.userid = ? and comm.useridare.userid=? order by comm.commentdate asc";
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -51,6 +52,15 @@ public class SaysCommentsDaoImpl extends AbstractBaseDao<SaysComments>
 			throws DataAccessException {
 
 		return this.countByHql(COUNT_COMMENTS, new Object[]{commentsforid,commentstatus});
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SaysComments> FindCommentsNopage(Serializable commentsforid,
+			Serializable userid, Serializable useridare)
+			throws DataAccessException {
+		return this.findByHql(FIND_COMMENTSNopage,new Object[]{commentsforid,userid,useridare});
 		
 	}
 
