@@ -47,7 +47,7 @@ public class SaysFriendsServiceImpl implements ISaysFriendsService {
 	public Serializable addnewSaysFriends(SaysFriends syasfriends)
 			throws DataAccessException {
 		
-		boolean istest=false;
+		
 		List i=friendsDao.selectbufriendsbyid(syasfriends.getUserfriendid().getUserid());
 		
 		if(i.size()!=0)
@@ -58,10 +58,10 @@ public class SaysFriendsServiceImpl implements ISaysFriendsService {
 			if(addf!=null)
 			{
 				System.out.println("好友添加成功");
-				istest=true;
+				
 			}
 		}
-		return istest;
+		return syasfriends;
 		
 	}
 

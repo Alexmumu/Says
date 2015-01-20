@@ -14,4 +14,5 @@ public interface IsaysShouShouService {
 	void updateShouShou(SaysShuoshuo ss);
 	int countShouShouByUserId(Serializable userid,int shuostatus);
 	public boolean deleteShuoShuo(Serializable shuoid);
+	public ContentData<SaysShuoshuo> getshuoshuobyid(Serializable shuoid); 
 }

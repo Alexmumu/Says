@@ -161,6 +161,7 @@ public class SaysRizhiControl {
 		return "rizhi/rizhitypebyid";
 		
 	}
+	
 	@RequestMapping("/toaddrizhi")
 	private String toaddrizhi(Model model,SaysUser user){
 		List<SaysRizhitype> listtype = saysRizhitypeService.find(user.getUserid(),0);
@@ -188,7 +189,7 @@ public class SaysRizhiControl {
 		try {
 			saysRizhitypeService.updataRizhitype(rzt);
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO: handle exception	
 		}
 		return "redirect:/rizhi/toRizhitypegl?userid.userid="+rzt.getUserid().getUserid();
 	}

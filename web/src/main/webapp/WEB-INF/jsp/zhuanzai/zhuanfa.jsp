@@ -37,6 +37,16 @@
 						"Relay/list?" + $("#zhuanfaform").serialize() + "");
 			}
 		});
+		$('#zhuanfaok').click(function(){
+			$.ajax({
+				url:'Relay/addRelay',
+				type:'post',
+				data:$('#fabiaoform').serialize(),
+				success:function(data){
+						alert(data);
+				}
+			});
+		});
 	});
 </script>
 
@@ -53,19 +63,38 @@ li {
 
 		<!--转发内容框-->
 		<div class="am-g">
-			<form id="fabiaoliuyan"
+			<form id="fabiaoform"
 				action="Relay/addRelay?" method="post">
 				<div class="am-u-lg-12" style="height: 100px;">
 					<textarea name="relayfor" style="width: 100%; height: 100%; border: 1px solid #A6A6A6;"></textarea>
 				</div>
+				<div class="am-u-lg-12">
+						<c:if test="${mytype==2 }">
+						日志你要转载到哪个分类下：
+							<select name="alorrtypeId">
+									<c:forEach items="${rtypelist}" var="rt">
+										<option value="${rt.typeid}">${rt.typename}</option>
+									</c:forEach>
+							</select>
+						</c:if>
+						<c:if test="${mytype==3 }">
+						相片你要转载到哪个相册下：	<select name="alorrtypeId">
+									<c:forEach items="${allist}" var="rt">
+										<option value="${rt.albumid}">${rt.albumtitle}</option>
+									</c:forEach>
+							</select>
+				         </c:if>
+				</div>
 				
 				<input type="hidden" name="type" value="${mytype}">
-				<input type="hidden" name="relayfor" value="${mysr.relayfor}">
-				<input type="hidden" name="useridare" value="${myuser.useridare}">
+				<input type="hidden" name="relayfrom" value="${mysr.relayfrom}">
+				<input type="hidden" name="userid.userid" value="${myuser.userid}">
+				<input type="hidden" name="useridare.userid" value="${mysr.useridare.userid}">
+			
 				<div class="am-u-lg-12 ">
-					<button type="submit" class="am-btn am-btn-default am-fr"
+					<button type="button" class="am-btn am-btn-default am-fr"
 						style="margin-top: -45px; margin-right: 5px;"
-						onclick="javascript:window.parent.location.reload();">确定</button>
+						onclick="javascript:window.parent.location.reload();" id="zhuanfaok">确定</button>
 				</div>
 			</form>
 		</div>

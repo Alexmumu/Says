@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
           <li><a href="javascript:;" onclick="tiaozhuan('finduser/findfriend')" ><span class="am-icon-search"></span>好友查找</a></li>
           
-          <li><a href="javascript:;" onclick="tiaozhuan('finduser/findfriend')" ><span class="am-icon-search"></span>已发出的申请</a></li>
+          <li><a href="javascript:;" onclick="tiaozhuan('frequest/findfrequest?fruser=${myuser.userid}')" ><span class="am-icon-search"></span>已发出的申请</a></li>
         </ul>
       </li>
     </ul>

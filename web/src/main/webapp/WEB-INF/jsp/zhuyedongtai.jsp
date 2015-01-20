@@ -49,7 +49,7 @@ function tanchuang(url){
 			<!--左边头像-->
 			<div class="am-u-lg-2">
 				<div class="am-g">
-					<img src="{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
+					<img src="images/shuoshuo/{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
 				</div>
 			</div>
 			<!--左边头像结束-->
@@ -61,7 +61,8 @@ function tanchuang(url){
 						<!--日志的例子-->
 						{{# if(d.newslist[i].datatype===1){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">{{d.newslist[i].data.userid.username}}</a> 于
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}" target="view_window">
+							{{d.newslist[i].data.userid.username}}</a> 于
 							 {{d.newslist[i].datadate}} 发表了一篇说说
 							 <span class="am-icon-eye am-fr">
 							 	 {{d.newslist[i].yuedunum}}人浏览
@@ -70,7 +71,8 @@ function tanchuang(url){
 						{{# } }}
 						{{# if(d.newslist[i].datatype===2){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">{{d.newslist[i].data.userid.username}}</a> 于
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}" target="view_window">
+							{{d.newslist[i].data.userid.username}}</a> 于
 							 {{d.newslist[i].datadate}} 转发了一篇说说
 							 <span class="am-icon-eye am-fr">
 							 	 {{d.newslist[i].yuedunum}}人浏览
@@ -94,11 +96,11 @@ function tanchuang(url){
 						{{# } }}
 						<div class="am-g am-text-sm">
 						{{# if(d.newslist[i].datatype===2){ }}
-							<a class="am-link-muted" href="">
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].fromid}}" target="view_window">
 							<i class="am-icon-link"> </i> {{d.newslist[i].fromname}}∶</a>
 						{{# } }}
 							{{d.newslist[i].data.shuocontent}}
-							<img src="{{d.newslist[i].data.shuoimg}}">
+							<img src="images/shuoshuo/{{d.newslist[i].data.shuoimg}}">
 						</div><hr>
 
 						<!--下面关于的操作-->
@@ -143,7 +145,7 @@ function tanchuang(url){
 			<!--左边头像-->
 			<div class="am-u-lg-2">
 				<div class="am-g">
-					<img src="{{d.newslist[i].data.rizhiuserid.userimg}}" width="64" height="64">
+					<img src="images/shuoshuo/{{d.newslist[i].data.rizhiuserid.userimg}}" width="64" height="64">
 				</div>
 			</div>
 			<!--左边头像结束-->
@@ -155,7 +157,8 @@ function tanchuang(url){
 						<!--日志的例子-->
 						{{# if(d.newslist[i].datatype===3){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">{{d.newslist[i].data.rizhiuserid.username}}</a> 于
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.rizhiuserid.userid}}" target="view_window">
+							{{d.newslist[i].data.rizhiuserid.username}}</a> 于
 							 {{d.newslist[i].datadate}} 发表了一篇日志
 							 <span class="am-icon-eye am-fr">
 							 	 {{d.newslist[i].yuedunum}}人浏览
@@ -164,7 +167,8 @@ function tanchuang(url){
 						{{# } }}
 						{{# if(d.newslist[i].datatype===4){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">{{d.newslist[i].data.rizhiuserid.username}}</a> 于
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.rizhiuserid.userid}}" target="view_window">
+							{{d.newslist[i].data.rizhiuserid.username}}</a> 于
 							 {{d.newslist[i].datadate}} 转载了一篇日志
 							 <span class="am-icon-eye am-fr">
 							 	 {{d.newslist[i].yuedunum}}人浏览
@@ -177,7 +181,7 @@ function tanchuang(url){
 						<div class="am-g am-text-lg">
 							{{# if(d.newslist[i].datatype===3){ }}
 								<h3 style="margin:0px;padding:0px;">
-								<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}">
+								<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}&rizhiuserid.userid={{d.newslist[i].data.rizhiuserid.userid}}" >
 								<i class="am-icon-quote-left"></i>{{d.newslist[i].data.rizhititle}}
 								<i class="am-icon-quote-right"></i></a>
 							</h3>
@@ -196,7 +200,7 @@ function tanchuang(url){
 							<p class="line-clamp">
 									{{d.newslist[i].data.rizhicontent}}
 								</p>
-									<a href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}" class="am-link-muted"style=" float: right;">
+									<a href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}&rizhiuserid.userid={{d.newslist[i].data.rizhiuserid.userid}}" class="am-link-muted"style=" float: right;">
 										 查看日志 <i class="am-icon-chevron-circle-right"></i>
 									</a>
 						</div><hr>
@@ -243,7 +247,7 @@ function tanchuang(url){
 			<!--左边头像-->
 			<div class="am-u-lg-2">
 				<div class="am-g">
-					<img src="{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
+					<img src="images/shuoshuo/{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
 				</div>
 			</div>
 			<!--左边头像结束-->
@@ -255,8 +259,10 @@ function tanchuang(url){
 						<!--相片的例子-->
 						{{# if(d.newslist[i].datatype===5){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">{{d.newslist[i].data.userid.username}}</a> 于
-							{{d.newslist[i].datadate}} 上传了一张照片到<a class="am-link-muted" href=" ">
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}" target="view_window">
+							{{d.newslist[i].data.userid.username}}</a> 于
+							{{d.newslist[i].datadate}} 上传了一张照片到
+							<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}" target="view_window">
 							<i class="am-icon-angle-double-left"></i>
 							{{d.newslist[i].data.albumid.albumtitle}}
 							<i class="am-icon-angle-double-right"></i></a>
@@ -267,8 +273,10 @@ function tanchuang(url){
 						{{# } }}
 						{{# if(d.newslist[i].datatype===6){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">{{d.newslist[i].data.userid.username}}</a> 于
-							{{d.newslist[i].datadate}} 转载了一张照片到<a class="am-link-muted" href=" ">
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}" target="view_window">
+							{{d.newslist[i].data.userid.username}}</a> 于
+							{{d.newslist[i].datadate}} 转载了一张照片到
+							<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}" target="view_window">
 							<i class="am-icon-angle-double-left"></i>
 							{{d.newslist[i].data.albumid.albumtitle}}
 							<i class="am-icon-angle-double-right"></i></a>
@@ -286,7 +294,7 @@ function tanchuang(url){
 							</h3>
 						</div>
 						<div class="am-g am-text-sm">
-							<img src="images/body_1.png">
+							<img src="images/shuoshuo/{{d.newslist[i].data.photosrc}}">
 						</div><hr>
 
 						<!--下面关于的操作-->

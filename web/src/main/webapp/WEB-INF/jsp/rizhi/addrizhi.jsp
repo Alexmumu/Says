@@ -85,7 +85,7 @@
     </div>
     <input type="hidden" name="rizhinature" value="0">
     <p><span><button type="submit" id='btnHtml' class="am-btn am-btn-secondary">提交</button></span>
-    <span><a  href="javascript:history.go(-1)" class="am-btn  am-btn-default">返回</a></span></p>
+    <span><a  href="javascript:history.go(-1)" class="am-btn  am-btn-default">取消</a></span></p>
     </fieldset>
     </div>
     </article>
