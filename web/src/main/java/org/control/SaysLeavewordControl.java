@@ -1,10 +1,13 @@
 package org.control;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.dao.ISaysMsgcenterDao;
 import org.entity.SaysLeaveword;
+import org.entity.SaysMsgcenter;
 import org.entity.SaysUser;
 import org.entity.SaysUserword;
 import org.service.ISaysLeavewordService;
@@ -26,7 +29,9 @@ public class SaysLeavewordControl {
 	private ISaysLeavewordService saysLeavewordServiceImpl;
 	@Autowired
 	private ISaysUserwordService saysUserwordServiceImpl;
-
+	@Autowired
+	private ISaysMsgcenterDao SaysMsgcenterDaoImpl;
+	
 	@RequestMapping("/toLeavwordneirong")
 	public String toLeavwordNeiRong(Page<SaysLeaveword> page,SaysLeaveword sysleaveword,Model model,HttpSession session){
 		SaysUser myuser=(SaysUser) session.getAttribute("myuser");
@@ -84,13 +89,21 @@ public class SaysLeavewordControl {
 	@RequestMapping("/addSaysLeaveword")
 	public String addSaysLeaveword(SaysLeaveword saysLeaveword,HttpSession session){
 		SaysUser myuser=(SaysUser) session.getAttribute("myuser");
-
+		
 		System.out.println(saysLeaveword.getLeavewordcontent()+"jjjjj");
 		System.out.println(saysLeaveword.getUserid().getUserid()+"wwwwww");
 		System.out.println(saysLeaveword.getFromuserid().getUserid()+"wwwwww");
 		System.out.println(saysLeaveword.getLeavewordcontent());
 		saysLeaveword.setLevewodidstatus(1);
-		saysLeavewordServiceImpl.saveSaysLeaveword(saysLeaveword);
+		Serializable lw =this.saysLeavewordServiceImpl.saveSaysLeaveword(saysLeaveword);
+		SaysMsgcenter msg=new SaysMsgcenter();
+		msg.setMcstatus(1);
+		msg.setMcfromid((String)lw);
+		msg.setMctype(11);
+		SaysUser sus3=new SaysUser();
+		sus3.setUserid(saysLeaveword.getUserid().getUserid());
+		msg.setUserid(sus3);
+		SaysMsgcenterDaoImpl.save(msg);
 		return "redirect:/Leavword/toLeavwordneirong?userid.userid="+myuser.getUserid()+"&pageNo=1";
 		
 	}

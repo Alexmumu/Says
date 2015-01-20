@@ -26,9 +26,9 @@ public class SaysLeavewordServiceImpl extends AbstractBaseService implements ISa
 		return page;
 	}
 	@Override
-	public void saveSaysLeaveword(SaysLeaveword sl) {
-		
-		saysLeavewordDao.saveSaysLeaveword(sl);
+	public Serializable saveSaysLeaveword(SaysLeaveword sl) {
+		Serializable lw = this.saysLeavewordDao.save(sl);
+	 return	lw;
 		
 	}
 	

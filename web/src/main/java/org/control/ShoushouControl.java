@@ -25,10 +25,9 @@ public class ShoushouControl {
 		{
 			page.setPageNo(1);
 		}
-		Page<ContentData<Object>>  page1= shoushouService.findAllShuoShuo(userid, page);
+		Page<ContentData<Object>>  page1= shoushouService.findAllShuoShuo(userid, page,0);
 		System.out.println("的后的后"+page1.getResult().size());
-		model.addAttribute("shou",page1);
-		
+		model.addAttribute("shou",page1);	
 		return "shoushoulist";
 	}
 }

@@ -47,6 +47,7 @@ public class SaysCommentsServiceImpl implements ISaysCommentsService {
 			for(SaysReply sr:sc.getSaysreply()){
 				sr.setCommentid(null);
 			}
+			commentsDao.initialize(sc.getSaysreply());
 			System.out.println(sc);
 		}
 		System.out.println(page.getDataSum());

@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.dao.ISaysCommentsDao;
 import org.dao.ISaysMsgcenterDao;
 import org.entity.SaysComments;
 import org.entity.SaysMsgcenter;
+import org.entity.SaysReply;
 import org.entity.SaysUser;
 import org.service.ISaysCommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ public class SaysCommentsControl {
 	@Autowired
 	private ISaysMsgcenterDao saysMsgcenterDaoImpl;
 	
+	
 	/**
 	 * 
 	 * @param cs  评论需要传项目id 访问的用户id 和type
@@ -38,13 +41,15 @@ public class SaysCommentsControl {
 	 * @return
 	 */
 	@RequestMapping("/toComments")
-	public String toComments(SaysComments cs,Model model,Page<SaysComments> page){
+	public String toComments(SaysComments cs,Model model,Page<SaysComments> page,int type,SaysReply sr){
 			System.out.println(page.getPageNo());
 			System.out.println(cs.getUseridare().getUserid()+"我草你吗个比");
 			page.setPageSize(4);
 			Page page1=saysCommentsServiceImpl.findComments(cs.getCommentsforid(), page, "1");
 			model.addAttribute("page1", page1);
 			model.addAttribute("aaa", cs.getUseridare().getUserid());
+			model.addAttribute("type",type);
+			
 		return "pinlun/pinlunneirong";
 	}
 
@@ -60,6 +65,7 @@ public class SaysCommentsControl {
 		model.addAttribute("Userid",cs.getUserid().getUserid());
 		model.addAttribute("type",type);
 		System.out.println(cs.getUserid().getUserid());
+		
 		return "pinlun/pinlun";
 	}
 	

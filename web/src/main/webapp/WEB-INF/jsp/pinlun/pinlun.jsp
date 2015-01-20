@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   	<script type="text/javascript">
   	$(function(){
+  		
   		//alert($("#pageSum").val());
   			laypage({
 		    cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象,
@@ -62,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							   
 							    	
 							     	 <div class="am-u-lg-12 ">
-							     	 <button type="submit" class="am-btn am-btn-default am-fr"  style="margin-top:-45px; margin-right:5px;" onclick="javascript:window.parent.location.reload();">确定</button>
+							     	 <button type="submit" class="am-btn am-btn-default am-fr"  style="margin-top:-45px; margin-right:5px;" onclick="javascript:window.parent.location.reload();">评论</button>
 							     	</div>
 							     	 </form>
 							     </div>
@@ -70,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--评论列表-->
 							     <div class="am-g">
-				 <iframe scrolling="no"  id="pinlunframe" src="" name="rightF" width="100%" height="560px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
+				 <iframe scrolling="yes"  id="pinlunframe" src="" name="rightF" width="100%" height="700px;" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
 				
 							     </div>
 							</div>
@@ -79,6 +80,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<input type="hidden" id="pageNotb" name="pageNo" > 
 								<input type="hidden"  name="commentsforid" value="${Commentsforid}">
 								<input type="hidden" name="useridare.userid" value="${Userid}">
+								<input type="hidden" name="type" value="${type}">
+							    	
 							</form>
 							<input type="hidden" id="pageSum" value="${pageSum}">
 							
