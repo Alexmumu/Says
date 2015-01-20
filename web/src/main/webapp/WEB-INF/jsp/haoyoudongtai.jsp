@@ -40,8 +40,8 @@
     		< len; i++){ }}
 			<li>
     			<div style="padding:5px;">
-    				<a href="javascrip:;">
-    					<img  class="am-circle" content="{{d.result[i].fromuserid.username}} 于  {{d.result[i].fangketime}}"  src="images/touxiang1.jpg"  width="64" height="64"></a>
+    				<a href="user/myhome?userid={{d.result[i].fromuserid.userid}}" target="view_window" >
+    					<img  class="am-circle" content="{{d.result[i].fromuserid.usernickname}} 于  {{d.result[i].fangketime}}"  src="{{d.result[i}.fromuserid.userimg}"  width="64" height="64"></a>
 				</div>
     		</li>
     		{{# } }}

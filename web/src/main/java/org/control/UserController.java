@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.entity.SaysMsgcenter;
 import org.entity.SaysNews;
 import org.entity.SaysUser;
+import org.entity.SaysVisit;
 import org.service.ICommonService;
 import org.service.ISaysAlbumService;
 import org.service.ISaysLeavewordService;
@@ -16,6 +17,7 @@ import org.service.ISaysMsgcenterService;
 import org.service.ISaysNewsService;
 import org.service.ISaysRizhiService;
 import org.service.ISaysUserService;
+import org.service.ISaysVisitService;
 import org.service.IsaysShouShouService;
 import org.service.impl.SaysUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class UserController {
 	private ICommonService commonServiceImpl;
 	@Autowired
 	private ISaysNewsService newsServiceImpl;
+	@Autowired
+	private ISaysVisitService visitService;
 	
 	
 	/**
@@ -104,16 +108,26 @@ public class UserController {
 	}
 	
 	/**
-	 * 去传入的用户id的领土页面
+	 * 去传入的用户id的领土页面  并增加访问记录
 	 * @param model
 	 * @param session
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping("myhome")
-	public String toUserMyHome(Model model ,SaysUser user){
+	public String toUserMyHome(Model model ,SaysUser user,HttpSession session){
 		Map<String,Object> map=this.commonServiceImpl.findMyCountByUserid(user.getUserid());
 		user=(SaysUser) this.saysUserServiceImpl.selectSaysuserbyid(user.getUserid()).get(0);
+		//访问者肯定是session用户
+		SaysUser myuser=(SaysUser) session.getAttribute("myuser");
+		//如果访问者和被访问者不是同一个人 那么就要增加一条访问记录
+		if(!myuser.getUserid().equals(user.getUserid())){
+			SaysVisit sv=new SaysVisit();
+			sv.setUserid(user);
+			sv.setFromuserid(myuser);
+			this.visitService.addSaysVisit(sv);
+		}
+		
 		model.addAttribute("usercount", map);
 		model.addAttribute("zyuser",user);
 		return "wodelingtu";
