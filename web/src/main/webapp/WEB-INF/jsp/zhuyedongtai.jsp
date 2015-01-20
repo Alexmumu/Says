@@ -188,7 +188,7 @@ function tanchuang(url){
 							{{# } }}
 							{{# if(d.newslist[i].datatype===4){ }}
 							<h3 style="margin:0px;padding:0px;">
-						<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}">
+						<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}&rizhiuserid.userid={{d.newslist[i].data.rizhiuserid.userid}}">
 								<strong>「转」</strong>
 								<i class="am-icon-quote-left"></i>{{d.newslist[i].data.rizhititle}}
 								<i class="am-icon-quote-right"></i>

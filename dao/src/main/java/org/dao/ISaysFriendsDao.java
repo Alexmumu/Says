@@ -50,6 +50,14 @@ public interface ISaysFriendsDao extends IBaseDao<SaysFriends> {
 	 * @throws DataAccessException
 	 */
 	public int countSaysFriends(Serializable userid)throws DataAccessException;
+	/**
+	 * 根据用户id和好友id 查询俩用户之间的好友关系是否存在
+	 * @param userid
+	 * @param userfriendid
+	 * @return
+	 * @throws DataAccessException
+	 */
+	public List  selectUserAnduserfriendid(Serializable userid,Serializable userfriendid)throws DataAccessException;
 	
 	
 }

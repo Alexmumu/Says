@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public class SaysShouShouDaoImpl extends AbstractBaseDao<SaysShuoshuo> implements ISaysShouShousDao{
    private static final String FIND_ALL_SHOUSHOU_HQL="from SaysShuoshuo ss where ss.userid.userid=? and shuostatus!=? order by shuodate desc";
 	
+   private static final String FIND_SHUOSHUOBYID = "from SaysShuoshuo ss where ss.shuoid=? and shuostatus=1";
 	
 	@SuppressWarnings("unchecked")
 	public List<SaysShuoshuo> findAllShuoShuo(Serializable userid,
@@ -51,7 +52,21 @@ public class SaysShouShouDaoImpl extends AbstractBaseDao<SaysShuoshuo> implement
 	public SaysShuoshuo fingByID(Serializable shouid)
 			throws DataAccessException {
 		 
-		return this.getById(shouid);
+		return this.fingByID(shouid);
 	}
 
+	@Override
+	public boolean hasShuoByID(Serializable shouid)
+			throws DataAccessException {
+		
+			if((this.findByHql(FIND_SHUOSHUOBYID, new Object[]{shouid})).size()>0){
+				System.out.println("---有数据---");
+				return true;
+			}
+			else{
+				System.out.println("---没找到---");
+				return false;
+			}
+	}
+	
 }

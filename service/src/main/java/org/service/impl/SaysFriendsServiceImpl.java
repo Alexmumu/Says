@@ -48,7 +48,7 @@ public class SaysFriendsServiceImpl implements ISaysFriendsService {
 			throws DataAccessException {
 		
 		boolean istest=false;
-		List i=friendsDao.selectbufriendsbyid(syasfriends.getUserfriendid().getUserid());
+		List i=friendsDao.selectUserAnduserfriendid(syasfriends.getUserid().getUserid(), syasfriends.getUserfriendid().getUserid());
 		
 		if(i.size()!=0)
 		{

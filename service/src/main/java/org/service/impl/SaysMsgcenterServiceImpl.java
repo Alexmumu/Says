@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.dao.ISaysCommentsDao;
 import org.dao.ISaysFrequestDao;
+import org.dao.ISaysLeavewordDao;
 import org.dao.ISaysLikeDao;
 import org.dao.ISaysMsgcenterDao;
 import org.dao.ISaysPhotoDao;
@@ -17,6 +18,7 @@ import org.dao.ISaysShouShousDao;
 import org.entity.SaysAlbum;
 import org.entity.SaysComments;
 import org.entity.SaysFrequest;
+import org.entity.SaysLeaveword;
 import org.entity.SaysLike;
 import org.entity.SaysMsgcenter;
 import org.entity.SaysPhoto;
@@ -55,6 +57,8 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 	private ISaysRizhiDao rizhiDao;
 	@Autowired
 	private ISaysPhotoDao photoDao;
+	@Autowired
+	private ISaysLeavewordDao leaveDao;
 	
 	
 	
@@ -103,7 +107,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 				SaysFrequest frequest = frequestDao.getById(msg.getMcfromid());
 				System.out.println(frequest);
 				String fromid = frequest.getFruser().getUserid();
-				frequest.setFruser(null);
+				frequest.setFruserare(null);
 				
 				msgda.setData(frequest);
 				msgda.setUserid((String)userid);
@@ -132,7 +136,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					comm.setUseridare(null);
 					msgda.setUserid((String)userid);
 					msgda.setFromid(comm.getUserid().getUserid());
-					msgda.setFromname(comm.getUserid().getUsername());
+					msgda.setFromname(comm.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -159,7 +163,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					comm.setUseridare(null);
 					msgda.setUserid((String)userid);
 					msgda.setFromid(comm.getUserid().getUserid());
-					msgda.setFromname(comm.getUserid().getUsername());
+					msgda.setFromname(comm.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -186,7 +190,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					comm.setUseridare(null);
 					msgda.setUserid((String)userid);
 					msgda.setFromid(comm.getUserid().getUserid());
-					msgda.setFromname(comm.getUserid().getUsername());
+					msgda.setFromname(comm.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -214,7 +218,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					relay.setUseridare(null);
 					msgda.setUserid((String)userid);
 					msgda.setFromid(relay.getUserid().getUserid());
-					msgda.setFromname(relay.getUserid().getUsername());
+					msgda.setFromname(relay.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -241,7 +245,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					relay.getUseridare().setUserid(null);
 					msgda.setUserid((String)userid);
 					msgda.setFromid(relay.getUserid().getUserid());
-					msgda.setFromname(relay.getUserid().getUsername());
+					msgda.setFromname(relay.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -269,7 +273,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					relayDao.initialize(relay.getUserid());
 					msgda.setUserid((String)userid);
 					msgda.setFromid(relay.getUserid().getUserid());
-					msgda.setFromname(relay.getUserid().getUsername());
+					msgda.setFromname(relay.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -297,7 +301,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					like.getUseridare().setUserid(null);
 					msgda.setUserid((String)userid);
 					msgda.setFromid(like.getUserid().getUserid());
-					msgda.setFromname(like.getUserid().getUsername());
+					msgda.setFromname(like.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -324,7 +328,7 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					like.getUseridare().setUserid(null);
 					msgda.setUserid((String)userid);
 					msgda.setFromid(like.getUserid().getUserid());
-					msgda.setFromname(like.getUserid().getUsername());
+					msgda.setFromname(like.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -349,10 +353,9 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					photo.setUserid(user);
 					msgda.setData(photo);
 					like.getUseridare().setUserid(null);
-					likeDao.initialize(like.getUserid());
 					msgda.setUserid((String)userid);
 					msgda.setFromid(like.getUserid().getUserid());
-					msgda.setFromname(like.getUserid().getUsername());
+					msgda.setFromname(like.getUserid().getUsernickname());
 					msgda.setMctype(msg.getMctype());
 					msgda.setMcstatus(msg.getMcstatus());
 					msgda.setMsgid(msg.getMcid());
@@ -362,6 +365,28 @@ public class SaysMsgcenterServiceImpl extends AbstractBaseService implements
 					msgda.setMsgcontent(((SaysPhoto)msgda.getData()).getPhotoremark());
 					content.add(msgda);
 				}
+			}
+			if(msg.getMctype()==11){
+				MsgDataVo msgda = new MsgDataVo();
+				SaysLeaveword leaveword = leaveDao.getById(msg.getMcfromid());
+				SaysUser user = new SaysUser();
+				user.setUserid(leaveword.getUserid().getUserid());
+				user.setUsername(leaveword.getUserid().getUsername());
+				leaveword.setUserid(user);
+				SaysUser fromuserid=new SaysUser();
+				fromuserid.setUserid(leaveword.getFromuserid().getUserid());
+				fromuserid.setUsernickname(leaveword.getFromuserid().getUsernickname());
+				leaveword.setFromuserid(fromuserid);
+				msgda.setData(leaveword);
+				msgda.setFromid(leaveword.getFromuserid().getUserid());
+				msgda.setFromname(leaveword.getFromuserid().getUsernickname());
+				msgda.setMctype(msg.getMctype());
+				msgda.setMcstatus(msg.getMcstatus());
+				msgda.setMsgid(msg.getMcid());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = msg.getMsctime();
+				msgda.setMsctime(sdf.format(date));
+				content.add(msgda);
 			}
 		}
 		msgData.setDataSum(msgcenterDao.CountMsg(userid));

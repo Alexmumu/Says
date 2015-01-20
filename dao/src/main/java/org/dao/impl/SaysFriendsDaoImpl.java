@@ -16,6 +16,7 @@ public class SaysFriendsDaoImpl extends AbstractBaseDao<SaysFriends> implements
 	private static final String FINDBYUSERID_HQL="select f from SaysFriends f  where  f.userid.userid=?";
 	private static final String FINDBYID_HQL="select s from SaysFriends f,SaysUser s where f.userfriendid.userid=s.userid and f.userfriendid.userid=?";
 	private static final String COUNT_HQL="select count(sf) from SaysFriends sf where sf.userid.userid=?";
+	private static final String SELECTUSERIDANDUSERFRIENDID_HQL="select f from SaysFriends f  where f.userid.userid=? and f.userfriendid.userid=?";
 
 	@SuppressWarnings("unchecked")
 	public List<SaysFriends> findbyuseridallSaysFriends(Serializable userid, int firstResult,int maxResults)
@@ -51,6 +52,15 @@ public class SaysFriendsDaoImpl extends AbstractBaseDao<SaysFriends> implements
 		// TODO Auto-generated method stub
 		return this.countByHql(FINDBYUSERID_HQL, userid);
 	}
+
+
+	@Override
+	public List selectUserAnduserfriendid(Serializable userid,
+			Serializable userfriendid) throws DataAccessException {
+			return this.findByHql(SELECTUSERIDANDUSERFRIENDID_HQL, new Object[]{userid.toString(),userfriendid.toString()});
+	}
+	
+	
 
 	
 }

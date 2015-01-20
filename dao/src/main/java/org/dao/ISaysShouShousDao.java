@@ -57,4 +57,8 @@ public interface ISaysShouShousDao extends IBaseDao<SaysShuoshuo> {
 	 * @throws DataAccessException
 	 */
 	public SaysShuoshuo fingByID(Serializable shouid)throws DataAccessException;
+	
+	
+	
+	public boolean hasShuoByID(Serializable shouid);
 }

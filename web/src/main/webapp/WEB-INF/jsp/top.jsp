@@ -46,7 +46,7 @@
 	</div>
 	<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 		<div class="am-panel-bd">
-			<a href="">{{d.msglist[i].data.fruserare.username}}</a>申请与你为好友
+			<a href="">{{d.msglist[i].data.fruser.username}}</a>申请与你为好友
 			<hr>
 			<b>申请理由：</b>{{d.msglist[i].data.shenqiliyou}}
 			<hr>
@@ -294,6 +294,31 @@
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的相片 <br />
 								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+							</div>
+						</div>
+					</div>
+	{{# } }}
+	{{#if(d.msglist[i].mctype==11) { }}
+					<div class="am-panel am-panel-default">
+						<div class="am-panel-hd">
+							{{#if(d.msglist[i].mcstatus==1) { }}
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								新的留言
+								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
+							</p>
+							{{# } }}
+							{{#if(d.msglist[i].mcstatus==0) { }}
+							<p class="am-panel-title"
+								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
+								新的留言</p>
+							{{# } }}
+						</div>
+						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
+							<div class="am-panel-bd">
+								<a href="">{{d.msglist[i].fromname}}</a> 
+								在{{d.msglist[i].msctime}}的留言： <br />
+								 <p>{{d.msglist[i].data.leavewordcontent}}</p>
 							</div>
 						</div>
 					</div>

@@ -144,7 +144,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				System.out.println(shuoshuo);
 				SaysUser user=new SaysUser();
 				user.setUserid(shuoshuo.getUserid().getUserid());
-				user.setUsername(shuoshuo.getUserid().getUsername());
+				user.setUsername(shuoshuo.getUserid().getUsernickname());
 				user.setUserimg(shuoshuo.getUserid().getUserimg());
 				shuoshuo.setUserid(user);
 				con.setData(shuoshuo);
@@ -154,9 +154,18 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				if(news.getNewsstatus() == 2){
 					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
 					con.setRalaycontent(relay.getRelayfor());
+					boolean sign = shouShousDao.hasShuoByID(relay.getRelayfrom());
 					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
-					con.setFromid(fromuser.getUserid());
-					con.setFromname(fromuser.getUsername());
+					if(sign){
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+					}else{
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+						((SaysShuoshuo)con.getData()).setShuocontent("〔该条说说内容已被删除〕");
+//						shuoshuo.setShuocontent("〔该条说说内容已被删除〕");
+//						shouShousDao.update(shuoshuo);
+					}
 				}
 				content.add(con);
 			}
@@ -177,7 +186,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				rizhi.setRizhitype(rizhitype);
 				SaysUser user = new SaysUser();
 				user.setUserid(rizhi.getRizhiuserid().getUserid());
-				user.setUsername(rizhi.getRizhiuserid().getUsername());
+				user.setUsername(rizhi.getRizhiuserid().getUsernickname());
 				user.setUserimg(rizhi.getRizhiuserid().getUserimg());
 				rizhi.setRizhiuserid(user);
 				con.setData(rizhi);
@@ -202,7 +211,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				photo.setAlbumid(album);
 				SaysUser user = new SaysUser();
 				user.setUserid(photo.getUserid().getUserid());
-				user.setUsername(photo.getUserid().getUsername());
+				user.setUsername(photo.getUserid().getUsernickname());
 				user.setUserimg(photo.getUserid().getUserimg());
 				photo.setUserid(user);
 				con.setData(photo);
@@ -272,9 +281,18 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				if(news.getNewsstatus() == 2){
 					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
 					con.setRalaycontent(relay.getRelayfor());
+					boolean sign = shouShousDao.hasShuoByID(relay.getRelayfrom());
 					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
-					con.setFromid(fromuser.getUserid());
-					con.setFromname(fromuser.getUsername());
+					if(sign){
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+					}else{
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+						((SaysShuoshuo)con.getData()).setShuocontent("〔该条说说内容已被删除〕");
+//						shuoshuo.setShuocontent("〔该条说说内容已被删除〕");
+//						shouShousDao.update(shuoshuo);
+					}
 				}
 				content.add(con);
 			}

@@ -373,7 +373,7 @@
 	<div class="am-g am-animation-slide-top">
 		<div class="am-container">
 			<div class="am-u-lg-12 block">
-				<h1>${myuser.username}的好友动态</h1>
+				<h1>我的好友动态</h1>
 			</div>
 		</div>
 	</div>
