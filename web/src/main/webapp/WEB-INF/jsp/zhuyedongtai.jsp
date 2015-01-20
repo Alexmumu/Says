@@ -43,14 +43,14 @@ function tanchuang(url){
 
 
 <script type="text/html" id="mydongtaitp">
-{{# for(var i = 0, len = d.newslist.length; i < len; i++){ }}
+    	{{# for(var i = 0, len = d.newslist.length; i < len; i++){ }}
 <!-- 发表/转发说说 -->
 	{{# if(d.newslist[i].datatype===1 || d.newslist[i].datatype===2){ }}
 <div class="am-g" style="margin-bottom: 40px;">
 			<!--左边头像-->
 			<div class="am-u-lg-2">
 				<div class="am-g">
-					<img src="images/shuoshuo/{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
+					<img src="images/touxiang/{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
 				</div>
 			</div>
 			<!--左边头像结束-->
@@ -101,7 +101,9 @@ function tanchuang(url){
 							<i class="am-icon-link"> </i> {{d.newslist[i].fromname}}∶</a>
 						{{# } }}
 							{{d.newslist[i].data.shuocontent}}
+		
 							<img src="images/shuoshuo/{{d.newslist[i].data.shuoimg}}">
+					
 						</div><hr>
 
 						<!--下面关于的操作-->
@@ -113,9 +115,16 @@ function tanchuang(url){
 								</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 						<span>
+				{{# if(d.newslist[i].datatype===1){ }}
+					<button onclick="tanchuang('Relay/findall?type=1&useridare.userid={{d.newslist[i].data.userid.userid}}&relayfrom={{d.newslist[i].data.shuoid}}')" class="am-link-muted" alt="转发">
+				<i class="am-icon-share" alt="转发"></i>
+				转发 ({{d.newslist[i].zhuanfanum}})</button>
+				{{# } }}
+				{{# if(d.newslist[i].datatype===2){ }}
 						<button onclick="tanchuang('Relay/findall?type=1&useridare.userid={{d.newslist[i].data.userid.userid}}&relayfrom={{d.newslist[i].contentfromid}}')" class="am-link-muted" alt="转发">
 				<i class="am-icon-share" alt="转发"></i>
 				转发 ({{d.newslist[i].zhuanfanum}})</button>
+				{{# } }}
 								</span>
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<span>
@@ -145,7 +154,7 @@ function tanchuang(url){
 			<!--左边头像-->
 			<div class="am-u-lg-2">
 				<div class="am-g">
-					<img src="images/shuoshuo/{{d.newslist[i].data.rizhiuserid.userimg}}" width="64" height="64">
+					<img src="images/touxiang/{{d.newslist[i].data.rizhiuserid.userimg}}" width="64" height="64">
 				</div>
 			</div>
 			<!--左边头像结束-->
@@ -181,14 +190,14 @@ function tanchuang(url){
 						<div class="am-g am-text-lg">
 							{{# if(d.newslist[i].datatype===3){ }}
 								<h3 style="margin:0px;padding:0px;">
-								<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}&rizhiuserid.userid={{d.newslist[i].data.rizhiuserid.userid}}" >
+								<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}&rizhiuserid.userid={{d.newslist[i].data.rizhiuserid.userid}}">
 								<i class="am-icon-quote-left"></i>{{d.newslist[i].data.rizhititle}}
 								<i class="am-icon-quote-right"></i></a>
 							</h3>
 							{{# } }}
 							{{# if(d.newslist[i].datatype===4){ }}
 							<h3 style="margin:0px;padding:0px;">
-						<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}&rizhiuserid.userid={{d.newslist[i].data.rizhiuserid.userid}}">
+							<a class="am-link-muted" href="rizhi/getRizhiid?rizhiid={{d.newslist[i].data.rizhiid}}&rizhiuserid.userid={{d.newslist[i].data.rizhiuserid.userid}}">
 								<strong>「转」</strong>
 								<i class="am-icon-quote-left"></i>{{d.newslist[i].data.rizhititle}}
 								<i class="am-icon-quote-right"></i>
@@ -245,7 +254,7 @@ function tanchuang(url){
 			<!--左边头像-->
 			<div class="am-u-lg-2">
 				<div class="am-g">
-					<img src="images/shuoshuo/{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
+					<img src="images/touxiang/{{d.newslist[i].data.userid.userimg}}" width="64" height="64">
 				</div>
 			</div>
 			<!--左边头像结束-->
@@ -257,10 +266,9 @@ function tanchuang(url){
 						<!--相片的例子-->
 						{{# if(d.newslist[i].datatype===5){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}" target="view_window">
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}">
 							{{d.newslist[i].data.userid.username}}</a> 于
-							{{d.newslist[i].datadate}} 上传了一张照片到
-							<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}">
+							{{d.newslist[i].datadate}} 上传了一张照片到<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}">
 							<i class="am-icon-angle-double-left"></i>
 							{{d.newslist[i].data.albumid.albumtitle}}
 							<i class="am-icon-angle-double-right"></i></a>
@@ -271,10 +279,9 @@ function tanchuang(url){
 						{{# } }}
 						{{# if(d.newslist[i].datatype===6){ }}
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}" target="view_window">
+							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}">
 							{{d.newslist[i].data.userid.username}}</a> 于
-							{{d.newslist[i].datadate}} 转载了一张照片到
-							<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}">
+							{{d.newslist[i].datadate}} 转载了一张照片到<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}">
 							<i class="am-icon-angle-double-left"></i>
 							{{d.newslist[i].data.albumid.albumtitle}}
 							<i class="am-icon-angle-double-right"></i></a>
@@ -292,9 +299,10 @@ function tanchuang(url){
 							</h3>
 						</div>
 						<div class="am-g am-text-sm">
-							<img src="images/shuoshuo/{{d.newslist[i].data.photosrc}}">
+							<img src="images/photo/{{d.newslist[i].data.photosrc}}">
 						</div><hr>
 
+						<!--下面关于的操作-->
 						<div class="am-g am-text-sm">
 							<div class="am-fr">
 								<span>
@@ -334,6 +342,7 @@ function tanchuang(url){
 </script>
 
 
+
 </head>
 <body style="background-color: rgb(237, 237, 239); height: 1500px;">
 	<input type="hidden" id="zhuyeuserid" value="${zhuyeuser.userid }">
@@ -343,8 +352,9 @@ function tanchuang(url){
 		<div class="am-container">
 			<!--内容开始-->
 			<div class="am-u-lg-9  " id="mydongtai">
+			&nbsp;	
 				<div class="am-g am-text-center" id="zhuanzhuan">
-									<i style="font-size:65px;" class="am-icon-refresh am-icon-spin"></i>
+								<i style="font-size:65px;" class="am-icon-refresh am-icon-spin"></i>
 				</div>
 			</div>
 			<!--内容结束-->

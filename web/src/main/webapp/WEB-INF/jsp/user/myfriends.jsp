@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="am-g">
             <div class="am-u-md-12 am-text-center ">
               <a href="friends/finduserfriendid?userfriendid=${p.userfriendid.userid}">
-                <img src="images/${p.userfriendid.userimg}" width="64" height="64"></a>
+                <img src="images/touxiang/${p.userfriendid.userimg}" width="64" height="64"></a>
               <br>        
              	${p.userfriendid.username}
              	<c:if test="${p.userfriendid.usersex=='0'}">

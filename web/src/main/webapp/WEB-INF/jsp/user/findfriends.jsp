@@ -80,7 +80,7 @@
 				<c:forEach items="${page.result}" var="pr">
 					<tr>
 						
-						<td><img src="images/${pr.userimg}" width="34" height="34"></td>
+						<td><img src="images/touxiang/${pr.userimg}" width="34" height="34"></td>
 						<td>${pr.username}</td>
 						<td>${pr.usernickname}</td>
 						<!-- 性别 -->

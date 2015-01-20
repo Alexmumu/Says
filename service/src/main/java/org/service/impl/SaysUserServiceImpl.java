@@ -1,16 +1,20 @@
 package org.service.impl;
 
 import java.io.Serializable;
-
 import java.util.List;
+
 import org.dao.ISaysAlbumDao;
 import org.dao.ISaysRizhitypeDao;
 import org.dao.ISaysUserDao;
+import org.dao.ISaysUserwordDao;
 import org.entity.SaysAlbum;
 import org.entity.SaysFriends;
+import org.entity.SaysLeaveword;
 import org.entity.SaysRizhitype;
 import org.entity.SaysUser;
+import org.entity.SaysUserword;
 import org.service.ISaysAlbumService;
+import org.service.ISaysLeavewordService;
 import org.service.ISaysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -27,7 +31,8 @@ public class SaysUserServiceImpl implements ISaysUserService{
 	private ISaysAlbumDao albumdao;
 	@Autowired
 	private ISaysRizhitypeDao rizhidao;
-	
+	@Autowired
+	private ISaysUserwordDao userwordDao;
 
 
 	
@@ -74,7 +79,7 @@ public class SaysUserServiceImpl implements ISaysUserService{
 		     	
 		     	
 		    	SaysRizhitype rzt = new SaysRizhitype();
-		    	rzt.setTypename("秘密日志");
+		    	rzt.setTypename("个人日志");
 		    	SaysUser ur = new SaysUser();
 		    	ur.setUserid((String)s);
 		    	rzt.setUserid(ur);
@@ -82,6 +87,10 @@ public class SaysUserServiceImpl implements ISaysUserService{
 		    	Serializable rz=rizhidao.save(rzt);
 		     	System.out.println(rz.toString()+"默认日志类型");
 		     	
+		     	SaysUserword userword=new SaysUserword();
+		     	userword.setUserid(ur);
+		     	userword.setUserwordcontent("你很懒哦，暂时没有内容！");
+		     	this.userwordDao.save(userword);
 		     	return s;
 		}
 	}

@@ -46,7 +46,7 @@
 	</div>
 	<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 		<div class="am-panel-bd">
-			<a href="">{{d.msglist[i].data.fruser.username}}</a>申请与你为好友
+			<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window">{{d.msglist[i].data.fruser.username}}</a>申请与你为好友
 			<hr>
 			<b>申请理由：</b>{{d.msglist[i].data.shenqiliyou}}
 			<hr>
@@ -90,7 +90,7 @@
 						</div>
 						<div id="doc{{i}}"  class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >
 									{{d.msglist[i].fromname}}
 								</a> 评论你的说说 <br />
 								{{d.msglist[i].msctime}} <a href="Shuoshuo/shuoshuobyid?shuoid={{d.msglist[i].data.shuoid}}">点击查看</a>
@@ -117,7 +117,7 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 转发你的说说 <br />
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 转发你的说说 <br />
 								{{d.msglist[i].msctime}} <a href="Shuoshuo/shuoshuobyid?shuoid={{d.msglist[i].data.shuoid}}">点击查看</a>
 							</div>
 						</div>
@@ -142,7 +142,7 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的说说 <br />
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 赞了你的说说 <br />
 								{{d.msglist[i].msctime}} <a href="Shuoshuo/shuoshuobyid?shuoid={{d.msglist[i].data.shuoid}}">点击查看</a>
 							</div>
 						</div>
@@ -167,7 +167,7 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 评论了你的日志 <br />
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 评论了你的日志 <br />
 								{{d.msglist[i].msctime}} <a href="rizhi/getRizhiid?rizhiid={{d.msglist[i].data.rizhiid}}&rizhiuserid.userid={{d.msglist[i].data.rizhiuserid.userid}}">点击查看</a>
 							</div>
 						</div>
@@ -192,7 +192,7 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 转发了你的日志 <br />
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 转发了你的日志 <br />
 								{{d.msglist[i].msctime}} <a href="rizhi/getRizhiid?rizhiid={{d.msglist[i].data.rizhiid}}&rizhiuserid.userid={{d.msglist[i].data.rizhiuserid.userid}}">点击查看</a>
 							</div>
 						</div>
@@ -217,7 +217,7 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的日志 <br />
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 赞了你的日志 <br />
 								{{d.msglist[i].msctime}} <a href="rizhi/getRizhiid?rizhiid={{d.msglist[i].data.rizhiid}}&rizhiuserid.userid={{d.msglist[i].data.rizhiuserid.userid}}">点击查看</a>
 							</div>
 						</div>
@@ -242,8 +242,8 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 评论了你的相片 <br />
-								{{d.msglist[i].msctime}} <a href="album/getAlbumbyAlbumid?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 评论了你的相片 <br />
+								{{d.msglist[i].msctime}} <a href="photo/listphoto?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -253,7 +253,7 @@
 					<div class="am-panel am-panel-default">
 						<div class="am-panel-hd">
 							{{#if(d.msglist[i].mcstatus==1) { }}
-							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}},i')" class="am-panel-title"
+							<p onclick="updateMsgStatus('{{d.msglist[i].msgid}}','{{i}}')" class="am-panel-title"
 								data-am-collapse="{parent: '#accordion', target: '#doc{{i}}'}">
 								相片被转发
 								<span id="remove{{i}}" class="am-badge am-badge-warning"><i>1</i></span>
@@ -267,8 +267,8 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 转发了你的相片 <br />
-								{{d.msglist[i].msctime}} <a href="album/getAlbumbyAlbumid?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 转发了你的相片 <br />
+								{{d.msglist[i].msctime}} <a href="photo/listphoto?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -292,8 +292,8 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的相片 <br />
-								{{d.msglist[i].msctime}} <a href="album/getAlbumbyAlbumid?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 赞了你的相片 <br />
+								{{d.msglist[i].msctime}} <a href="photo/listphoto?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -316,7 +316,7 @@
 						</div>
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
-								<a href="">{{d.msglist[i].fromname}}</a> 
+								<a href="user/myhome?userid={{d.msglist[i].fromid}}"target="view_window" >{{d.msglist[i].fromname}}</a> 
 								在{{d.msglist[i].msctime}}的留言： <br />
 								 <p>{{d.msglist[i].data.leavewordcontent}}</p>
 							</div>

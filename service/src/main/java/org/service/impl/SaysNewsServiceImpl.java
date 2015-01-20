@@ -154,7 +154,10 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				if(news.getNewsstatus() == 2){
 					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
 					con.setRalaycontent(relay.getRelayfor());
-					shuoshuo.setShuocontent((shouShousDao.getById(relay.getRelayfrom())).getShuocontent());
+					SaysShuoshuo beishuoshuo=shouShousDao.getById(relay.getRelayfrom());
+					shuoshuo.setShuocontent(beishuoshuo.getShuocontent());
+					System.out.println(shuoshuo.getShuocontent() +"-------------");
+					shuoshuo.setShuoimg(beishuoshuo.getShuoimg());
 					boolean sign = shouShousDao.hasShuoByID(relay.getRelayfrom());
 					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
 					if(sign){
@@ -166,6 +169,7 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 						con.setFromname(fromuser.getUsernickname());
 						con.setContentfromid(relay.getRelayfrom());
 						((SaysShuoshuo)con.getData()).setShuocontent("〔该条说说内容已被删除〕");
+						shuoshuo.setShuoimg(null);
 //						shuoshuo.setShuocontent("〔该条说说内容已被删除〕");
 //						shouShousDao.update(shuoshuo);
 					}
@@ -284,15 +288,22 @@ public class SaysNewsServiceImpl implements ISaysNewsService {
 				if(news.getNewsstatus() == 2){
 					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
 					con.setRalaycontent(relay.getRelayfor());
+					SaysShuoshuo beishuoshuo=shouShousDao.getById(relay.getRelayfrom());
+					shuoshuo.setShuocontent(beishuoshuo.getShuocontent());
+					System.out.println(shuoshuo.getShuocontent() +"-------------");
+					shuoshuo.setShuoimg(beishuoshuo.getShuoimg());
 					boolean sign = shouShousDao.hasShuoByID(relay.getRelayfrom());
 					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
 					if(sign){
 						con.setFromid(fromuser.getUserid());
 						con.setFromname(fromuser.getUsernickname());
+						con.setContentfromid(relay.getRelayfrom());
 					}else{
 						con.setFromid(fromuser.getUserid());
 						con.setFromname(fromuser.getUsernickname());
+						con.setContentfromid(relay.getRelayfrom());
 						((SaysShuoshuo)con.getData()).setShuocontent("〔该条说说内容已被删除〕");
+						shuoshuo.setShuoimg(null);
 //						shuoshuo.setShuocontent("〔该条说说内容已被删除〕");
 //						shouShousDao.update(shuoshuo);
 					}

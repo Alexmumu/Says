@@ -126,7 +126,7 @@
 			<c:forEach items="${page1.result}" var="pro">
 				<li style="height: 80px; line-height: 78px;"><span
 					style="display: block; width: 80px; float: left;"><img
-						src="images/${pro.fromuserid.userimg}" alt=""
+						src="images/touxiang/${pro.fromuserid.userimg}" alt=""
 						class="am-comment-avatar" width="48" height="48"></span><span>${pro.leavewordcontent}</span><span
 					style="float: right;"> <a
 						onclick="tiaozhuan('Comments/toLeavword')" href="javascript:;"
