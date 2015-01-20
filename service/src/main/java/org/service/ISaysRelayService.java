@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.entity.SaysComments;
 import org.entity.SaysRelay;
+import org.entity.SaysUser;
 import org.vo.Page;
 
 public interface ISaysRelayService {
-	void saveSaysRelay(SaysRelay ar);
+	Serializable saveSaysRelay(SaysRelay ar);
 	void deleteSaysRelay(Serializable relayid);
 	int countByUseridSaysRelay(Serializable userid);
 	List<SaysRelay> findByUseridSaysRelay(Serializable userid);
@@ -20,4 +21,6 @@ public interface ISaysRelayService {
 	
 	public SaysRelay findByUseridAndRelayafterSaysRelay(
 			Serializable userid, Serializable relayafter);
+	
+	public boolean addRelay(SaysRelay sr,int type,SaysUser myuser,String alorrtypeId);
 }
