@@ -110,8 +110,12 @@ data-am-figure="{  pureview: 'auto' }">
               </div>
             </div>
             </figcaption>
-
-  
+           <c:if test="${p.data.phototype==1}">
+           <div><small class="am-article-meta" style="font-size: 14px;">
+											转载自 </small>
+										<small style="color: #236; font-size: 14px;">
+											<a href="user/myhome?userid=${p.fromid}"target="view_window">${p.fromname}</a></small></div>
+            </c:if>
 </li>
  </c:forEach> 
  </c:if>

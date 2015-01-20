@@ -82,7 +82,7 @@ public class PhotoControl implements ServletContextAware{
 	    model.addAttribute("album", this.albumDao.findAlbumByalbumid(albumid));
 	    model.addAttribute("yuedu", this.browseService.countByBrowseforSaysBrowse(albumid));
 	    System.out.println("nihao"+page1.getResult().size());
-	    
+	    System.out.println();
 	    return "photo";
 	}
 	

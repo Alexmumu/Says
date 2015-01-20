@@ -10,6 +10,7 @@ import java.util.List;
 
 
 
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.vo.ContentData;
@@ -110,6 +112,13 @@ public class SaysShuoShuoController implements ServletContextAware {
 		this.shouService.deleteShuoShuo(shuoid);
 		SaysUser user = (SaysUser)session.getAttribute("myuser");
 		return "redirect:/Shuoshuo/toshuoshuo?userid="+user.getUserid();
+	}
+	
+	@RequestMapping("/shuoshuobyid")
+	public String shuoshuobyid(String shuoid,Model model){
+		ContentData<SaysShuoshuo> con= this.shouService.getshuoshuobyid(shuoid);
+		model.addAttribute("con", con);
+		return "shuoshuo/shuoshuobyid";
 	}
 	
 	public void setServletContext(ServletContext arg0) {

@@ -27,7 +27,9 @@
 <body style="background-color: rgb(237, 237, 239);" >
 <div class="am-g ">
 		<div class="am-container">
+		
 		<div class="am-u-lg-12 block">
+		
 <c:if test="${userid==myuser.userid}">
 <div style="margin-bottom:  160px;">
 <form class="am-form" action="Shuoshuo/addshuoshuo"

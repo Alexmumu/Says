@@ -8,9 +8,13 @@ import org.dao.ISaysCommentsDao;
 import org.dao.ISaysNewsDao;
 import org.dao.ISaysPhotoDao;
 import org.dao.ISaysRelayDao;
+import org.dao.ISaysUserDao;
 import org.entity.SaysAlbum;
 import org.entity.SaysNews;
 import org.entity.SaysPhoto;
+import org.entity.SaysRelay;
+import org.entity.SaysShuoshuo;
+import org.entity.SaysUser;
 import org.service.AbstractBaseService;
 import org.service.ISaysLikeService;
 import org.service.ISaysNewsService;
@@ -35,6 +39,9 @@ public class SaysPhotoServiceImpl extends AbstractBaseService implements ISaysPh
      
      @Autowired 
      private ISaysNewsDao newDao;
+     
+     @Autowired
+     private ISaysUserDao userdao;
      
 	@Override
 	public Serializable addPhotoIntoAlbum(SaysPhoto ph) {
@@ -72,7 +79,17 @@ public class SaysPhotoServiceImpl extends AbstractBaseService implements ISaysPh
 			//统计点赞
 			conn.setDianzannum(likeDao.countByLikeforSaysLike(ph.getPhotoid()));
 			
-			
+			if(ph.getPhototype() == 1){
+				
+				SaysRelay relay = relDao.findByUseridAndRelayafterSaysRelay(((SaysPhoto)conn.getData()).getUserid().getUserid(), ((SaysPhoto)conn.getData()).getPhotoid());
+			//	relDao.initialize(relay.getUseridare());
+				conn.setRalaycontent(relay.getRelayfor());
+				SaysUser fromuser = userdao.getById(relay.getUseridare().getUserid());
+				conn.setFromid(fromuser.getUserid());
+				conn.setFromname(fromuser.getUsername());
+				System.out.println("----------源ID----------");
+				System.out.println(conn.getFromname());
+			}
 			content.add(conn);
 		}
 		pagecount.setResult(content);
