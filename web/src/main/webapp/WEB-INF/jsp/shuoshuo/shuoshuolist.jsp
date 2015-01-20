@@ -74,7 +74,8 @@
 						<div class="pop-triangle"></div>
 						<!--日志的例子-->
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">${p.data.userid.username} </a> 于
+							<a class="am-link-muted" href="user/myhome?userid=${p.data.userid.userid }" target="view_window">
+							${p.data.userid.username} </a> 于
 							 ${p.data.shuodate } 发表了一篇说说
 							 <span class="am-icon-eye am-fr">
 							 	 ${p.yuedunum }人浏览
@@ -111,7 +112,7 @@
 								</span>
 								<c:if test="${p.data.userid.userid==myuser.userid }">
 								<span>
-									<a  href="Shuoshuo/deleteshuoshuo?shuoid=${p.data.shuoid }"><i class="am-icon-trash am-icon-sm"></i></a>
+									<a  href="Shuoshuo/deleteshuoshuo?shuoid=${p.data.shuoid }" target="view_window"><i class="am-icon-trash am-icon-sm"></i></a>
 								</span>
 								</c:if>
 							</div>
@@ -142,7 +143,8 @@
 						<div class="pop-triangle"></div>
 						<!--日志的例子-->
 						<div class="am-g am-text-xs">
-							<a class="am-link-muted" href="">${p.data.userid.username}</a> 于
+							<a class="am-link-muted" href="user/myhome?userid=${p.data.userid.userid }" target="view_window">
+							${p.data.userid.username}</a> 于
 							 ${p.data.shuodate} 转发了一篇说说
 							 <span class="am-icon-eye am-fr">
 							 	 ${p.yuedunum}人浏览
@@ -155,7 +157,7 @@
 							${p.ralaycontent}<br><hr>
 						</div>
 						<div class="am-g am-text-sm">
-							<a class="am-link-muted" href="">
+							<a class="am-link-muted" href="user/myhome?userid=${p.fromid }" target="view_window">
 								<i class="am-icon-link"> </i> ${p.fromname}∶
 							</a>
 								${p.data.shuocontent }
