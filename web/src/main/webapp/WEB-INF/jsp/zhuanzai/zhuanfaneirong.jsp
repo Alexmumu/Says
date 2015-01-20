@@ -88,9 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<c:forEach items="${page.result}" var="pro">
   <li style="height:80px; line-height:78px;"><span style="display:block;width:80px; float:left;"><img  src="images/${pro.userid.userimg}" alt="" class="am-comment-avatar" width="48" height="48"></span><span>${pro.relayfor}</span><span style="float:right;"> <a href="javascript:void(0);" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>回复(0)</a></span></li>
   <li ><span style="font-size: 12px;">${pro.userid.usernickname} 在</span><span style="color: blue;">${pro.relaytime}</span><span style="font-size: 12px;">进行了转发</span></li>
-  <a  id="sanchu" onclick="javascript:window.parent.location.reload();" style="background-color:A2A2A2; font-size:14px; color:blue; margin-top: -118px ; float:right;" class="am-close am-close-alt am-close-spin" href="Comments/deleteComment?commentid=${pro.relayid}">
-  x
-</a>
+  
 </c:forEach>
   </ul>
  </div>

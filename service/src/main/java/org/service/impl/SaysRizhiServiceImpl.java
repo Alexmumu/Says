@@ -66,17 +66,18 @@ public class SaysRizhiServiceImpl implements ISaysRizhiService {
 	public ContentData<SaysRizhi> SaysRizhiById(Serializable rizhiid)
 			throws DataAccessException {
 		// TODO Auto-generated method stub
-		//封装一天日志的所有信息
+		//封装日志的所有信息
 		ContentData<SaysRizhi> data = new ContentData<SaysRizhi>();
 		System.out.println(rizhiid);
 		SaysRizhi rz=this.saysRizhiDao.SaysRizhiById(rizhiid);
 		saysRizhiDao.initialize(rz.getRizhiuserid().getUserid());
 	    saysRizhiDao.initialize(rz.getRizhitype());
-		data.setPinglunnum(this.saysCommentsDao.CountComments(rz.getRizhiuserid().getUserid(),(String)rizhiid));
+		data.setPinglunnum(this.saysCommentsDao.CountComments(rizhiid,"1"));
 		data.setDianzannum(this.saysLikeDao.countByLikeforSaysLike(rizhiid));
 		data.setZhuanfanum(this.saysRelayDao.countByRelayfromSaysRelay(rizhiid));
 		data.setYuedunum(this.saysBrowseDao.countByBrowseforSaysBrowse(rizhiid));
 		data.setData(rz);
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd HH:MM:SS");
 		Date date = rz.getRizhidate();
 		data.setDatadate(sdf.format(date));

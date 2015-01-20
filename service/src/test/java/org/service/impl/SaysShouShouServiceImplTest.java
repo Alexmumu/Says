@@ -117,6 +117,16 @@ public class SaysShouShouServiceImplTest extends TestCase{
 // 	assertTrue(istest);
 // }
  
+ public void getShuoShuobyid()
+   {
+		Boolean istest=true;
+		
+		 ContentData<SaysShuoshuo> con=ss.getshuoshuobyid("S006");
+		System.out.println(ss.toString());
+		assertTrue(true);
+           
+
+   }
  public void testdeleteShuoShuo(){
 	 assertTrue(ss.deleteShuoShuo("S006"));
  }
