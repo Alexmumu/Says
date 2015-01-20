@@ -1,5 +1,10 @@
 
-$(function(){	
+$(function(){
+	$(document).ajaxStart(function(){
+    	$('#zhuanzhuan').show();
+	}).ajaxStop(function(){
+		$('#zhuanzhuan').hide();
+	});
 	laypage({
 	    cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象,
 	    pages: $('#zongyeshu').val(), //总页数

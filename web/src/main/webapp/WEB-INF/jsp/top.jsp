@@ -93,7 +93,7 @@
 								<a href="">
 									{{d.msglist[i].fromname}}
 								</a> 评论你的说说 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="Shuoshuo/shuoshuobyid?shuoid={{d.msglist[i].data.shuoid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -118,7 +118,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 转发你的说说 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="Shuoshuo/shuoshuobyid?shuoid={{d.msglist[i].data.shuoid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -143,7 +143,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的说说 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="Shuoshuo/shuoshuobyid?shuoid={{d.msglist[i].data.shuoid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -168,7 +168,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 评论了你的日志 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="rizhi/getRizhiid?rizhiid={{d.msglist[i].data.rizhiid}}&rizhiuserid.userid={{d.msglist[i].data.rizhiuserid.userid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -193,7 +193,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 转发了你的日志 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="rizhi/getRizhiid?rizhiid={{d.msglist[i].data.rizhiid}}&rizhiuserid.userid={{d.msglist[i].data.rizhiuserid.userid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -218,7 +218,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的日志 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="rizhi/getRizhiid?rizhiid={{d.msglist[i].data.rizhiid}}&rizhiuserid.userid={{d.msglist[i].data.rizhiuserid.userid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -243,7 +243,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 评论了你的相片 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="album/getAlbumbyAlbumid?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -268,7 +268,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 转发了你的相片 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="album/getAlbumbyAlbumid?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
 							</div>
 						</div>
 					</div>
@@ -293,7 +293,7 @@
 						<div id="doc{{i}}" class="am-panel-collapse am-collapse">
 							<div class="am-panel-bd">
 								<a href="">{{d.msglist[i].fromname}}</a> 赞了你的相片 <br />
-								{{d.msglist[i].msctime}} <a href="">点击查看</a>
+								{{d.msglist[i].msctime}} <a href="album/getAlbumbyAlbumid?albumid={{d.msglist[i].data.albumid.albumid}}">点击查看</a>
 							</div>
 						</div>
 					</div>

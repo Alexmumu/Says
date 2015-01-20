@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public class SaysFrequestDaoImpl extends AbstractBaseDao<SaysFrequest> implements
 		ISaysFrequestDao{
 
-	private static final String FIND_HQL="select fq,s2 from SaysFrequest fq,SaysUser s2 where fq.fruser.userid=s2.userid and fq.fruser.userid=?";
+	private static final String FIND_HQL="select fq from SaysFrequest fq where fq.fruser.userid=?";
 	private static final String FINDBYFRID_HQL="select f from SaysFrequest f where f.frid=?";
 	private static final String COUNT_HQL="select count(sf) from SaysFrequest sf where sf.fruser.userid=?";
 	private static final String INFO_HQL="select f from SaysFrequest f where  f.fruser.userid=? and f.fruserare.userid=?";

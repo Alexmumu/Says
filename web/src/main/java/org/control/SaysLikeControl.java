@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.dao.ISaysLikeDao;
 import org.entity.SaysLike;
 import org.entity.SaysUser;
@@ -38,10 +40,9 @@ public class SaysLikeControl {
 	
 	//点击的时候获取点赞好友
 	@RequestMapping("/clickReturnDianZanNum")
-	public @ResponseBody Map<String,Object> clickReturnDianZanNum(SaysLike sl,Model model){
-		System.out.println(sl.getUserid().getUserid());
-		System.out.println(sl.getUseridare().getUserid());
-		System.out.println(sl.getLikefor());
+	public @ResponseBody Map<String,Object> clickReturnDianZanNum(SaysLike sl,Model model,HttpSession session){
+		SaysUser myuser=(SaysUser) session.getAttribute("myuser");
+		sl.setUserid(myuser);
 		saysLikeServiceImpl.saveSaysLike(sl);
 		int aa=saysLikeServiceImpl.countByLikeforAndUseridSaysLike(sl.getLikefor(), sl.getUseridare().getUserid());
 		System.out.println("YSha"+aa);

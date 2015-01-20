@@ -23,11 +23,23 @@
   	<script src="js/laypage/laypage.js"></script>
    <script src="js/laytpl.js"></script>
   <script src="js/laytpl.js"></script>
+  <script src="js/dianzan.js"></script>
+  <script type="text/javascript">
+//为了让父窗口弹出模态窗 里面方的是ifream
+function tanchuang(url){
+	//1.获取父窗口的元素 这个元素我方在了top。jsp里面 然后改属性 就是改url地址
+	$('#myframe',window.parent.document).attr('src',url);
+	//2.使用模态窗口的方法 激活弹出
+	$('#my-popup',window.parent.document).modal('open');
+}
+</script>
 </head>
 <body style="background-color: rgb(237, 237, 239);" >
 <div class="am-g ">
 		<div class="am-container">
+		
 		<div class="am-u-lg-12 block">
+		
 <c:if test="${userid==myuser.userid}">
 <div style="margin-bottom:  160px;">
 <form class="am-form" action="Shuoshuo/addshuoshuo"
@@ -98,17 +110,17 @@
 						<div class="am-g am-text-sm">
 							<div class="am-fr">
 								<span>
-									<button href="" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>评论 (${p.pinglunnum })</button>
+									<button onclick="tanchuang('Comments/toCommentsaa?commentsforid=${p.data.shuoid}&userid.userid=${p.data.userid.userid}&type=1')"  class="am-link-muted"><i class="am-icon-comments"></i>评论 (${p.pinglunnum })</button>
 								</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 						<span>
-						<button href="" class="am-link-muted" alt="转发">
+						<button onclick="tanchuang('Relay/findall?type=1&useridare.userid=${p.data.userid.userid}&relayfrom=${p.contentfromid}')" class="am-link-muted" alt="转发">
 				<i class="am-icon-share" alt="转发"></i>
 				转发 (${p.zhuanfanum })</button>
 								</span>
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<span>
-									<button href="" class="am-link-muted"><i class="am-icon-thumbs-up"></i> ${p.dianzannum }</button>
+									<button onclick="dianzan('${p.data.userid.userid}','${p.data.shuoid}',this)" class="am-link-muted"><i class="am-icon-thumbs-up"></i> ${p.dianzannum }</button>
 								</span>
 								<c:if test="${p.data.userid.userid==myuser.userid }">
 								<span>
@@ -168,18 +180,18 @@
 						<div class="am-g am-text-sm">
 							<div class="am-fr">
 								<span>
-									<button href="" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>评论 (${p.pinglunnum })</button>
+									<button onclick="tanchuang('Comments/toCommentsaa?commentsforid=${p.data.shuoid}&userid.userid=${p.data.userid.userid}&type=1')"   class="am-link-muted"><i class="am-icon-comments"></i>评论 (${p.pinglunnum })</button>
 								</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 						<span>
-						<button href="" class="am-link-muted" alt="转发">
+						<button onclick="tanchuang('Relay/findall?type=1&useridare.userid=${p.data.userid.userid}&relayfrom=${p.contentfromid}')" class="am-link-muted" alt="转发">
 				<i class="am-icon-share" alt="转发"></i>
 				转发 (${p.zhuanfanum })</button>
 								</span>
 								
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<span>
-									<button href="" class="am-link-muted"><i class="am-icon-thumbs-up"></i> ${p.dianzannum }</button>
+									<button onclick="dianzan('${p.data.userid.userid}','${p.data.shuoid}',this)" class="am-link-muted"><i class="am-icon-thumbs-up"></i> ${p.dianzannum }</button>
 								</span>
 								<c:if test="${p.data.userid.userid==myuser.userid }">
 								<span>

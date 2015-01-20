@@ -22,6 +22,7 @@
 <script src="js/haoyoudongtai.js"></script>
 <script src="js/laytpl.js"></script>
 <script src="js/laypage/laypage.js"></script>
+<script src="js/dianzan.js"></script>
 
  <style type="text/css">
   		.line-clamp{
@@ -33,6 +34,16 @@
 					}
 </style>
 
+<script type="text/javascript">
+//为了让父窗口弹出模态窗 里面方的是ifream
+function tanchuang(url){
+	//1.获取父窗口的元素 这个元素我方在了top。jsp里面 然后改属性 就是改url地址
+	$('#myframe',window.parent.document).attr('src',url);
+	//2.使用模态窗口的方法 激活弹出
+	$('#my-popup',window.parent.document).modal('open');
+}
+</script>
+
 <!-- 访客记录的模版开始 -->
 <script type="text/html" id="fangkeTpl">
     	<ul class="am-avg-sm-3" id="fangke" >
@@ -40,8 +51,8 @@
     		< len; i++){ }}
 			<li>
     			<div style="padding:5px;">
-    				<a href="javascrip:;">
-    					<img  class="am-circle" content="{{d.result[i].fromuserid.username}} 于  {{d.result[i].fangketime}}"  src="images/touxiang1.jpg"  width="64" height="64"></a>
+    				<a href="user/myhome?userid={{d.result[i].fromuserid.userid}}" target="view_window" >
+    					<img  class="am-circle" content="{{d.result[i].fromuserid.usernickname}} 于  {{d.result[i].fangketime}}"  src="images/touxiang/{{d.result[i}.fromuserid.userimg}"  width="64" height="64"></a>
 				</div>
     		</li>
     		{{# } }}
@@ -116,23 +127,22 @@
 						<div class="am-g am-text-sm">
 							<div class="am-fr">
 								<span>
-									<button href="" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>
+									<button onclick="tanchuang('Comments/toCommentsaa?commentsforid={{d.newslist[i].data.shuoid}}&userid.userid={{d.newslist[i].data.userid.userid}}&type=1')"  class="am-link-muted"><i class="am-icon-comments"></i>
 										评论 ({{d.newslist[i].pinglunnum}})</button>
 								</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 						<span>
-						<button href="" class="am-link-muted" alt="转发">
+						<button onclick="tanchuang('Relay/findall?type=1&useridare.userid={{d.newslist[i].data.userid.userid}}&relayfrom={{d.newslist[i].contentfromid}}')" class="am-link-muted" alt="转发">
 				<i class="am-icon-share" alt="转发"></i>
 				转发 ({{d.newslist[i].zhuanfanum}})</button>
 								</span>
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<span>
-									<button href="" class="am-link-muted">
-									<i class="am-icon-thumbs-up"></i> {{d.newslist[i].dianzannum}}</button>
+									<button onclick="dianzan('{{d.newslist[i].data.userid.userid}}','{{d.newslist[i].data.shuoid}}',this)" class="am-link-muted">
+									<i class="am-icon-thumbs-up"></i>{{d.newslist[i].dianzannum}}</button>
 								</span>
-							
-						
-							</div>
+								
+								</div>
 						</div>
 
 
@@ -218,24 +228,22 @@
 						<div class="am-g am-text-sm">
 							<div class="am-fr">
 								<span>
-									<button href="" data-am-modal="{target: '#my-popup'}" class="am-link-muted">
-										<i class="am-icon-comments"></i>
+									<button onclick="tanchuang('Comments/toCommentsaa?commentsforid={{d.newslist[i].data.rizhiid}}&userid.userid={{d.newslist[i].data.rizhiuserid.userid}}&type=2')"  class="am-link-muted"><i class="am-icon-comments"></i>
 										评论 ({{d.newslist[i].pinglunnum}})</button>
 								</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 						<span>
-						<button href="" class="am-link-muted" alt="转发">
+						<button onclick="tanchuang('Relay/findall?type=2&useridare.userid={{d.newslist[i].data.rizhiuserid.userid}}&relayfrom={{d.newslist[i].data.rizhiid}}')" class="am-link-muted" alt="转发">
 				<i class="am-icon-share" alt="转发"></i>
 				转发 ({{d.newslist[i].zhuanfanum}})</button>
 								</span>
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<span>
-									<button href="" class="am-link-muted"><i class="am-icon-thumbs-up"></i> 
-									{{d.newslist[i].dianzannum}}</button>
+									<button onclick="dianzan('{{d.newslist[i].data.rizhiuserid.userid}}','{{d.newslist[i].data.rizhiid}}',this)" class="am-link-muted">
+									<i class="am-icon-thumbs-up"></i>{{d.newslist[i].dianzannum}}</button>
 								</span>
-							
-						
-							</div>
+								
+								</div>
 						</div>
 
 
@@ -270,7 +278,7 @@
 						<div class="am-g am-text-xs">
 							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}">
 							{{d.newslist[i].data.userid.username}}</a> 于
-							{{d.newslist[i].datadate}} 上传了一张照片到<a class="am-link-muted" href=" ">
+							{{d.newslist[i].datadate}} 上传了一张照片到<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}">
 							<i class="am-icon-angle-double-left"></i>
 							{{d.newslist[i].data.albumid.albumtitle}}
 							<i class="am-icon-angle-double-right"></i></a>
@@ -283,7 +291,7 @@
 						<div class="am-g am-text-xs">
 							<a class="am-link-muted" href="user/myhome?userid={{d.newslist[i].data.userid.userid}}">
 							{{d.newslist[i].data.userid.username}}</a> 于
-							{{d.newslist[i].datadate}} 转载了一张照片到<a class="am-link-muted" href=" ">
+							{{d.newslist[i].datadate}} 转载了一张照片到<a class="am-link-muted" href="photo/listphoto?albumid={{d.newslist[i].data.albumid.albumid}}&userid={{d.newslist[i].data.userid.userid}}">
 							<i class="am-icon-angle-double-left"></i>
 							{{d.newslist[i].data.albumid.albumtitle}}
 							<i class="am-icon-angle-double-right"></i></a>
@@ -308,42 +316,26 @@
 						<div class="am-g am-text-sm">
 							<div class="am-fr">
 								<span>
-									<button href="" data-am-modal="{target: '#my-popup'}" class="am-link-muted">
-									<i class="am-icon-comments"></i>评论 ({{d.newslist[i].pinglunnum}})
-									</button>
-
-<!--评论弹出框-->
-					<div class="am-popup" id="my-popup" style="display: none;">
-						<div class="am-popup-inner">
-							<div class="am-popup-hd">
-								<h4 class="am-popup-title">评论输入窗口</h4>
-								<span data-am-modal-close="" class="am-close">×</span>
-							</div>
-							<div class="am-popup-bd">
-
-								 <iframe src="pinglun.html" name="rightF" width="600px" height="550px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
-
-					</div>
-					</div>
-					</div>
-<!--评论弹出框结束-->
-
-					</span>
+									<button onclick="tanchuang('Comments/toCommentsaa?commentsforid={{d.newslist[i].data.photoid}}&userid.userid={{d.newslist[i].data.userid.userid}}&type=3')"  class="am-link-muted"><i class="am-icon-comments"></i>
+										评论 ({{d.newslist[i].pinglunnum}})</button>
+								</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 						<span>
-						<button href="" class="am-link-muted" alt="转发">
+						<button onclick="tanchuang('Relay/findall?type=3&useridare.userid={{d.newslist[i].data.userid.userid}}&relayfrom={{d.newslist[i].data.photoid}}')" class="am-link-muted" alt="转发">
 				<i class="am-icon-share" alt="转发"></i>
 				转发 ({{d.newslist[i].zhuanfanum}})</button>
 								</span>
 									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<span>
-									<button href="" class="am-link-muted"><i class="am-icon-thumbs-up"></i> 
-									  {{d.newslist[i].dianzannum}}</button>
+									<button onclick="dianzan('{{d.newslist[i].data.userid.userid}}','{{d.newslist[i].data.photoid}}',this)" class="am-link-muted">
+									<i class="am-icon-thumbs-up"></i>{{d.newslist[i].dianzannum}}</button>
 								</span>
-							
-						
-							</div>
+								
+								</div>
 						</div>
+
+
+
 
 					</div>
 
@@ -386,7 +378,9 @@
 		<div class="am-container">
 			<!-- 左边边栏开始 -->
 			<div class="am-u-lg-9  " id="showdongtai">
-			&nbsp;
+					<div class="am-g am-text-center" id="zhuanzhuan">
+									<i style="font-size:65px;" class="am-icon-refresh am-icon-spin"></i>
+				</div>
 			</div>
 			<!--左边栏结束 -->
 			<!-- -----------------分割线---------------------- -->
@@ -414,6 +408,11 @@
 	</div>
 	<!-- 主页展示核心结束 -->
 	
-
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+  <a href="#top" title="回到顶部" class="">
+    <span class="am-gotop-title">回到顶部</span>
+    <i class="am-gotop-icon am-icon-chevron-up"></i>
+  </a>
+</div>
 </body>
 </html>

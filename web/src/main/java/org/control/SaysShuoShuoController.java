@@ -10,6 +10,7 @@ import java.util.List;
 
 
 
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.vo.ContentData;
@@ -43,23 +45,23 @@ public class SaysShuoShuoController implements ServletContextAware {
 	public String  findAllShuoShuo(String userid,
 			Page<SaysShuoshuo> page,Model model){
 	        
-			if(page.getPageNo()==null){
-	        	page.setPageNo(1);
-	        }
-
+		if(page.getPageNo()==null){
+			page.setPageNo(1);
+		}
+		int pageNo2=page.getPageNo();
 			Page<ContentData<Object>> page2 =this.shouService.findAllShuoShuo(userid, page, 0);
 			model.addAttribute("page2", page2.getResult());
 			model.addAttribute("page1", page2);
 			model.addAttribute("userid", userid);
-			
-			if(page2.getPageNo()==null){
-	        	page2.setPageNo(1);
-	        }
+			page2.setPageNo(pageNo2);
+	
 			
 			
 			System.out.println("----------------page2长度-------------");
 			System.out.println(page2.getPageNo());
 			System.out.println(page2.getPageSize());
+			System.out.println(page2.getPageSum());
+			
 			System.out.println(page2.getResult().size());
 		
 			return "shuoshuo/shuoshuolist";
@@ -110,6 +112,13 @@ public class SaysShuoShuoController implements ServletContextAware {
 		this.shouService.deleteShuoShuo(shuoid);
 		SaysUser user = (SaysUser)session.getAttribute("myuser");
 		return "redirect:/Shuoshuo/toshuoshuo?userid="+user.getUserid();
+	}
+	
+	@RequestMapping("/shuoshuobyid")
+	public String shuoshuobyid(String shuoid,Model model){
+		ContentData<SaysShuoshuo> con= this.shouService.getshuoshuobyid(shuoid);
+		model.addAttribute("con", con);
+		return "shuoshuo/shuoshuobyid";
 	}
 	
 	public void setServletContext(ServletContext arg0) {

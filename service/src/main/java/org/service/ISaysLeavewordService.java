@@ -9,7 +9,7 @@ import org.vo.Page;
 
 public interface ISaysLeavewordService {
 	public Page<SaysLeaveword> findAllSaysLeaveword(Page<SaysLeaveword> page,SaysLeaveword sysleaveword)  ;
-	void saveSaysLeaveword(SaysLeaveword sl);
+	Serializable saveSaysLeaveword(SaysLeaveword sl);
 	void deleteSaysLeaveword(Serializable leavewordid);
 	int countAllSaysLeaveword(Serializable userid,Serializable levewodidstatus);
 }

@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="css/amazeui.css">
    <script src="js/jquery.min.js"></script>
   <script src="js/amazeui.js"></script>
+ <script src="js/dianzan.js"></script>
   <script type="text/javascript">
 //为了让父窗口弹出模态窗 里面方的是ifream
 function tanchuang(url){
@@ -24,6 +25,7 @@ function tanchuang(url){
 	$('#my-popup',window.parent.document).modal('open');
 }
 </script>
+
 </head>
 <body style="background-color: rgb(237, 237, 239);" >
 <div class="am-g am-animation-slide-left ">
@@ -73,45 +75,29 @@ data-am-figure="{  pureview: 'auto' }">
    <figcaption class="am-figure-capition-btm"> <div class="am-g am-text-sm">
               <div class="">
                 <span>
-                  <a href="javascript:void(0);" data-am-modal="{target: '#my-popup'}" class="am-link-muted"><i class="am-icon-comments"></i>评论(${p.pinglunnum})</a>
+                  <a onclick="tanchuang('Comments/toCommentsaa?commentsforid=${p.data.photoid}&userid.userid=${p.data.userid.userid}&type=3')"  class="am-link-muted"><i class="am-icon-comments"></i>评论(${p.pinglunnum})</a>
  
-<!--评论弹出框-->
-  <div class="am-popup" id="my-popup" style="display: none;">
-    <div class="am-popup-inner">
-      <div class="am-popup-hd">
-        <h4 class="am-popup-title">评论输入窗口</h4>
-        <span data-am-modal-close="" class="am-close">×</span>
-      </div>
-      <div class="am-popup-bd">
-
-         <iframe src="pinglun.html" name="rightF" width="600px" height="550px" marginheight="0" marginwidth="0" style="margin: 0px;padding: 0px;"> </iframe>
-
-  </div>
-  </div>
-  </div>
-  
-    
-
-  
-  
-<!--评论弹出框结束-->
           </span>
           <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span>
-            <a href="" class="am-link-muted" alt="转发">
+            <a onclick="tanchuang('Relay/findall?type=3&useridare.userid=${p.data.userid.userid}&relayfrom=${p.data.photoid}')" class="am-link-muted" alt="转发">
         <i class="am-icon-share" alt="转发"></i>
         转发(${p.zhuanfanum})</a>
                 </span>
                   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span>
-                  <a href="" class="am-link-muted"><i class="am-icon-thumbs-up"></i>赞(${p.dianzannum})</a>
+                  <a onclick="dianzan('${p.data.userid.userid}','${p.data.photoid}',this)" class="am-link-muted"><i class="am-icon-thumbs-up"></i>赞(${p.dianzannum})</a>
                 </span>
 
               </div>
             </div>
             </figcaption>
-
-  
+           <c:if test="${p.data.phototype==1}">
+           <div><small class="am-article-meta" style="font-size: 14px;">
+											转载自 </small>
+										<small style="color: #236; font-size: 14px;">
+											<a href="user/myhome?userid=${p.fromid}"target="view_window">${p.fromname}</a></small></div>
+            </c:if>
 </li>
  </c:forEach> 
  </c:if>

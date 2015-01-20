@@ -20,6 +20,16 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.js"></script>
+  <script src="js/dianzan.js"></script>
+  <script type="text/javascript">
+//为了让父窗口弹出模态窗 里面方的是ifream
+function tanchuang(url){
+	//1.获取父窗口的元素 这个元素我方在了top。jsp里面 然后改属性 就是改url地址
+	$('#myframe',window.parent.document).attr('src',url);
+	//2.使用模态窗口的方法 激活弹出
+	$('#my-popup',window.parent.document).modal('open');
+}
+</script>
 
 <style type="text/css">
 body {
@@ -72,33 +82,18 @@ body {
 				<div class="am-g am-text-sm">
 					<div class="am-fr">
 						<span>
-							<button href="" data-am-modal="{target: '#my-popup'}"
+							<button onclick="tanchuang('Comments/toCommentsaa?commentsforid=${srz.data.rizhiid}&userid.userid=${srz.data.rizhiuserid.userid}&type=2')"  data-am-modal="{target: '#my-popup'}"
 								class="am-link-muted">
 								<i class="am-icon-comments"></i>评论(${srz.pinglunnum})
-							</button> <!--评论弹出框-->
-							<div class="am-popup" id="my-popup" style="display: none;">
-								<div class="am-popup-inner">
-									<div class="am-popup-hd">
-										<h4 class="am-popup-title">评论输入窗口</h4>
-										<span data-am-modal-close="" class="am-close">×</span>
-									</div>
-									<div class="am-popup-bd">
-
-										<iframe src="pinglun.html" name="rightF" width="600px"
-											height="550px" marginheight="0" marginwidth="0"
-											style="margin: 0px; padding: 0px;"> </iframe>
-
-									</div>
-								</div>
-							</div> <!--评论弹出框结束-->
-						</span> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span> <c:if
-								test="${srz.data.rizhiuserid.userid!=myuser.userid}">
-								<button href="" class="am-link-muted" alt="转发">
+							</button> 
+						</span> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span> 
+						<c:if 	test="${srz.data.rizhiuserid.userid!=myuser.userid}">
+								<button onclick="tanchuang('Relay/findall?type=2&useridare.userid=${srz.data.rizhiuserid.userid}&relayfrom=${srz.data.rizhiid}')" class="am-link-muted" alt="转发">
 									<i class="am-icon-share" alt="转发"></i> 转发(${srz.zhuanfanum})
 								</button>
 							</c:if>
 						</span> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span>
-							<button href="" class="am-link-muted">
+							<button onclick="dianzan('${srz.data.rizhiuserid.userid}','${srz.data.rizhiid}',this)" class="am-link-muted">
 								<i class="am-icon-thumbs-up"></i>赞(${srz.dianzannum})
 							</button>
 						</span>

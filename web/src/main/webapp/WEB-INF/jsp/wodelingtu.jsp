@@ -37,7 +37,7 @@
 		<div class="am-u-lg-12 block" style="padding: 0 20px;">
 		<div class="am-u-lg-3">
 			<div class="am-g" style="margin-top:20px;">
-				<img class="am-img-thumbnail"  src="http://imgsize.ph.126.net/?imgurl=http://imglf0.ph.126.net/zWJqlfYp6_2J_rykisp63g==/2210985942162543330.jpg_180x180x0x90.jpg">
+				<img class="am-img-thumbnail"  src="images/touxiang/${zyuser.userimg }">
 			</div>
 		</div>
 		<div class="am-u-lg-9">
@@ -74,6 +74,11 @@
         $(this).height(mainheight);
     });
 </script>
-	
+		<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+  <a href="#top" title="回到顶部" class="">
+    <span class="am-gotop-title">回到顶部</span>
+    <i class="am-gotop-icon am-icon-chevron-up"></i>
+  </a>
+</div>
 </body>
 </html>

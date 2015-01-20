@@ -1,5 +1,11 @@
 
 $(function(){
+	$(document).ajaxStart(function(){
+    	$('#zhuanzhuan').show();
+	}).ajaxStop(function(){
+		$('#zhuanzhuan').hide();
+	});
+	
 	wokanguoshui();
 	shuikanguowo();
 	laypage({

@@ -124,6 +124,9 @@ public class friendsControl {
 			model.addAttribute("msg", msg2);
 		}
 		
+		   SaysUser  u= new SaysUser();
+		   u.setUserid(saysfrequest.getFruserare().getUserid());
+		   msg1.setUserid(u);
 	 	   msg1.setMcfromid((String) a);
 	 	   msg1.setMctype(1);
 	 	   msg1.setMcstatus(1);
@@ -134,6 +137,7 @@ public class friendsControl {
 	 	   {
 	 		  saysmsgcenterserviceImpl.addMsg(msg1);
 	 	   }
+	 	   
 		System.out.println(saysfrequest.getFruser().getUserid());
 		return "user/myfriends";
 	}

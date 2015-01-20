@@ -49,6 +49,7 @@ public class SaysFriendsServiceImpl implements ISaysFriendsService {
 		
 		boolean istest=false;
 		List i=friendsDao.selectUserAnduserfriendid(syasfriends.getUserid().getUserid(), syasfriends.getUserfriendid().getUserid());
+
 		
 		if(i.size()!=0)
 		{
@@ -58,10 +59,10 @@ public class SaysFriendsServiceImpl implements ISaysFriendsService {
 			if(addf!=null)
 			{
 				System.out.println("好友添加成功");
-				istest=true;
+				
 			}
 		}
-		return istest;
+		return syasfriends;
 		
 	}
 

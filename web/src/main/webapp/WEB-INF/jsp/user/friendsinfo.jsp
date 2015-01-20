@@ -47,7 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="am-panel-bd">
             <div class="am-g">
               <div class="am-u-md-4">
-                 <img src="images/${uf.userimg}" alt="${uf.username}">
+                 <a href="user/myhome?userid=${uf.userid}"target="view_window"><img src="images/${uf.userimg}" alt="${uf.username}"></a>
+
               </div>
               <div class="am-u-md-8">
                

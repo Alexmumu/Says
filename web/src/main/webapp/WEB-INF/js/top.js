@@ -1,7 +1,14 @@
 
 $(function(){
+	$(document).ajaxStart(function(){
+    	$.AMUI.progress.start();
+	}).ajaxStop(function(){
+   		$.AMUI.progress.done();
+	});
 	getCountxxnum();
-	findXiaoxi();
+	$('#axxnum').click(function(){
+		findXiaoxi();
+	});
 	//window.setInterval(getCountxxnum,'3000');//定时循环执行
 });
 //加载出用户的未读消息数

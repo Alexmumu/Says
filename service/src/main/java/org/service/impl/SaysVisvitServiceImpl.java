@@ -62,14 +62,17 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 		} else {
 			System.out.println("已有记录 更新中。。。访客表");
 			saysVisit = (SaysVisit) list.get(0);
+			saysVisit.setVisittime(new Timestamp(new Date().getTime()));
 			saysVisitDao.update(saysVisit);
 			return saysVisit.getVisitid();
 		}
 
 	}
-
+	
+	/**
+	 * 与 findSaysVisitsUseridByAndPage 方法结果相反
+	 */
 	@Override
-
 	public Page<FankeVo> findMySaysVisit(SaysVisit data,
 			Page<FankeVo> page) throws DataAccessException {
 		page.setDataSum(saysVisitDao.countMyByUserid(data.getFromuserid().getUserid()));
@@ -77,8 +80,9 @@ public class SaysVisvitServiceImpl implements ISaysVisitService {
 		List<FankeVo> fklist=new ArrayList<FankeVo>();
 		for(SaysVisit sv:list){
 			FankeVo fv=new FankeVo();
-			fv.setUser(sv.getUserid());
-			fv.setFromuserid(sv.getFromuserid());
+			fv.setUser(sv.getFromuserid());
+			fv.setFromuserid(sv.getUserid());
+			System.out.println(sv.getVisittime());
 			fv.setFangketime(DateUtil.getDateStr(sv.getVisittime()));
 			fklist.add(fv);
 		}

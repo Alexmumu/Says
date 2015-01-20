@@ -34,13 +34,6 @@ public class SaysFrequestServiceImpl implements ISaysFrequestService{
 			frequestDao.initialize(f.getFruserare());
 			
 		}
-		
-		if(sp.size()!=0){
-			System.out.println("该申请记录已存在！");	
-			return null;
-			
-		}else
-		{
 			Serializable f=frequestDao.addSaysFrequest(saysfrequest);
 			if(f!=null)
 			{
@@ -48,8 +41,6 @@ public class SaysFrequestServiceImpl implements ISaysFrequestService{
 				
 			}	
 			return  f;
-		}
-		
 		
 	}
 
@@ -68,6 +59,11 @@ public class SaysFrequestServiceImpl implements ISaysFrequestService{
 		
 		List<SaysFrequest> ft=frequestDao.selectSaysFrequest(data, page
 				.getFirstResult(), page.getMaxResults());
+		
+		for (SaysFrequest f:ft) {
+			frequestDao.initialize(f.getFruserare());
+		}
+		
 		if(ft.size()==0)
 		{
 			System.out.println("没有事情记录！");

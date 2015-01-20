@@ -97,9 +97,21 @@ public class SaysShouShouServiceImpl extends AbstractBaseService implements Isay
 				if(shuoshuo.getShuonature() == 1){
 					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
 					con.setRalaycontent(relay.getRelayfor());
+					shuoshuo.setShuocontent((shoushouDao.getById(relay.getRelayfrom())).getShuocontent());
+					boolean sign = shoushouDao.hasShuoByID(relay.getRelayfrom());
 					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
-					con.setFromid(fromuser.getUserid());
-					con.setFromname(fromuser.getUsername());
+					if(sign){
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+						con.setContentfromid(relay.getRelayfrom());
+					}else{
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+						con.setContentfromid(relay.getRelayfrom());
+						((SaysShuoshuo)con.getData()).setShuocontent("〔该条说说内容已被删除〕");
+//						shuoshuo.setShuocontent("〔该条说说内容已被删除〕");
+//						shouShousDao.update(shuoshuo);
+					}
 				}
 				content.add(con);
 		}		
@@ -111,6 +123,44 @@ public class SaysShouShouServiceImpl extends AbstractBaseService implements Isay
 	
 		return conrtentpage;
 	}
+	@Override
+	public ContentData<SaysShuoshuo> getshuoshuobyid(Serializable shuoid) {
+
+				ContentData<SaysShuoshuo> con = new ContentData<SaysShuoshuo>();
+				SaysShuoshuo shuoshuo = this.shoushouDao.getById(shuoid);
+				shoushouDao.initialize(shuoshuo.getUserid());
+				con.setPinglunnum(commDao.CountComments(shuoid,"1"));
+				con.setZhuanfanum(relayDao.countByRelayfromSaysRelay(shuoid));
+				con.setYuedunum(browseDao.countByBrowseforSaysBrowse(shuoid));
+				con.setDianzannum(likeDao.countByLikeforSaysLike(shuoid));
+				con.setData(shuoshuo);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = ((SaysShuoshuo)con.getData()).getShuodate();
+				con.setDatadate(sdf.format(date));
+				if(shuoshuo.getShuonature() == 1){
+					SaysRelay relay = relayDao.findByUseridAndRelayafterSaysRelay(((SaysShuoshuo)con.getData()).getUserid().getUserid(), ((SaysShuoshuo)con.getData()).getShuoid());
+					con.setRalaycontent(relay.getRelayfor());
+					shuoshuo.setShuocontent((shoushouDao.getById(relay.getRelayfrom())).getShuocontent());
+					boolean sign = shoushouDao.hasShuoByID(relay.getRelayfrom());
+					SaysUser fromuser = userDao.getById(relay.getUseridare().getUserid());
+					if(sign){
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+						con.setContentfromid(relay.getRelayfrom());
+					}else{
+						con.setFromid(fromuser.getUserid());
+						con.setFromname(fromuser.getUsernickname());
+						con.setContentfromid(relay.getRelayfrom());
+						((SaysShuoshuo)con.getData()).setShuocontent("〔该条说说内容已被删除〕");
+//						shuoshuo.setShuocontent("〔该条说说内容已被删除〕");
+//						shouShousDao.update(shuoshuo);
+					}
+				}
+				return con;
+		}		
+	
+		
+
 	public boolean deleteShuoShuo(Serializable shuoid){
 		try {
 			SaysShuoshuo shuoshuo = shoushouDao.getById(shuoid);

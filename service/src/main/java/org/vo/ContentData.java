@@ -51,6 +51,10 @@ public class ContentData<T> implements Serializable {
 	 * 转发内容
 	 */
 	private String ralaycontent;
+	/**
+	 * 源ID
+	 */
+	private String contentfromid;
 	
 	/**
 	 * 转发时间
@@ -156,6 +160,14 @@ public class ContentData<T> implements Serializable {
 
 	public void setFromname(String fromname) {
 		this.fromname = fromname;
+	}
+
+	public String getContentfromid() {
+		return contentfromid;
+	}
+
+	public void setContentfromid(String contentfromid) {
+		this.contentfromid = contentfromid;
 	}
 	
 	
